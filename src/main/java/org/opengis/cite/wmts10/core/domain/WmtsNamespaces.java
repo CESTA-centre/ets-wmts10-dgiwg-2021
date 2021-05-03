@@ -1,0 +1,55 @@
+package org.opengis.cite.wmts10.core.domain;
+
+import javax.xml.XMLConstants;
+
+//From ets-dgiwg-core dependency
+import de.latlon.ets.core.util.NamespaceBindings;
+
+/**
+ * XML namespace names.
+ * 
+ * @see <a href="http://www.w3.org/TR/xml-names/">Namespaces in XML 1.0</a>
+ * 
+ * @author <a href="mailto:"></a>
+ */
+public final class WmtsNamespaces {
+
+    private WmtsNamespaces() {
+    }
+
+    /** OGC 06-042 (WMTS 1.0) */
+    //TODO: check if data ressource is ok
+    public static final String WMTS = "http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd";
+
+    /** W3C XLink */
+    public static final String XLINK = "http://www.w3.org/1999/xlink";
+
+    /** GML */
+    public static final String GML = "http://www.opengis.net/gml";
+
+    /** ExtendedCapabilities Namespace used for SOAP binding */
+    //TODO: check if data ressource is ok
+    // public static final String SOAPWMTS = "http://schemas.deegree.org/extensions/services/wms/1.3.0"; //(link for wms13)
+    public static final String SOAPWMTS = "http://schemas.opengis.net/wmts/1.0/examples/wmtsGetCapabilities_response_SOAP.xml";
+
+    /**
+     * Creates a NamespaceBindings object that declares the following namespace bindings:
+     * 
+     * <ul>
+     * <li>wmts: {@value org.opengis.cite.wmts10.core.domain.WmtsNamespaces#WMTS}</li>
+     * <li>xlink: {@value org.opengis.cite.wmts10.core.domain.WmtsNamespaces#XLINK}</li>
+     * </ul>
+     * 
+     * @return A NamespaceBindings object.
+     */
+    public static NamespaceBindings withStandardBindings() {
+        NamespaceBindings nsBindings = new NamespaceBindings();
+        nsBindings.addNamespaceBinding( WmtsNamespaces.WMTS, "wmts" );
+        nsBindings.addNamespaceBinding( WmtsNamespaces.XLINK, "xlink" );
+        nsBindings.addNamespaceBinding( XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "xsi" );
+        nsBindings.addNamespaceBinding( WmtsNamespaces.GML, "gml" );
+        nsBindings.addNamespaceBinding( WmtsNamespaces.SOAPWMTS, "soapwmts" );
+        return nsBindings;
+    }
+    
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="${ets-code}-${project.version}" verbose="0" configfailurepolicy="continue">
+  <parameter name="wmts" value="" />
+  <parameter name="tes" value="" />
+
+  <listeners>
+    <listener class-name="org.opengis.cite.wmts10.core.SuiteFixtureListener" />
+  </listeners>
+
+  <test name="Preconditions">
+    <classes>
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites" />
+    </classes>
+  </test>
+
+  <test name="WMTS Basic">
+    <!-- TODO: add tests (invoke ETS WMTS 1.0) -->
+  </test>
+
+  <test name="WMTS Queryable">
+    <classes>
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.QueryableWMTS" />
+    </classes>
+  </test>
+
+  <test name="DGIWG WMTS">
+    <classes>
+      <!-- TODO : add tests -->
+    </classes>
+  </test>
+</suite>

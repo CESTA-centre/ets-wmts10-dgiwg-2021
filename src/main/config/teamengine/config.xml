@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Add this entry to TE_BASE/config.xml (//organization/standard) -->
+<organization>
+  <name>OGC</name>
+  <standard>
+    <name>DGIWG Web Map Tile Service (DGIWG WMTS) - 2021</name>
+    <version>
+      <name>${spec-version}</name>
+      <suite>
+        <namespace-uri>http://www.opengis.net/cite/dgiwg/wms</namespace-uri>
+        <prefix>tns</prefix>
+        <local-name>ets-${ets-code}-${version}</local-name>
+        <title>DGIWG WMTS 1.0 Conformance Test Suite</title>
+        <description>Checks DGIWG WMTS 1.0 implementations for conformance to DGIWG WMTS 1.0 (DGIWG-124).</description>
+        <BasicConformanceClasses>
+          <conformanceClass>Preconditions</conformanceClass>
+          <conformanceClass>WMTS Basic</conformanceClass>
+          <conformanceClass>WMTS Queryable</conformanceClass>
+          <conformanceClass>DGIWG WMTS</conformanceClass>
+        </BasicConformanceClasses>
+      </suite>
+      <revision>
+        <name>${project.version}</name>
+        <status>Beta</status>
+        <sources>
+          <source>${ets-code}/${spec-version}/ctl</source>
+        </sources>
+        <webdir>${ets-code}/${spec-version}/site</webdir>
+      </revision>
+    </version>
+  </standard>
+</organization>
