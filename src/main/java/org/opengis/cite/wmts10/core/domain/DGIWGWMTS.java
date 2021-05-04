@@ -30,7 +30,7 @@ public final class DGIWGWMTS {
     /** request types **/
     public static final String GET_CAPABILITIES = "GetCapabilities";
 
-    public static final String GET_MAP = "GetMap";
+    public static final String GET_TILE = "GetTile";
 
     public static final String GET_FEATURE_INFO = "GetFeatureInfo";
 

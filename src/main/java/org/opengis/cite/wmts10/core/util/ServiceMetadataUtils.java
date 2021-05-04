@@ -74,9 +74,13 @@ public final class ServiceMetadataUtils {
         }
         if ( binding == null )
             return null;
-
-        String expr = "//wmts:Request/wmts:%s/wmts:DCPType/wmts:HTTP/wmts:%s/wmts:OnlineResource/@xlink:href";
+        
+        String expr = "/wmts:Capabilities/wmts:OperationsMetadata/wmts:Operation/@name/%s/wmts:DCP/wmts:HTTP/wmts:%s/@link:href";
+        //String expr = "//wms:Request/wms:%s/wms:DCPType/wms:HTTP/wms:%s/wms:OnlineResource/@xlink:href";
         String xPathExpr = String.format( expr, opName, binding.getElementName() );
+        
+        ;
+
 
         String href = null;
         try {
@@ -85,15 +89,16 @@ public final class ServiceMetadataUtils {
         } catch ( XPathExpressionException ex ) {
             TestSuiteLogger.log( Level.INFO, ex.getMessage() );
         }
-
+        System.out.println("!!!href = " + href);
+        
         return createEndpoint( href );
     }
 
     /**
      * Determines which protocol bindings are supported for a given operation.
-     *
+     * 
      * @param wmtsMetadata
-     *            the capabilities document (wmts:WMTS_Capabilities), never <code>null</code>
+     *            the capabilities document (wmts:Capabilities), never <code>null</code>
      * @param opName
      *            the name of the WMTS operation
      * @return A Set of protocol bindings supported for the operation. May be empty but never <code>null</code>.
@@ -195,6 +200,7 @@ public final class ServiceMetadataUtils {
      *            node of the layer, never <code>null</code>
      * @return the {@link BoundingBox} - crs is CRS:84, <code>null</code> if missing
      */
+    //TODO : EX_GeographicBoundingBox is not present in WMTS
     public static BoundingBox parseGeographicBoundingBox( Node layerNode ) {
         XPath xPath = createXPath();
         String bboxesExpr = "ancestor-or-self::wmts:Layer/wmts:EX_GeographicBoundingBox";
@@ -394,7 +400,7 @@ public final class ServiceMetadataUtils {
     }
 
     private static boolean isOperationBindingSupported( Document wmtsMetadata, String opName, ProtocolBinding binding ) {
-        String exprTemplate = "count(/wmts:WMTS_Capabilities/wmts:Capability/wmts:Request/wmts:%s/wmts:DCPType/wmts:HTTP/wmts:%s)";
+        String exprTemplate = "count(/wmts:Capabilities/ows:OperationsMetadata/ows:Operation[@name='%s']/ows:DCP/ows:HTTP/ows:%s)";
         String xPathExpr = String.format( exprTemplate, opName, binding.getElementName() );
         try {
             XPath xPath = createXPath();
@@ -403,6 +409,7 @@ public final class ServiceMetadataUtils {
                 return true;
             }
         } catch ( XPathExpressionException xpe ) {
+        	System.out.println("!!!!!Raté");
             throw new RuntimeException( "Error evaluating XPath expression against capabilities doc. ", xpe );
         }
         return false;

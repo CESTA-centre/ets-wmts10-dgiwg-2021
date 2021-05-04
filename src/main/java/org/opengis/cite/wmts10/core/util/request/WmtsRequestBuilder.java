@@ -4,7 +4,7 @@ import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.BBOX_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.CRS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.FORMAT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_MAP;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.HEIGHT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.IMAGE_GIF;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.IMAGE_PNG;
@@ -96,12 +96,12 @@ public final class WmtsRequestBuilder {
         WmtsKvpRequest reqEntity = new WmtsKvpRequest();
         reqEntity.addKvp( SERVICE_PARAM, SERVICE_TYPE_CODE );
         reqEntity.addKvp( VERSION_PARAM, VERSION );
-        reqEntity.addKvp( REQUEST_PARAM, GET_MAP );
+        reqEntity.addKvp( REQUEST_PARAM, GET_TILE );
 
         LayerInfo layerInfo = findSuitableLayerInfo( layerInfos );
         assertNotNull( layerInfo, "Could not find suitable layer for GetMap request." );
 
-        String format = getSupportedFormat( wmtsCapabilities, GET_MAP );
+        String format = getSupportedFormat( wmtsCapabilities, GET_TILE );
         assertNotNull( format, "Could not find request format for GetMap request." );
 
         reqEntity.addKvp( LAYERS_PARAM, layerInfo.getLayerName() );

@@ -41,7 +41,7 @@ public final class WmtsAssertion {
      *            element.
      */
     public static void assertVersion100( Document response ) {
-        assertXPath( "//wmts:WMTS_Capabilities/@version = '1.0.0'", response, WmtsNamespaces.withStandardBindings() );
+        assertXPath( "//wmts:Capabilities/@version = '1.0.0'", response, WmtsNamespaces.withStandardBindings() );
     }
 
 }

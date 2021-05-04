@@ -17,8 +17,7 @@ public final class WmtsNamespaces {
     private WmtsNamespaces() {
     }
 
-    /** OGC 06-042 (WMTS 1.0) */
-    //TODO: check if data ressource is ok
+    /** OGC WMTS 1.0 */
     public static final String WMTS = "http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd";
 
     /** W3C XLink */
@@ -28,9 +27,7 @@ public final class WmtsNamespaces {
     public static final String GML = "http://www.opengis.net/gml";
 
     /** ExtendedCapabilities Namespace used for SOAP binding */
-    //TODO: check if data ressource is ok
-    // public static final String SOAPWMTS = "http://schemas.deegree.org/extensions/services/wms/1.3.0"; //(link for wms13)
-    public static final String SOAPWMTS = "http://schemas.opengis.net/wmts/1.0/examples/wmtsGetCapabilities_response_SOAP.xml";
+    public static final String SOAPWMTS = "http://schemas.opengis.net/wmts/1.0";
 
     /**
      * Creates a NamespaceBindings object that declares the following namespace bindings:

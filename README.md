@@ -13,13 +13,17 @@ This test suite has been designed based on the existing [ets-wms13-dgiwg](https:
 Before building it you need to build ets-dgiwg-core. Do the follwoing:
 
 `git clone https://github.com/opengeospatial/ets-dgiwg-core`
+
 `cd ets-dgiwg-core`
+
 `mvn clean install`
 
 Now you can build the project:
 
 `git clone https://github.com/CESTA-centre/ets-wmts10-dgiwg-2021.git`
+
 `cd ets-wmts10-dgiwg-2021`
+
 `mvn clean install`
 It will creat the jars to be installed in TEAM Engine.
 
@@ -32,7 +36,7 @@ You can use a Java IDE such as Eclipse to develop and run the test suite.
 Clone the repository and build the project. The runtime configuration is summarized below.
 It is more common practice to use the TEAM Engine simulation engine to run the tests.
 
-__Main class__: `de.latlon.ets.wms13.dgiwg.WmtsDgiwgTestNGController`
+__Main class__: `org.opengis.cite.wmts10.dgiwg.WmtsDgiwgTestNGController`
 
 __Arguments__: The first argument must refer to an XML properties file containing the 
 required test run argument (a reference to a WMTS 1.0 capabilities document). If not specified, 

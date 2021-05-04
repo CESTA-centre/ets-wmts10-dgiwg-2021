@@ -1,7 +1,7 @@
 package org.opengis.cite.wmts10.core.util.interactive;
 
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_MAP;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYERS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.ProtocolBinding.GET;
@@ -78,7 +78,7 @@ public final class InteractiveTestUtils {
      */
     public static String retrieveInvalidGetMapRequest( String wmtsCapabilitiesUrl ) {
         Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
-        URI getFeatureInfoEndpoint = getOperationEndpoint( wmtsCapabilities, GET_MAP, GET );
+        URI getFeatureInfoEndpoint = getOperationEndpoint( wmtsCapabilities, GET_TILE, GET );
         List<LayerInfo> layerInfos = parseLayerInfo( wmtsCapabilities );
 
         WmtsKvpRequest getFeatureInfoRequest = buildGetMapRequest( wmtsCapabilities, layerInfos );
