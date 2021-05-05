@@ -1,6 +1,6 @@
 package org.opengis.cite.wmts10.core;
 
-import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
+//import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
 
 import java.io.File;
 import java.net.URI;
@@ -35,12 +35,13 @@ public class SuiteFixtureListener implements ISuiteListener {
 
     @Override
     public void onStart( ISuite suite ) {
-        processWmtsParameter( suite );
+        /*processWmtsParameter( suite );
         Reporter.clear(); // clear output from previous test runs
         StringBuilder str = new StringBuilder( "Initial test run parameters:\n" );
         str.append( suite.getXmlSuite().getAllParameters().toString() );
         Reporter.log( str.toString() );
         TestSuiteLogger.log( Level.CONFIG, str.toString() );
+        */
     }
 
     @Override
@@ -60,7 +61,7 @@ public class SuiteFixtureListener implements ISuiteListener {
      * @param suite
      *            An ISuite object representing a TestNG test suite.
      */
-    void processWmtsParameter( ISuite suite ) {
+/*    void processWmtsParameter( ISuite suite ) {
         Map<String, String> params = suite.getXmlSuite().getParameters();
         String wmtsRef = params.get( TestRunArg.WMTS.toString() );
         if ( ( null == wmtsRef ) || wmtsRef.isEmpty() ) {
@@ -85,7 +86,7 @@ public class SuiteFixtureListener implements ISuiteListener {
             suite.setAttribute( SuiteAttribute.INTERACTIVE_TEST_RESULT.getName(), parseInteractiveTestResults( params ) );
         }
     }
-
+*/
     private Object parseInteractiveTestResults( Map<String, String> params ) {
         boolean capabilitiesInEnglishLanguage = parseBoolean( params, TestRunArg.CAPABILITIES_IN_ENGLISH );
         boolean getFeatureInfoInEnglishLanguage = parseBoolean( params, TestRunArg.GETFEATUREINFO_IN_ENGLISH );

@@ -62,7 +62,7 @@ public class WmtsClient {
      * @return a document containing the response to a GetCapabilities request
      */
     public Document getCapabilities() {
-        if ( null == this.wmtsCapabilities ) {
+    /*    if ( null == this.wmtsCapabilities ) {
             throw new IllegalStateException( "Service description is unavailable." );
         }
         URI endpoint = ServiceMetadataUtils.getOperationEndpoint( this.wmtsCapabilities, DGIWGWMTS.GET_CAPABILITIES,
@@ -76,6 +76,8 @@ public class WmtsClient {
         queryParams.add( DGIWGWMTS.SERVICE_PARAM, DGIWGWMTS.SERVICE_TYPE_CODE );
         queryParams.add( DGIWGWMTS.VERSION_PARAM, DGIWGWMTS.VERSION );
         return resource.queryParams( queryParams ).get( Document.class );
+        */
+    	return null;
     }
 
     /**

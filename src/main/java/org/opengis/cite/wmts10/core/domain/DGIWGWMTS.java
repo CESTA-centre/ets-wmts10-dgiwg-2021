@@ -20,12 +20,12 @@ public final class DGIWGWMTS {
     public static final String SOAP_ENC = "Post";
 
     /** Local name of document element in WMTS capabilities document. */
-    public static final String WMTS_CAPABILITIES = "WMTS_Capabilities";
+    public static final String WMTS_CAPABILITIES = "Capabilities";
 
     /** common request values **/
     public static final String SERVICE_TYPE_CODE = "WMTS";
 
-    public static final String VERSION = "1.3.0";
+    public static final String VERSION = "1.0.0";
 
     /** request types **/
     public static final String GET_CAPABILITIES = "GetCapabilities";
@@ -35,11 +35,11 @@ public final class DGIWGWMTS {
     public static final String GET_FEATURE_INFO = "GetFeatureInfo";
 
     /** common request parameters **/
-    public static final String REQUEST_PARAM = "request";
+    public static final String REQUEST_PARAM = "Request";
 
-    public static final String SERVICE_PARAM = "service";
+    public static final String SERVICE_PARAM = "Service";
 
-    public static final String VERSION_PARAM = "version";
+    public static final String VERSION_PARAM = "Version";
 
     /** GetCapabilities request parameters **/
     public static final String UPDATE_SEQUENCE_PARAM = "UPDATESEQUENCE";

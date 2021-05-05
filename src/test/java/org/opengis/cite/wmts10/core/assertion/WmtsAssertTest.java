@@ -38,7 +38,9 @@ public class WmtsAssertTest {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware( true );
         DocumentBuilder builder = factory.newDocumentBuilder();
+        System.out.println("!!!!!wmtsCapabilities  : ");
         InputStream wmtsCapabilities = ServiceMetadataUtilsTest.class.getResourceAsStream( "../wmtsGetCapabilities_OGCresponse.xml" );
+        System.out.println("!!!!!wmtsCapabilities  : " + wmtsCapabilities);
         return builder.parse( new InputSource( wmtsCapabilities ) );
     }
 

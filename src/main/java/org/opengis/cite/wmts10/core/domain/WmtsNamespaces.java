@@ -2,6 +2,7 @@ package org.opengis.cite.wmts10.core.domain;
 
 import javax.xml.XMLConstants;
 
+
 //From ets-dgiwg-core dependency
 import de.latlon.ets.core.util.NamespaceBindings;
 
@@ -18,7 +19,7 @@ public final class WmtsNamespaces {
     }
 
     /** OGC WMTS 1.0 */
-    public static final String WMTS = "http://schemas.opengis.net/wmts/1.0/wmtsGetCapabilities_response.xsd";
+    public static final String WMTS = "http://schemas.opengis.net/wmts/1.0";
 
     /** W3C XLink */
     public static final String XLINK = "http://www.w3.org/1999/xlink";
@@ -27,8 +28,11 @@ public final class WmtsNamespaces {
     public static final String GML = "http://www.opengis.net/gml";
 
     /** ExtendedCapabilities Namespace used for SOAP binding */
-    public static final String SOAPWMTS = "http://schemas.opengis.net/wmts/1.0";
+    public static final String SOAPWMTS = "http://schemas.opengis.net/wmts/3.4.0/";
 
+    /** OWS */
+    public static final String OWS = "http://www.opengis.net/ows/1.1";
+    
     /**
      * Creates a NamespaceBindings object that declares the following namespace bindings:
      * 
@@ -46,6 +50,7 @@ public final class WmtsNamespaces {
         nsBindings.addNamespaceBinding( XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "xsi" );
         nsBindings.addNamespaceBinding( WmtsNamespaces.GML, "gml" );
         nsBindings.addNamespaceBinding( WmtsNamespaces.SOAPWMTS, "soapwmts" );
+        nsBindings.addNamespaceBinding( WmtsNamespaces.OWS, "ows");
         return nsBindings;
     }
     

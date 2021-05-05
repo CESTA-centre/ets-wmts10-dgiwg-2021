@@ -1,8 +1,5 @@
 package org.opengis.cite.wmts10.core.util;
 
-import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseAllLayerNodes;
-import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseRequestableDimension;
-import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseRequestableLayerNodes;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -57,7 +54,7 @@ import org.opengis.cite.wmts10.core.domain.dimension.number.NumberRequestableDim
 //TODO : se référer au ServiceMetadataUtils édité dans ets-wmts10-nsg
 
 public class ServiceMetadataUtilsTest {
-/*
+
 	@Test
 	public void testGetOperationBindings() throws Exception {
 		Set<ProtocolBinding> globalBindings = ServiceMetadataUtils.getOperationBindings(wmtsCapabilities(), "GetTile");
@@ -66,13 +63,6 @@ public class ServiceMetadataUtilsTest {
 		assertThat(globalBindings, hasItems(ProtocolBinding.GET));
 	}
 
-	@Test
-	public void testParseLayerInfo() throws Exception {
-		List<LayerInfo> layerInfos = ServiceMetadataUtils.parseLayerInfo(wmtsCapabilities());
-
-		assertThat(layerInfos.size(), is(1));
-	}
-*/
 	private Document wmtsCapabilities() throws SAXException, IOException, ParserConfigurationException {
 		return capabilities("../wmtsGetCapabilities_OGCresponse.xml");
 	}

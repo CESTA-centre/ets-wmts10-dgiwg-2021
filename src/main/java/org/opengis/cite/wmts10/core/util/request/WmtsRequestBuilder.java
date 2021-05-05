@@ -78,9 +78,11 @@ public final class WmtsRequestBuilder {
      */
     public static WmtsKvpRequest buildGetFeatureInfoRequest( Document wmtsCapabilities, List<LayerInfo> layerInfos,
                                                             String format ) {
-        boolean isFormatSupported = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities, GET_FEATURE_INFO ).contains( format );
+        /*boolean isFormatSupported = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities, GET_FEATURE_INFO ).contains( format );
         assertTrue( isFormatSupported, "The requested format is not supported for GetFEatureInfo requests." );
         return buildGetFeatureInfoRequestWithFormat( layerInfos, format );
+        */
+    	return null;
     }
 
     /**
@@ -153,11 +155,12 @@ public final class WmtsRequestBuilder {
      * @return one of the supported formats of the operation, <code>null</code> if no format is specified
      */
     public static String getSupportedFormat( Document wmtsCapabilities, String opName ) {
-        List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities, opName );
+        /*List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities, opName );
         if ( supportedFormats.size() > 0 ) {
             int randomIndex = RANDOM.nextInt( supportedFormats.size() );
             return supportedFormats.get( randomIndex );
         }
+        */
         return null;
     }
 
@@ -170,11 +173,11 @@ public final class WmtsRequestBuilder {
      *         specified or no format supporting transparency is configured
      */
     public static String getSupportedTransparentFormat( Document wmtsCapabilities, String opName ) {
-        List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities, opName );
+        /*List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities, opName );
         for ( String transparentFormat : TRANSPARENT_IMG_FORMATS ) {
             if ( supportedFormats.contains( transparentFormat ) )
                 return transparentFormat;
-        }
+        }*/
         return null;
     }
 
