@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 /**
  * Encapsulates the parameters of a KVP request (GET).
  * 
- * @author <a href="mailto:"></a>
+ * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
 public class WmtsKvpRequest {
 

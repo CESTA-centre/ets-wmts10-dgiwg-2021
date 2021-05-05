@@ -10,7 +10,7 @@ import de.latlon.ets.core.util.NamespaceBindings;
  * 
  * @see <a href="http://www.w3.org/TR/xml-names/">Namespaces in XML 1.0</a>
  * 
- * @author <a href="mailto:"></a>
+ * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
 public final class WmtsNamespaces {
 

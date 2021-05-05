@@ -14,7 +14,7 @@ import org.opengis.cite.wmts10.core.domain.WmtsNamespaces;
 /**
  * Provides WMTS 1.0.0 specific test assertion methods
  * 
- * @author <a href="mailto:"></a>
+ * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
 public final class WmtsAssertion {
 

@@ -14,7 +14,7 @@ import org.opengis.cite.wmts10.core.domain.BoundingBox;
 /**
  * Contains useful methods regarding supported/expected CRS.
  * 
- * @author <a href="mailto:"></a>
+ * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
 public class CrsMatcher {
 

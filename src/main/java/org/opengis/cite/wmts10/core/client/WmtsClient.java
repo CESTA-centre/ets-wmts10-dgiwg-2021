@@ -29,7 +29,7 @@ import org.opengis.cite.wmts10.core.util.ServiceMetadataUtils;
 /**
  * A WMTS 1.0.0 client component supporting HTTP GET and POST.
  * 
- * @author <a href="mailto:"></a>
+ * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
 public class WmtsClient {
 

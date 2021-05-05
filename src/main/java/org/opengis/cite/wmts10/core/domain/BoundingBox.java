@@ -3,7 +3,7 @@ package org.opengis.cite.wmts10.core.domain;
 /**
  * Represents a bounding box of a layer from a capabilities document.
  * 
- * @author <a href="mailto:"></a>
+ * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
 public class BoundingBox {
 
