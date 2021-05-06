@@ -42,54 +42,40 @@ public final class DGIWGWMTS {
     public static final String VERSION_PARAM = "Version";
 
     /** GetCapabilities request parameters **/
-    public static final String UPDATE_SEQUENCE_PARAM = "UPDATESEQUENCE";
+    public static final String UPDATE_SEQUENCE_PARAM = "UpdateSequence";
 
-    /** GetMap and GetCapabilities request parameters **/
-    public static final String FORMAT_PARAM = "FORMAT";
+    public static final String ACCEPT_FORMAT_PARAM = "AcceptFormats";
 
-    /** GetMap and GetFeatureInfo request parameters **/
-    public static final String EXCEPTIONS_PARAM = "EXCEPTIONS";
+    public static final String ACCEPT_VERSIONS_PARAM = "AcceptVersions";
 
-    /** GetMap request parameters **/
-    public static final String LAYERS_PARAM = "LAYERS";
+    public static final String OUTPUT_PARAM = "OutputFormat";
 
-    public static final String STYLES_PARAM = "STYLES";
+    /** GetTile request parameters **/
+    public static final String LAYER_PARAM = "Layer";
 
-    public static final String CRS_PARAM = "CRS";
+    public static final String STYLE_PARAM = "Style";
 
-    public static final String BBOX_PARAM = "BBOX";
+    public static final String FORMAT_PARAM = "Format";
 
-    public static final String WIDTH_PARAM = "WIDTH";
+    public static final String TILE_MATRIX_SET_PARAM = "TileMatrixSet";
 
-    public static final String HEIGHT_PARAM = "HEIGHT";
+    public static final String TILE_MATRIX_PARAM = "TileMatrix";
 
-    public static final String TRANSPARENT_PARAM = "TRANSPARENT";
+    public static final String TILE_ROW_PARAM = "TileRow";
 
-    public static final String BGCOLOR_PARAM = "BGCOLOR";
-
-    public static final String ELEVATION_PARAM = "ELEVATION";
-
-    public static final String TIME_PARAM = "TIME";
-
-    public static final String DIMENSION_PARAM = "DIMENSION";
+    public static final String TILE_COL_PARAM = "TileCol";
 
     /** GetFeatureInfo request parameters **/
-    public static final String INFO_FORMAT_PARAM = "INFO_FORMAT";
-
-    public static final String QUERY_LAYERS_PARAM = "QUERY_LAYERS";
+    public static final String INFO_FORMAT_PARAM = "InfoFormat";
 
     public static final String I_PARAM = "I";
 
     public static final String J_PARAM = "J";
 
-    public static final String FEATURE_COUNT_PARAM = "FEATURE_COUNT";
-
     /** FORMATS **/
     public static final String TEXT_XML = "text/xml";
 
     public static final String SOAP_XML = "application/soap+xml";
-
-    public static final String SOAP_MTOM = "application/xop+xml";
 
     public static final String TEXT_HTML = "text/html";
 
@@ -98,7 +84,5 @@ public final class DGIWGWMTS {
     public static final String IMAGE_GIF = "image/gif";
 
     public static final String IMAGE_JPEG = "image/jpeg";
-
-    public static final String IMAGE_SVG = "image/svg+xml";
 
 }

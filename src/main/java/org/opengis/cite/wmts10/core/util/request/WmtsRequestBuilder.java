@@ -1,25 +1,19 @@
 package org.opengis.cite.wmts10.core.util.request;
 
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.BBOX_PARAM;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.CRS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.FORMAT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.HEIGHT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.IMAGE_GIF;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.IMAGE_PNG;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.INFO_FORMAT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.I_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.J_PARAM;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYERS_PARAM;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
+//import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.REQUEST_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_TYPE_CODE;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.STYLES_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.VERSION;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.VERSION_PARAM;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.WIDTH_PARAM;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -95,7 +89,7 @@ public final class WmtsRequestBuilder {
      * @return a GetMap request with random parameters, never <code>null</code>
      */
     public static WmtsKvpRequest buildGetMapRequest( Document wmtsCapabilities, List<LayerInfo> layerInfos ) {
-        WmtsKvpRequest reqEntity = new WmtsKvpRequest();
+        /*WmtsKvpRequest reqEntity = new WmtsKvpRequest();
         reqEntity.addKvp( SERVICE_PARAM, SERVICE_TYPE_CODE );
         reqEntity.addKvp( VERSION_PARAM, VERSION );
         reqEntity.addKvp( REQUEST_PARAM, GET_TILE );
@@ -117,11 +111,11 @@ public final class WmtsRequestBuilder {
         reqEntity.addKvp( HEIGHT_PARAM, "100" );
         reqEntity.addKvp( FORMAT_PARAM, format );
 
-        return reqEntity;
+        return reqEntity;*/return null;
     }
 
     private static WmtsKvpRequest buildGetFeatureInfoRequestWithFormat( List<LayerInfo> layerInfos, String format ) {
-        WmtsKvpRequest reqEntity = new WmtsKvpRequest();
+        /*WmtsKvpRequest reqEntity = new WmtsKvpRequest();
         reqEntity.addKvp( SERVICE_PARAM, SERVICE_TYPE_CODE );
         reqEntity.addKvp( VERSION_PARAM, VERSION );
         reqEntity.addKvp( REQUEST_PARAM, GET_FEATURE_INFO );
@@ -144,7 +138,7 @@ public final class WmtsRequestBuilder {
         reqEntity.addKvp( I_PARAM, "0" );
         reqEntity.addKvp( J_PARAM, "0" );
         reqEntity.addKvp( INFO_FORMAT_PARAM, format );
-        return reqEntity;
+        return reqEntity;*/return null;
     }
 
     /**

@@ -2,8 +2,7 @@ package org.opengis.cite.wmts10.core.util.interactive;
 
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYERS_PARAM;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
+//import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.ProtocolBinding.GET;
 //import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.getOperationEndpoint;
 //import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
