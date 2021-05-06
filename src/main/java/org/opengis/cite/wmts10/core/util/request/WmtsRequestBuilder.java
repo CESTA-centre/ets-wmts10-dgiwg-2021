@@ -197,7 +197,8 @@ public final class WmtsRequestBuilder {
     }
 
     private static boolean layerIsQueryable( LayerInfo layerInfo ) {
-        return layerInfo.isQueryable();
+        //return layerInfo.isQueryable();
+    	return false;
     }
 
     private static boolean layerHasBboxes( LayerInfo layerInfo ) {
