@@ -35,6 +35,7 @@ import org.opengis.cite.wmts10.core.domain.WmtsNamespaces;
  * Provides various utility methods for accessing service metadata.
  * 
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
+ * @author Jim Beatty (modified/fixed May/Jun/Jul-2017 for WMS and/or WMTS)
  */
 public final class ServiceMetadataUtils {
 
@@ -131,6 +132,45 @@ public final class ServiceMetadataUtils {
 		return (String) xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.STRING);
 	}
 
+	public static String getNodeText(Node wmtsCapabilities, String xPathAbstract) throws XPathExpressionException {
+		return getNodeText(null, wmtsCapabilities, xPathAbstract);
+	}
+
+	public static Node getNode(XPath xPath, Node wmtsCapabilities, String xPathAbstract)
+			throws XPathExpressionException {
+		if (xPath == null)
+			xPath = createXPath();
+		return (Node) xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.NODE);
+	}
+
+	public static Node getNode(Node wmtsCapabilities, String xPathAbstract) throws XPathExpressionException {
+		return getNode(null, wmtsCapabilities, xPathAbstract);
+	}
+
+	/**
+	 * Parses the configured formats for the given operation.
+	 * 
+	 * @param wmtsCapabilities the capabilities document (wmts:Capabilities), never
+	 *                         <code>null</code>
+	 * @param layerName        the name of the selected layer
+	 * @param childElement     the child element(s) of the layer
+	 * @return a list of the child elements by the operation, never
+	 *         <code>null</code>
+	 */
+
+	public static NodeList parseLayerChildElements(Document wmtsCapabilities, String layerName, String childElement) {
+		if (!childElement.startsWith("ows:") && !childElement.startsWith("wmts:"))
+			childElement = "wmts:" + childElement; // --- apply default namespace if none given
+
+		String xPathExpr = "//wmts:Contents/wmts:Layer[ows:Identifier = '" + layerName + "']/" + childElement;
+		try {
+			return getNodeElements(wmtsCapabilities, xPathExpr);
+		} catch (XPathExpressionException ex) {
+			TestSuiteLogger.log(Level.INFO, ex.getMessage());
+		}
+		return null;
+	}
+
 	private static URI createEndpoint(String href) {
 		if (href == null || href.isEmpty())
 			return null;
@@ -221,6 +261,10 @@ public final class ServiceMetadataUtils {
 			xPath = createXPath();
 		String name = (String) xPath.evaluate("ows:Identifier", nodeElement, XPathConstants.STRING);
 		return name.trim();
+	}
+
+	public static String parseNodeElementName(Node nodeElement) throws XPathExpressionException {
+		return parseNodeElementName(createXPath(), nodeElement);
 	}
 
 	private static List<BoundingBox> parseBoundingBoxes(XPath xPath, Node layerNode) throws XPathExpressionException {
@@ -321,10 +365,10 @@ public final class ServiceMetadataUtils {
 			throw new RuntimeException("Error collecting layers from the Service Metadata Capabilities doc. ", xpe);
 		}
 	}
-	
-	public static NodeList parseLayers( Document wmtsCapabilities ) {
-        return parseLayers( createXPath(), wmtsCapabilities );
-    }
+
+	public static NodeList parseLayers(Document wmtsCapabilities) {
+		return parseLayers(createXPath(), wmtsCapabilities);
+	}
 
 	public static NodeList getNodeElements(XPath xPath, Node wmtsCapabilities, String xPathAbstract)
 			throws XPathExpressionException {
@@ -332,36 +376,39 @@ public final class ServiceMetadataUtils {
 			xPath = createXPath();
 		return (NodeList) xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.NODESET);
 	}
-	
-    /**
-     * Parses the configured formats for the given operation.
-     *
-     * @param wmtsCapabilities
-     *            the capabilities document (wmts:Capabilities), never <code>null</code>
-     * @return a list of the supported formats by the operation, never <code>null</code>
-     */
-    public static List<String> parseSupportedFormats( Document wmtsCapabilities) {
-        ArrayList<String> supportedFormats = new ArrayList<>();
 
-        String expr = "/wmts:Capabilities/wmts:Contents/wmts:Layer/wmts:Style/wmts:LegendURL/@format";
-        String xPathExpr = String.format(expr);
+	public static NodeList getNodeElements(Node wmtsCapabilities, String xPathAbstract)
+			throws XPathExpressionException {
+		return getNodeElements(null, wmtsCapabilities, xPathAbstract);
+	}
 
-        try {
-            XPath xPath = createXPath();
-            NodeList formatNodes = (NodeList) xPath.evaluate( xPathExpr, wmtsCapabilities, XPathConstants.NODESET );
-            for ( int formatNodeIndex = 0; formatNodeIndex < formatNodes.getLength(); formatNodeIndex++ ) {
-                Node formatNode = formatNodes.item( formatNodeIndex );
-                String format = formatNode.getTextContent();
-                if ( format != null && !format.isEmpty() )
-                    supportedFormats.add( format );
-            }
-        } catch ( XPathExpressionException ex ) {
-            TestSuiteLogger.log( Level.INFO, ex.getMessage() );
-        }
-        return supportedFormats;
-    }
-	
-	
-	
+	/**
+	 * Parses the configured formats for the given operation.
+	 *
+	 * @param wmtsCapabilities the capabilities document (wmts:Capabilities), never
+	 *                         <code>null</code>
+	 * @return a list of the supported formats by the operation, never
+	 *         <code>null</code>
+	 */
+	public static List<String> parseSupportedFormats(Document wmtsCapabilities) {
+		ArrayList<String> supportedFormats = new ArrayList<>();
+
+		String expr = "/wmts:Capabilities/wmts:Contents/wmts:Layer/wmts:Style/wmts:LegendURL/@format";
+		String xPathExpr = String.format(expr);
+
+		try {
+			XPath xPath = createXPath();
+			NodeList formatNodes = (NodeList) xPath.evaluate(xPathExpr, wmtsCapabilities, XPathConstants.NODESET);
+			for (int formatNodeIndex = 0; formatNodeIndex < formatNodes.getLength(); formatNodeIndex++) {
+				Node formatNode = formatNodes.item(formatNodeIndex);
+				String format = formatNode.getTextContent();
+				if (format != null && !format.isEmpty())
+					supportedFormats.add(format);
+			}
+		} catch (XPathExpressionException ex) {
+			TestSuiteLogger.log(Level.INFO, ex.getMessage());
+		}
+		return supportedFormats;
+	}
 
 }

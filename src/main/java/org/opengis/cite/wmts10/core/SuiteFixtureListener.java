@@ -1,6 +1,7 @@
 package org.opengis.cite.wmts10.core;
 
-//import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
+import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
+
 
 import java.io.File;
 import java.net.URI;
@@ -13,7 +14,7 @@ import org.testng.Reporter;
 import org.w3c.dom.Document;
 
 import org.opengis.cite.wmts10.core.domain.DGIWGWMTS;
-import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
+//import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
 import org.opengis.cite.wmts10.core.domain.SuiteAttribute;
 
 // From ets-dgiwg-core
@@ -35,13 +36,12 @@ public class SuiteFixtureListener implements ISuiteListener {
 
     @Override
     public void onStart( ISuite suite ) {
-        /*processWmtsParameter( suite );
+        processWmtsParameter( suite );
         Reporter.clear(); // clear output from previous test runs
         StringBuilder str = new StringBuilder( "Initial test run parameters:\n" );
         str.append( suite.getXmlSuite().getAllParameters().toString() );
         Reporter.log( str.toString() );
         TestSuiteLogger.log( Level.CONFIG, str.toString() );
-        */
     }
 
     @Override
@@ -54,14 +54,14 @@ public class SuiteFixtureListener implements ISuiteListener {
     }
 
     /**
-     * Processes the "wmts" test suite parameter that specifies a URI reference for the service description (capabilities
-     * document). The URI is dereferenced and the entity is parsed; the resulting Document object is set as the value of
-     * the {@link SuiteAttribute#TEST_SUBJECT testSubject} suite attribute.
+     * Processes the "wmts" test suite parameter that specifies a URI reference for the service description
+     * (capabilities document). The URI is dereferenced and the entity is parsed; the resulting Document object is set
+     * as the value of the {@link SuiteAttribute#TEST_SUBJECT testSubject} suite attribute.
      * 
      * @param suite
      *            An ISuite object representing a TestNG test suite.
      */
-/*    void processWmtsParameter( ISuite suite ) {
+    void processWmtsParameter( ISuite suite ) {
         Map<String, String> params = suite.getXmlSuite().getParameters();
         String wmtsRef = params.get( TestRunArg.WMTS.toString() );
         if ( ( null == wmtsRef ) || wmtsRef.isEmpty() ) {
@@ -72,7 +72,7 @@ public class SuiteFixtureListener implements ISuiteListener {
         try {
             doc = URIUtils.resolveURIAsDocument( wmtsURI );
             if ( !DGIWGWMTS.WMTS_CAPABILITIES.equals( doc.getDocumentElement().getLocalName() ) ) {
-                throw new RuntimeException( "Did not receive WMTS capabilities document: "
+                throw new RuntimeException( "Did not receive WMTS ServeiceMetadata capabilities document: "
                                             + doc.getDocumentElement().getNodeName() );
             }
         } catch ( Exception ex ) {
@@ -82,28 +82,7 @@ public class SuiteFixtureListener implements ISuiteListener {
         if ( null != doc ) {
             suite.setAttribute( SuiteAttribute.TEST_SUBJECT.getName(), doc );
             suite.setAttribute( SuiteAttribute.LAYER_INFO.getName(), parseLayerInfo( doc ) );
-            suite.setAttribute( SuiteAttribute.IS_VECTOR.getName(), parseBoolean( params, TestRunArg.VECTOR ) );
-            suite.setAttribute( SuiteAttribute.INTERACTIVE_TEST_RESULT.getName(), parseInteractiveTestResults( params ) );
         }
-    }
-*/
-    private Object parseInteractiveTestResults( Map<String, String> params ) {
-        boolean capabilitiesInEnglishLanguage = parseBoolean( params, TestRunArg.CAPABILITIES_IN_ENGLISH );
-        boolean getFeatureInfoInEnglishLanguage = parseBoolean( params, TestRunArg.GETFEATUREINFO_IN_ENGLISH );
-        boolean getFeatureInfoExceptionInEnglishLanguage = parseBoolean( params,
-                                                                         TestRunArg.GETFEATUREINFO_EXCEPTION_IN_ENGLISH );
-        boolean getMapExceptionInEnglishLanguage = parseBoolean( params, TestRunArg.GETMAP_EXCEPTION_IN_ENGLISH );
-        return new InteractiveTestResult( capabilitiesInEnglishLanguage, getFeatureInfoInEnglishLanguage,
-                        getFeatureInfoExceptionInEnglishLanguage, getMapExceptionInEnglishLanguage );
-    }
-
-    private boolean parseBoolean( Map<String, String> params, TestRunArg arg ) {
-        String key = arg.toString();
-        if ( params.containsKey( key ) ) {
-            String vectorParam = params.get( key );
-            return Boolean.parseBoolean( vectorParam );
-        }
-        return false;
     }
 
 }

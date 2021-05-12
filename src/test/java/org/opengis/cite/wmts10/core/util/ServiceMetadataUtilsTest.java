@@ -38,11 +38,10 @@ import org.opengis.cite.wmts10.core.domain.ProtocolBinding;
  */
 
 public class ServiceMetadataUtilsTest {
-
+	// TODO : requirement 2
 	@Test
 	public void testGetOperationBindings() throws Exception {
 		Set<ProtocolBinding> globalBindings = ServiceMetadataUtils.getOperationBindings(wmtsCapabilities(), "GetTile");
-
 		assertThat(globalBindings.size(), is(1));
 		assertThat(globalBindings, hasItems(ProtocolBinding.GET));
 	}
@@ -52,7 +51,6 @@ public class ServiceMetadataUtilsTest {
                             throws Exception {
         URI endpointUri = ServiceMetadataUtils.getOperationEndpoint_KVP( wmtsCapabilities(), "GetTile",
                                                                          ProtocolBinding.GET );
-
         assertThat( endpointUri, is( new URI( "https://wxs.ign.fr/pratique/geoportail/wmts" ) ) );
     }
 	
@@ -61,7 +59,6 @@ public class ServiceMetadataUtilsTest {
                             throws Exception {
         URI endpointUri = ServiceMetadataUtils.getOperationEndpoint_REST( wmtsCapabilities(), "GetTile",
                                                                           ProtocolBinding.POST );
-
         assertThat( endpointUri, is( nullValue() ) );
     }
 	
@@ -71,7 +68,6 @@ public class ServiceMetadataUtilsTest {
     public void testP()
                     throws Exception {
         List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats( wmtsCapabilities());
-
         assertThat( supportedFormats.size(), is( 2 ) );
         assertTrue( supportedFormats.stream().allMatch( Arrays.asList("image/png", "image/gif", "image/jpeg")::contains) );
     }
@@ -84,23 +80,23 @@ public class ServiceMetadataUtilsTest {
         URI soapEndpoint = ServiceMetadataUtils.getOperationEndpoint_SOAP( wmtsCapabilities(),
                                                                              "GetFeatureInfo",
                                                                              ProtocolBinding.POST );
-
         assertThat( soapEndpoint, is( new URI( "http://ips.terrapixel.com/terrapixel/cubeserv.cgi" ) ) );
     }
 	
+	// 2 layers GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2 and ORTHOIMAGERY.ORTHOPHOTOS that are available
+	// with the PRATIQUE key
 	@Test
     public void testParseLayerInfo()
                             throws Exception {
         List<LayerInfo> layerInfos = ServiceMetadataUtils.parseLayerInfo( wmtsCapabilities() );
-
         assertThat( layerInfos.size(), is( 2 ) );
     }
 	
+	// TODO
 	@Test
     public void testParseAllLayerNodes()
                             throws Exception {
         NodeList allLayerNodes = parseLayers( wmtsCapabilities() );
-
         assertThat( allLayerNodes.getLength(), is( 2 ) );
     }
 	
