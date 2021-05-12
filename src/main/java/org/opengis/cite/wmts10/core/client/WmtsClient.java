@@ -21,6 +21,7 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 import de.latlon.ets.core.util.XMLUtils;
+
 import org.opengis.cite.wmts10.core.domain.DGIWGWMTS;
 import org.opengis.cite.wmts10.core.domain.ProtocolBinding;
 import org.opengis.cite.wmts10.core.util.SOAPMessageConsumer;
@@ -62,13 +63,14 @@ public class WmtsClient {
      * @return a document containing the response to a GetCapabilities request
      */
     public Document getCapabilities() {
-    /*    if ( null == this.wmtsCapabilities ) {
+        if ( null == this.wmtsCapabilities ) {
             throw new IllegalStateException( "Service description is unavailable." );
         }
-        URI endpoint = ServiceMetadataUtils.getOperationEndpoint( this.wmtsCapabilities, DGIWGWMTS.GET_CAPABILITIES,
-                                                                  ProtocolBinding.GET );
-        if (null == endpoint) {
-            throw new RuntimeException("GetCapabilities (GET) endpoint not found in capabilities document.");
+        URI endpoint = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities,
+        		DGIWGWMTS.GET_CAPABILITIES,
+                                                                      ProtocolBinding.GET );
+        if ( null == endpoint ) {
+            throw new RuntimeException( "GetCapabilities (GET) endpoint not found in capabilities document." );
         }
         WebResource resource = client.resource( endpoint );
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -76,10 +78,7 @@ public class WmtsClient {
         queryParams.add( DGIWGWMTS.SERVICE_PARAM, DGIWGWMTS.SERVICE_TYPE_CODE );
         queryParams.add( DGIWGWMTS.VERSION_PARAM, DGIWGWMTS.VERSION );
         return resource.queryParams( queryParams ).get( Document.class );
-        */
-    	return null;
     }
-
     /**
      * Submits a HTTP GET request.
      * 

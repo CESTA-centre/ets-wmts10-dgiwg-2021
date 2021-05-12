@@ -33,7 +33,7 @@ public class WmtsClientIT {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware( true );
         DocumentBuilder builder = factory.newDocumentBuilder();
-        InputStream wmtsCapabilities = WmtsClientIT.class.getResourceAsStream( "wmtsGetCapabilities_OGCresponse.xml" );
+        InputStream wmtsCapabilities = WmtsClientIT.class.getResourceAsStream( "wmtsGetCapabilities_ignresponse.xml" );
         return builder.parse( new InputSource( wmtsCapabilities ) );
     }
 

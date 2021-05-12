@@ -25,6 +25,7 @@ Now you can build the project:
 `cd ets-wmts10-dgiwg-2021`
 
 `mvn clean install`
+
 It will creat the jars to be installed in TEAM Engine.
 
 

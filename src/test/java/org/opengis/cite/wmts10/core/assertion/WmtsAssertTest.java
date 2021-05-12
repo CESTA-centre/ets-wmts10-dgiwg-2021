@@ -26,21 +26,19 @@ public class WmtsAssertTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-/*
+
     @Test
     public void testAssertVersion100()
                     throws Exception {
         assertVersion100( wmtsCapabilities() );
     }
-*/
+
     private Document wmtsCapabilities()
                     throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware( true );
         DocumentBuilder builder = factory.newDocumentBuilder();
-        System.out.println("!!!!!wmtsCapabilities  : ");
-        InputStream wmtsCapabilities = ServiceMetadataUtilsTest.class.getResourceAsStream( "../wmtsGetCapabilities_OGCresponse.xml" );
-        System.out.println("!!!!!wmtsCapabilities  : " + wmtsCapabilities);
+        InputStream wmtsCapabilities = ServiceMetadataUtilsTest.class.getResourceAsStream( "../wmtsGetCapabilities_ignresponse.xml" );
         return builder.parse( new InputSource( wmtsCapabilities ) );
     }
 

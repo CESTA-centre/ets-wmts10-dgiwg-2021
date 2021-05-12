@@ -56,6 +56,8 @@ public final class DGIWGWMTS {
     public static final String STYLE_PARAM = "Style";
 
     public static final String FORMAT_PARAM = "Format";
+    
+    public static final String LEGENDURL_PARAM = "LegendURL";
 
     public static final String TILE_MATRIX_SET_PARAM = "TileMatrixSet";
 

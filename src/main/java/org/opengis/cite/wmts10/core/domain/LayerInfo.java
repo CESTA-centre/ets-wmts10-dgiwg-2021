@@ -2,6 +2,8 @@ package org.opengis.cite.wmts10.core.domain;
 
 import java.util.List;
 
+import org.opengis.cite.wmts10.core.domain.LayerInfo;
+
 /**
  * Represents a named layer from a capabilities document.
  * 
@@ -11,72 +13,46 @@ public class LayerInfo {
 
     private final String layerName;
 
-    private final boolean isQueryable;
-
     private final List<BoundingBox> bboxes;
-
-    private final List<Dimension> dimensions;
 
     private final BoundingBox geographicBbox;
 
     /**
      * @param layerName
-     *            name of the layer (wmts:Layer/wmts:Name), never <code>null</code> or empty
-     * @param isQueryable
-     *            <code>true</code> if the layer is queryable (wmts:Layer/@queryable=1), <code>false</code> if the layer
-     *            is not queryable (wmts:Layer/@queryable=1)
+     *            name of the layer (ows:Layer/ows:Name), never <code>null</code> or empty param isQueryable
+     *            <code>true</code> if the layer is queryable (ows:Layer/@queryable=1), <code>false</code> if the layer
+     *            is not queryable (ows:Layer/@queryable=1)
      * @param bboxes
-     *            bounding boxes of the layer (wmts:Layer/wmts:wmts:BoundingBox), never <code>null</code>
-     * @param dimensions
-     *            dimensions of the layer,never <code>null</code>
+     *            bounding boxes of the layer (ows:Layer/ows:ows:BoundingBox), never <code>null</code>
      * @param geographicBbox
      *            geographic bounding box of the layer, never <code>null</code>
      * @throws IllegalArgumentException
      *             if layerName or bboxes is <code>null</code>
      */
-    public LayerInfo( String layerName, boolean isQueryable, List<BoundingBox> bboxes, List<Dimension> dimensions,
-                      BoundingBox geographicBbox ) {
+    public LayerInfo( String layerName, List<BoundingBox> bboxes, BoundingBox geographicBbox ) {
         if ( layerName == null || layerName.isEmpty() )
             throw new IllegalArgumentException( "layerName must not be null!" );
         if ( bboxes == null )
             throw new IllegalArgumentException( "bboxes must not be null!" );
-        if ( dimensions == null )
-            throw new IllegalArgumentException( "dimensions must not be null!" );
         if ( geographicBbox == null )
             throw new IllegalArgumentException( "geographicBbox must not be null!" );
-        this.isQueryable = isQueryable;
         this.layerName = layerName;
         this.bboxes = bboxes;
-        this.dimensions = dimensions;
         this.geographicBbox = geographicBbox;
     }
 
     /**
-     * @return the name of the layer (wmts:Layer/wmts:Name), never <code>null</code>
+     * @return the name of the layer (ows:Layer/ows:Name), never <code>null</code>
      */
     public String getLayerName() {
         return layerName;
     }
 
     /**
-     * @return <code>true</code> if the layer is queryable, <code>false</code> otherwise
-     */
-    public boolean isQueryable() {
-        return isQueryable;
-    }
-
-    /**
-     * @return the bounding boxes of the layer (wmts:Layer/wmts:wmts:BoundingBox), never <code>null</code>
+     * @return the bounding boxes of the layer (ows:Layer/ows:ows:BoundingBox), never <code>null</code>
      */
     public List<BoundingBox> getBboxes() {
         return bboxes;
-    }
-
-    /**
-     * @return the dimensions of the layer (wmts:Layer/wmts:wmts:Dimension), never <code>null</code>
-     */
-    public List<Dimension> getDimensions() {
-        return dimensions;
     }
 
     /**
@@ -123,3 +99,4 @@ public class LayerInfo {
     }
 
 }
+
