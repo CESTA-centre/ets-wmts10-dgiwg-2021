@@ -31,25 +31,25 @@ public enum TestRunArg {
      * <code>true</code> if the interactive test for metadata content in english
      * language is passed, <code>false</code> otherwise
      */
-    CAPABILITIES_IN_ENGLISH,
+    //CAPABILITIES_IN_ENGLISH,
 
     /**
      * <code>true</code> if the interactive test for GetFeatureInfo response in
      * english language is passed, <code>false</code> otherwise
      */
-    GETFEATUREINFO_IN_ENGLISH,
+    //GETFEATUREINFO_IN_ENGLISH,
 
     /**
      * <code>true</code> if the interactive test for GetFeatureInfo exceptions
      * in english language is passed, <code>false</code> otherwise
      */
-    GETFEATUREINFO_EXCEPTION_IN_ENGLISH,
+    GETFEATUREINFO_EXCEPTION_IN_ENGLISH;
 
     /**
      * <code>true</code> if the interactive test for GetMap response in english
      * language is passed, <code>false</code> otherwise
      */
-    GETMAP_EXCEPTION_IN_ENGLISH;
+    //GETMAP_EXCEPTION_IN_ENGLISH;
 
     @Override
     public String toString() {

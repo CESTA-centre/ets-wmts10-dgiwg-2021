@@ -1,6 +1,7 @@
 package org.opengis.cite.wmts10.core.client;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,28 @@ public class WmtsKvpRequest {
     public void removeKvp( String key ) {
         kvps.remove( key );
     }
+    
+    // ---
+    /**
+     * Gets the current value of a the KVP, if existing.
+     * 
+     * @param keyd
+     *            of the KVP to remove, may be <code>null</code> (nothing happens)
+     * 
+     * @return the value of the KVP at key
+     */
+    public String getKvpValue( String keyd ) {
+    	System.out.println("....getKvpValue start  keyd :  " + keyd);
+        String value = null;
+        for ( Entry<String, String> kvp : kvps.entrySet() ) {
+            if ( kvp.getKey().equals( keyd ) ) {
+                value = kvp.getValue();
+                value = decode( value );
+                break;
+            }
+        }
+        return value;
+    }
 
     private String encode( String value ) {
         try {
@@ -61,4 +84,12 @@ public class WmtsKvpRequest {
         return value;
     }
 
+    private String decode( String value ) {
+        try {
+            return URLDecoder.decode( value, "UTF-8" );
+        } catch ( UnsupportedEncodingException e ) {
+            // UTF-8 should be available
+        }
+        return value;
+    }
 }

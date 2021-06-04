@@ -1,5 +1,11 @@
 package org.opengis.cite.wmts10.core.util.request;
 
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_CAPABILITIES;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.REQUEST_PARAM;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_PARAM;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_TYPE_CODE;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.VERSION;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.VERSION_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.FORMAT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYER_PARAM;
@@ -79,6 +85,15 @@ public final class WmtsRequestBuilder {
 		String format = getSupportedFormat(wmtsCapabilities, GET_FEATURE_INFO);
 		return buildGetFeatureInfoRequest(wmtsCapabilities, layerInfos, format);
 	}
+	
+    public static WmtsKvpRequest buildGetCapabilitiesRequest( Document wmtsCapabilities, List<LayerInfo> layerInfos ) {
+        WmtsKvpRequest reqEntity = new WmtsKvpRequest();
+        reqEntity.addKvp( SERVICE_PARAM, SERVICE_TYPE_CODE );
+        reqEntity.addKvp( REQUEST_PARAM, GET_CAPABILITIES );
+        reqEntity.addKvp( VERSION_PARAM, VERSION );
+
+        return reqEntity;
+    }
 
 	/**
 	 * Creates a GetFatureInfo request with random parameters from the WMTS

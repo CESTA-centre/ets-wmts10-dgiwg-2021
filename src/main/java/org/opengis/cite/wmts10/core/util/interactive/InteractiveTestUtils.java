@@ -2,10 +2,11 @@ package org.opengis.cite.wmts10.core.util.interactive;
 
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
-//import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYERS_PARAM;
 import static org.opengis.cite.wmts10.core.domain.ProtocolBinding.GET;
-//import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.getOperationEndpoint;
-//import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
+import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
+import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.getOperationEndpoint;
 import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetFeatureInfoRequest;
 import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetMapRequest;
 
@@ -60,7 +61,7 @@ public final class InteractiveTestUtils {
      * @return a GetFeatureInfo request with unsupported layer, never <code>null</code>
      */
     public static String retrieveInvalidGetFeatureInfoRequest( String wmtsCapabilitiesUrl ) {
-        /*Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
+        Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
         URI getFeatureInfoEndpoint = getOperationEndpoint( wmtsCapabilities, GET_FEATURE_INFO, GET );
         List<LayerInfo> layerInfos = parseLayerInfo( wmtsCapabilities );
 
@@ -68,8 +69,7 @@ public final class InteractiveTestUtils {
         getFeatureInfoRequest.addKvp( LAYERS_PARAM, UNKNOWN_LAYER_FOR_TESTING );
         getFeatureInfoRequest.addKvp( QUERY_LAYERS_PARAM, UNKNOWN_LAYER_FOR_TESTING );
         return createUri( getFeatureInfoEndpoint, getFeatureInfoRequest );
-        */
-    	return null;
+
     }
 
     /**

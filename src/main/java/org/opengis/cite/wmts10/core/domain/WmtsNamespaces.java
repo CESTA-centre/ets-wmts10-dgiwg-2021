@@ -2,7 +2,7 @@ package org.opengis.cite.wmts10.core.domain;
 
 import javax.xml.XMLConstants;
 
-//From ets-dgiwg-core dependency
+//From ets-dgiwg-core dependency 
 import de.latlon.ets.core.util.NamespaceBindings;
 
 /**

@@ -2,9 +2,8 @@
 <!-- TODO : remake ctl file -->
 <ctl:package xmlns:ctl="http://www.occamlab.com/ctl" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:tns="http://www.opengis.net/cite/dgiwg/wmts" 
+  xmlns:tns="http://www.opengis.net/cite/nsg/wmts"
   xmlns:saxon="http://saxon.sf.net/" 
-  xmlns:interactive="https://lat-lon.de/wms-1.3.0/dgiwg/ctl/interactive.xml"
   xmlns:tec="java:com.occamlab.te.TECore" 
   xmlns:tng="java:org.opengis.cite.wmts10.dgiwg.WmtsDgiwgTestNGController">
 
@@ -63,8 +62,9 @@
             |
             <input class="form-button" type="reset" value="Clear" />
           </p>
-        </ctl:form>
+        </ctl:form>        
       </xsl:variable>
+  <!--    
       <xsl:variable name="capbilitiesInEnglishLanguage">
         <ctl:call-function name="interactive:capabilitiesInEnglishLanguage">
           <ctl:with-param name="wmts.capabilities.url" select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
@@ -75,16 +75,19 @@
           <ctl:with-param name="wmts.capabilities.url" select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
         </ctl:call-function>
       </xsl:variable>
+      
       <xsl:variable name="getFeatureInfoExceptionInEnglishLanguage">
         <ctl:call-function name="interactive:featureInfoExceptionInEnglishLanguage">
           <ctl:with-param name="wmts.capabilities.url" select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
         </ctl:call-function>
       </xsl:variable>
+       
       <xsl:variable name="getMapExceptionInEnglishLanguage">
         <ctl:call-function name="interactive:mapExceptionInEnglishLanguage">
           <ctl:with-param name="wmts.capabilities.url" select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
         </ctl:call-function>
       </xsl:variable>
+      -->
       <xsl:variable name="test-run-props">
         <properties version="1.0">
           <entry key="wmts">
@@ -100,18 +103,23 @@
               </xsl:otherwise>
             </xsl:choose>
           </entry>
-          <entry key="capabilities_in_english">
+          <!--
+            <entry key="capabilities_in_english">
             <xsl:value-of select="$capbilitiesInEnglishLanguage" />
           </entry>
           <entry key="getfeatureinfo_in_english">
             <xsl:value-of select="$getFeatureInfoInEnglishLanguage" />
           </entry>
+          
           <entry key="getfeatureinfo_exception_in_english">
             <xsl:value-of select="$getFeatureInfoExceptionInEnglishLanguage" />
           </entry>
+          <!-- 
           <entry key="getmap_exception_in_english">
             <xsl:value-of select="$getMapExceptionInEnglishLanguage" />
           </entry>
+          -->
+          
         </properties>
       </xsl:variable>
       <xsl:variable name="testRunDir">

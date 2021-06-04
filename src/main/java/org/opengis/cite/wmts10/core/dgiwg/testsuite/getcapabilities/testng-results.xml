@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="1" failed="1" total="6" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="wmts10-dgiwg-2021-0.1" duration-ms="3356" started-at="2021-05-14T09:31:57Z" finished-at="2021-05-14T09:32:00Z">
+    <groups>
+    </groups>
+    <test name="Preconditions" duration-ms="2915" started-at="2021-05-14T09:31:57Z" finished-at="2021-05-14T09:31:59Z">
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites">
+        <test-method status="PASS" signature="verifyServiceDescription(org.testng.ITestContext)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites@6295d394]" name="verifyServiceDescription" duration-ms="37" started-at="2021-05-14T11:31:57Z" finished-at="2021-05-14T11:31:57Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@387a8303]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyServiceDescription -->
+        <test-method status="PASS" signature="serviceIsAvailable(org.testng.ITestContext)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites@6295d394]" name="serviceIsAvailable" duration-ms="2837" started-at="2021-05-14T11:31:57Z" depends-on-methods="org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites.verifyServiceDescription" finished-at="2021-05-14T11:31:59Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@387a8303]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- serviceIsAvailable -->
+      </class> <!-- org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites -->
+    </test> <!-- Preconditions -->
+    <test name="DGIWG WMTS" duration-ms="439" started-at="2021-05-14T09:31:59Z" finished-at="2021-05-14T09:32:00Z">
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo">
+        <test-method status="PASS" signature="initBaseFixture(org.testng.ITestContext)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="initBaseFixture" is-config="true" duration-ms="201" started-at="2021-05-14T11:31:59Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@28cda624]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBaseFixture -->
+        <test-method status="PASS" signature="initParser()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="initParser" is-config="true" duration-ms="3" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initParser -->
+        <test-method status="PASS" signature="buildGetTileRequest()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="buildGetTileRequest" is-config="true" duration-ms="91" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- buildGetTileRequest -->
+        <test-method status="PASS" signature="setResultDirectory(org.testng.ITestContext)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="setResultDirectory" is-config="true" duration-ms="12" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@28cda624]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setResultDirectory -->
+        <test-method status="PASS" signature="verifyGetTileSupported()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="verifyGetTileSupported" duration-ms="6" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <reporter-output>
+          </reporter-output>
+          <attributes>
+            <attribute name="request">
+              <![CDATA[TileMatrixSet=PM&Format=image%2Fjpeg&Version=1.0.0&TileRow=386626&Request=GetTile&Service=WMTS&Style=normal&TileCol=68379&Layer=ORTHOIMAGERY.ORTHOPHOTOS&TileMatrix=19]]>
+            </attribute> <!-- request -->
+          </attributes>
+        </test-method> <!-- verifyGetTileSupported -->
+        <test-method status="PASS" signature="addAttributesOnTestFailure(org.testng.ITestResult)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="addAttributesOnTestFailure" is-config="true" duration-ms="0" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyGetTileSupported status=SUCCESS method=AbstractBaseGetTileFixture.verifyGetTileSupported()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAttributesOnTestFailure -->
+        <test-method status="PASS" signature="addAttributesOnTestSuccess(org.testng.ITestResult)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="addAttributesOnTestSuccess" is-config="true" duration-ms="1" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyGetTileSupported status=SUCCESS method=AbstractBaseGetTileFixture.verifyGetTileSupported()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAttributesOnTestSuccess -->
+        <test-method status="PASS" signature="wmtsGetTileKVPRequestsExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="wmtsGetTileKVPRequestsExists" duration-ms="20" started-at="2021-05-14T11:32:00Z" description="DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings." depends-on-methods="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.AbstractBaseGetTileFixture.verifyGetTileSupported" finished-at="2021-05-14T11:32:00Z">
+          <reporter-output>
+          </reporter-output>
+          <attributes>
+            <attribute name="request">
+              <![CDATA[TileMatrixSet=PM&Format=image%2Fjpeg&Version=1.0.0&TileRow=386626&Request=GetTile&Service=WMTS&Style=normal&TileCol=68379&Layer=ORTHOIMAGERY.ORTHOPHOTOS&TileMatrix=19]]>
+            </attribute> <!-- request -->
+          </attributes>
+        </test-method> <!-- wmtsGetTileKVPRequestsExists -->
+        <test-method status="PASS" signature="addAttributesOnTestFailure(org.testng.ITestResult)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="addAttributesOnTestFailure" is-config="true" duration-ms="1" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=wmtsGetTileKVPRequestsExists status=SUCCESS method=GetTileCachingInfo.wmtsGetTileKVPRequestsExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAttributesOnTestFailure -->
+        <test-method status="PASS" signature="addAttributesOnTestSuccess(org.testng.ITestResult)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="addAttributesOnTestSuccess" is-config="true" duration-ms="1" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=wmtsGetTileKVPRequestsExists status=SUCCESS method=GetTileCachingInfo.wmtsGetTileKVPRequestsExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAttributesOnTestSuccess -->
+        <test-method status="FAIL" signature="wmtsGetTileCachingInformationExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="wmtsGetTileCachingInformationExists" duration-ms="91" started-at="2021-05-14T11:32:00Z" description="DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings." depends-on-methods="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo.wmtsGetTileKVPRequestsExists" finished-at="2021-05-14T11:32:00Z">
+          <exception class="java.lang.NullPointerException">
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+          <attributes>
+            <attribute name="request">
+              <![CDATA[TileMatrixSet=PM&Format=image%2Fpng&Version=1.0.0&TileRow=386626&Request=GetTile&Service=WMTS&Style=normal&TileCol=68379&Layer=ORTHOIMAGERY.ORTHOPHOTOS&TileMatrix=19]]>
+            </attribute> <!-- request -->
+          </attributes>
+        </test-method> <!-- wmtsGetTileCachingInformationExists -->
+        <test-method status="PASS" signature="addAttributesOnTestFailure(org.testng.ITestResult)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="addAttributesOnTestFailure" is-config="true" duration-ms="1" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=wmtsGetTileCachingInformationExists status=FAILURE method=GetTileCachingInfo.wmtsGetTileCachingInformationExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAttributesOnTestFailure -->
+        <test-method status="PASS" signature="addAttributesOnTestSuccess(org.testng.ITestResult)[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="addAttributesOnTestSuccess" is-config="true" duration-ms="0" started-at="2021-05-14T11:32:00Z" finished-at="2021-05-14T11:32:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=wmtsGetTileCachingInformationExists status=FAILURE method=GetTileCachingInfo.wmtsGetTileCachingInformationExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAttributesOnTestSuccess -->
+        <test-method status="SKIP" signature="wmtsGetTileExpirationExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36]" name="wmtsGetTileExpirationExists" duration-ms="0" started-at="2021-05-14T11:32:00Z" description="DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings." depends-on-methods="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo.wmtsGetTileCachingInformationExists" finished-at="2021-05-14T11:32:00Z">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method GetTileCachingInfo.wmtsGetTileExpirationExists()[pri:0, instance:org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo@78b66d36] depends on not successfully finished methods]]>
+            </message>
+          </exception> <!-- java.lang.Throwable -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- wmtsGetTileExpirationExists -->
+      </class> <!-- org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo -->
+    </test> <!-- DGIWG WMTS -->
+  </suite> <!-- wmts10-dgiwg-2021-0.1 -->
+</testng-results>
