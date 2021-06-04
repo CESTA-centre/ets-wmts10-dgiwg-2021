@@ -24,19 +24,19 @@ import org.w3c.dom.NodeList;
  */
 public class GetCapabilitiesProjectionTest extends AbstractBaseGetCapabilitiesFixture {
     /**
-     * --- NSG Requirement 12: An NSG WMTS server shall support the following projections whose validity zones overlap
-     * data published by the service: • World Mercator Projection…EPSG:3395 • UPS projection over WGS84 (north zone)……
-     * EPSG:5041 • UPS projection over WGS84 (south zone)…… EPSG:5042
-     * 
-     * ---
+	/**
+	 * DGIWG WMTS requirement 3 
+	 * A WMTS server shall support at least on the
+	 * folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84)
+	 * and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).
      */
 
-    @Test(description = "DGIWG Web Map Tile Service (WMTS) 1.0.0, Requirement 3", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks wmtsCapabilities", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         assertTrue( this.wmtsCapabilities != null, "No ServerMetadata Capabilities document" );
     }
 
-    @Test(description = "DGIWG Web Map Tile Service (WMTS) 1.0.0, Requirement 3", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesEPSG3395", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesEPSG3395Test() {
         assessAdvertisedProjections( "EPSG:3395", "World Mercator Projection", -15496570.7397, 18764656.2314, -84.0,
                                      80.0 );
@@ -52,12 +52,12 @@ public class GetCapabilitiesProjectionTest extends AbstractBaseGetCapabilitiesFi
     */
     
 
-    @Test(description = "DGIWG Web Map Tile Service (WMTS) 1.0.0, Requirement 3", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesUPS_North", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesUPS_NorthTest() {
         assessAdvertisedProjections( "EPSG:5041", "WGS 84 / UPS North", -14440759.350252, 18440759.350252, 60.0, 90.0 );
     }
 
-    @Test(description = "DGIWG Web Map Tile Service (WMTS) 1.0.0, Requirement 3", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesUPS_South", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesUPS_SouthTest() {
         assessAdvertisedProjections( "EPSG:5042", "WGS 84 / UPS South", -14440759.350252, 18440759.350252, -90.0, -60.0 );
     }

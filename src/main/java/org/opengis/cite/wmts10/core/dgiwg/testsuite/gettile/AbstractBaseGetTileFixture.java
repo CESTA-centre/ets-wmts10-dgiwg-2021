@@ -104,14 +104,16 @@ public abstract class AbstractBaseGetTileFixture extends AbstractBaseGetFixture 
      *            the mime type of the image, never <code>null</code>
      */
     protected void storeResponseImage( ClientResponse rsp, String testGroup, String testName, String requestFormat ) {
+    	System.out.println("....storeResponseImage imageDirectory :  " + imageDirectory);
         if ( imageDirectory == null ) {
             TestSuiteLogger.log( Level.WARNING,
                                  "Directory to store GetTile responses is not set. GetTile response is not written!" );
             return;
         }
+        System.out.println("....storeResponseImage writeIntoFile _rsp :  " 
+        + rsp  + " _testGroup : " +  testGroup  + " _testName : " + testName  + " _requestFormat : " +  requestFormat                                   );
         writeIntoFile( rsp, testGroup, testName, requestFormat );
-    }
-
+    } 
     protected void storeSoapResponseImage( SOAPMessage soapResponse, String testGroup, String testName,
                                            String requestFormat ) {
         if ( imageDirectory == null ) {
@@ -123,17 +125,20 @@ public abstract class AbstractBaseGetTileFixture extends AbstractBaseGetFixture 
     }
 
     private void writeIntoFile( ClientResponse rsp, String testGroup, String testName, String requestFormat ) {
+    	System.out.println("....writeIntoFile 1 :  ");
         try {
             Path testClassDirectory = createDirectory( imageDirectory, testGroup );
             InputStream imageStream = rsp.getEntityInputStream();
-
+            System.out.println("....writeIntoFile 2 :  ");
             String fileExtension = detectFileExtension( requestFormat );
             if ( ( fileExtension != null ) && ( !fileExtension.startsWith( "." ) ) ) {
                 fileExtension = "." + fileExtension;
             }
+            System.out.println("....writeIntoFile 3 :  ");
             String fileName = testName + fileExtension;
             Path imageFile = testClassDirectory.resolve( fileName );
             Integer indx = -1;
+            System.out.println("....writeIntoFile 4 :  ");
             while ( Files.exists( imageFile, java.nio.file.LinkOption.NOFOLLOW_LINKS ) ) {
                 fileName = testName + ( ++indx ).toString() + "." + fileExtension;
                 imageFile = testClassDirectory.resolve( fileName );
@@ -194,17 +199,20 @@ public abstract class AbstractBaseGetTileFixture extends AbstractBaseGetFixture 
 
     private String detectFileExtension( String requestFormat ) // throws MimeTypeException
     {
+    	//System.out.println("....detectFileExtension requestFormat :  " + requestFormat);
         String extension = null;
         try {
+        	//System.out.println("....detectFileExtension BufferedReader start :  " + this.getClass().getResourceAsStream( MIME_FILENAME ));
             BufferedReader br = new BufferedReader(
                                                     new InputStreamReader(
                                                                            this.getClass().getResourceAsStream( MIME_FILENAME ),
                                                                            "UTF-8" ) );
+            //System.out.println("....detectFileExtension BufferedReader end :  " );
             String mimeLine = null;
 
             do {
                 mimeLine = br.readLine();
-
+                //System.out.println("....detectFileExtension mimeLine :  " + mimeLine);
                 if ( ( mimeLine != null ) && ( mimeLine.indexOf( ':' ) > 0 ) ) {
                     int indx = mimeLine.indexOf( ':' );
                     String mime = mimeLine.substring( 0, indx );
@@ -217,9 +225,10 @@ public abstract class AbstractBaseGetTileFixture extends AbstractBaseGetFixture 
             } while ( ( mimeLine != null ) && ( extension == null ) );
             br.close();
         } catch ( IOException e ) {
+        	//System.out.println("....detectFileExtension Cannot find MIME Types :  " + e);
             TestSuiteLogger.log( Level.WARNING, "Cannot find MIME Types.", e );
         }
-
+        System.out.println("....detectFileExtension extension :  " + extension);
         return extension;
     }
 

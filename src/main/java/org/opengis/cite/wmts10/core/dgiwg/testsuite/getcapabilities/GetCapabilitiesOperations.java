@@ -28,28 +28,27 @@ import org.w3c.dom.NodeList;
  */
 public class GetCapabilitiesOperations extends AbstractBaseGetCapabilitiesFixture {
     /**
-     * --- NSG Requirement 2: An NSG WMTS server shall declare its support for GetCapabilities operations using KVP with
-     * HTTP GET by providing an OperationsMetadata section in the ServiceMetadata document with an Operation section for
-     * each supported HTTP request type. ---
+     * DGIWG WMTS requirement 2
+     * A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.
      */
-    @Test(description = "DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities.", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         assertTrue( this.wmtsCapabilities != null, "No ServerMetadata Capabilities document" );
     }
 
-    @Test(description = "DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities metadata.", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesOperationsMetadataExists() {
         String xPathExpr = "//wmts:Capabilities/ows:OperationsMetadata != ''";
         assertXPath( xPathExpr, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataExists")
+    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities metadata operation.", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataExists")
     public void wmtsCapabilitiesOperationsMetadataOperationExists() {
         String xPathExpr = "//wmts:Capabilities/ows:OperationsMetadata/ows:Operation != ''";
         assertXPath( xPathExpr, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataOperationExists")
+    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities KVP request.", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataOperationExists")
     public void wmtsCapabilitiesKVPRequestsExists() {
         URI uri = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities,
         		DGIWGWMTS.GET_CAPABILITIES, ProtocolBinding.GET );
@@ -57,7 +56,7 @@ public class GetCapabilitiesOperations extends AbstractBaseGetCapabilitiesFixtur
                     "GetCapabilities (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document." );
     }
 
-    @Test(description = "DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings", dependsOnMethods = "wmtsCapabilitiesKVPRequestsExists")
+    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities validated.", dependsOnMethods = "wmtsCapabilitiesKVPRequestsExists")
     public void wmtsCapabilitiesValidated()
                             throws XPathFactoryConfigurationException, XPathExpressionException {
         XPath xpath = createXPath();

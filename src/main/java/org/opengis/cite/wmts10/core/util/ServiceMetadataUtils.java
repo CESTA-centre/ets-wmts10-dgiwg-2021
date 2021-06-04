@@ -116,6 +116,7 @@ public final class ServiceMetadataUtils {
 			String xPathString = "//ows:OperationsMetadata/ows:Operation[@name = '%s'and ( ./ows:Constraint/ows:AllowedValues/ows:Value = '%s' or ./ows:DCP/ows:HTTP/ows:%s/ows:Constraint/ows:AllowedValues/ows:Value = '%s')]/ows:DCP/ows:HTTP/ows:%s/@xlink:href";
 			String xPathExpr = String.format(xPathString, opName, protocol, binding.getElementName(), protocol,
 					binding.getElementName());
+			System.out.println("....getOperationEndpoint : " + xPathExpr);
 			XPath xPath = createXPath();
 			String href = getNodeText(xPath, wmtsMetadata, xPathExpr);
 			return createEndpoint(href);
@@ -410,5 +411,26 @@ public final class ServiceMetadataUtils {
 		}
 		return supportedFormats;
 	}
+	
+	public static URI getOperationEndpoint( final Document wmsMetadata, String opName, ProtocolBinding binding ) {
+        if ( null == binding || binding.equals( ProtocolBinding.ANY ) ) {
+            binding = getOperationBindings( wmsMetadata, opName ).iterator().next();
+        }
+        if ( binding == null )
+            return null;
+        //TODO : revoir expr
+    	String expr = "//wmts:Request/wmts:%s/wmts:DCPType/wmts:HTTP/wmts:%s/wmts:OnlineResource/@xlink:href";
+        String xPathExpr = String.format( expr, opName, binding.getElementName() );
+        
+        String href = null;
+        try {
+            XPath xPath = createXPath();
+            href = xPath.evaluate( xPathExpr, wmsMetadata );
+        } catch ( XPathExpressionException ex ) {
+            TestSuiteLogger.log( Level.INFO, ex.getMessage() );
+        }
+
+        return createEndpoint( href );
+    }
 
 }

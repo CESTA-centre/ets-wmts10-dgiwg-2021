@@ -16,14 +16,16 @@ public class GetCapabilitiesContentTest extends AbstractBaseGetCapabilitiesFixtu
     @Test(description = "DGIWG WMTS 1.0, Requirement 8")
     public void wmsCapabilitiesNameExists()
                     throws SOAPException {
-    	String xPathXml = "//ows:ServiceProvider/ows:ServiceContact/text() != ''";
+    	//String xPathXml = "//ows:ServiceProvider/ows:ServiceContact/text() != ''";
+    	String xPathXml = "//ows:ServiceProvider/ows:ServiceContact != ''";
     	System.out.println("....GetCapabilitiesContentTest : " + xPathXml);
         assertXPath( xPathXml, wmtsCapabilities, NS_BINDINGS );
     }
     @Test(description = "DGIWG WMTS 1.0, Requirement 8")
     public void wmsCapabilitiesTitleExists()
                     throws SOAPException {
-        String xPathXml = "//ows:ServiceProvider/ows:KeywordList/text() != ''";
+        //String xPathXml = "//ows:ServiceProvider/ows:Keywords != ''";
+        String xPathXml = "//ows:ServiceIdentification/ows:Keywords != ''";
         assertXPath( xPathXml, wmtsCapabilities, NS_BINDINGS );
     }
 

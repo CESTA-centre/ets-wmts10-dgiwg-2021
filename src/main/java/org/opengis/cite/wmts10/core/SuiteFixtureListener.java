@@ -14,12 +14,14 @@ import org.testng.Reporter;
 import org.w3c.dom.Document;
 
 import org.opengis.cite.wmts10.core.domain.DGIWGWMTS;
-//import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
+import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
 import org.opengis.cite.wmts10.core.domain.SuiteAttribute;
 
 // From ets-dgiwg-core
 import de.latlon.ets.core.util.TestSuiteLogger;
 import de.latlon.ets.core.util.URIUtils;
+import org.opengis.cite.wmts10.core.TestRunArg;
+
 
 /**
  * A listener that performs various tasks before and after a test suite is run, usually concerned with maintaining a
@@ -85,6 +87,25 @@ public class SuiteFixtureListener implements ISuiteListener {
             suite.setAttribute( SuiteAttribute.TEST_SUBJECT.getName(), doc );
             suite.setAttribute( SuiteAttribute.LAYER_INFO.getName(), parseLayerInfo( doc ) );
         }
+    }
+    
+    private Object parseInteractiveTestResults( Map<String, String> params ) {
+        
+        boolean getFeatureInfoExceptionInEnglishLanguage = parseBoolean( params,
+                                                                         TestRunArg.GETFEATUREINFO_EXCEPTION_IN_ENGLISH );
+
+
+        return new InteractiveTestResult( 
+                        getFeatureInfoExceptionInEnglishLanguage);
+    }
+
+    private boolean parseBoolean( Map<String, String> params, TestRunArg arg ) {
+        String key = arg.toString();
+        if ( params.containsKey( key ) ) {
+            String vectorParam = params.get( key );
+            return Boolean.parseBoolean( vectorParam );
+        }
+        return false;
     }
 
 }
