@@ -18,7 +18,6 @@ public class GetCapabilitiesContentTest extends AbstractBaseGetCapabilitiesFixtu
                     throws SOAPException {
     	//String xPathXml = "//ows:ServiceProvider/ows:ServiceContact/text() != ''";
     	String xPathXml = "//ows:ServiceProvider/ows:ServiceContact != ''";
-    	System.out.println("....GetCapabilitiesContentTest : " + xPathXml);
         assertXPath( xPathXml, wmtsCapabilities, NS_BINDINGS );
     }
     @Test(description = "DGIWG WMTS 1.0, Requirement 8")

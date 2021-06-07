@@ -85,17 +85,13 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 	}
 
 	private void checkGetTileWithImageFormat(String requestFormat) {
-		System.out.println("....checkGetTileWithImageFormat  1: " + requestFormat);
 		if (getTileURI == null) {
 			getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
 					ProtocolBinding.GET);
 		}
-		System.out.println("....checkGetTileWithImageFormat  2: " + getTileURI);
 		this.reqEntity.removeKvp(DGIWGWMTS.FORMAT_PARAM);
 		this.reqEntity.addKvp(DGIWGWMTS.FORMAT_PARAM, requestFormat);
-		System.out.println("....checkGetTileWithImageFormat  3: ");
 		ClientResponse rsp = wmtsClient.submitRequest(this.reqEntity, getTileURI);
-		System.out.println("....checkGetTileWithImageFormat  4 : " + rsp);
 		storeResponseImage(rsp, "Requirement4", "simple", requestFormat);
 
 		assertTrue(rsp.hasEntity(), ErrorMessage.get(ErrorMessageKey.MISSING_XML_ENTITY));

@@ -89,7 +89,6 @@ public class WmtsClient {
      * @return the {@link ClientResponse} object representing the response message
      */
     public ClientResponse submitRequest( WmtsKvpRequest request, URI endpoint ) {
-    	System.out.println("....ClientResponse submitRequest( : " + request);
         WebResource resource = client.resource( endpoint );
         return submitGetRequest( resource, request );
     }
@@ -132,7 +131,6 @@ public class WmtsClient {
     }
 
     private ClientResponse submitGetRequest( WebResource resource, WmtsKvpRequest requestParameter ) {
-    	System.out.println("....ClientResponse submitGetRequest( : " + requestParameter);
         LOGR.log( Level.FINE, String.format( "Submitting GET request to URI %s", resource.getURI() ) );
         String queryString = requestParameter.asQueryString();
         URI requestURI = UriBuilder.fromUri( resource.getURI() ).replaceQuery( queryString ).build();

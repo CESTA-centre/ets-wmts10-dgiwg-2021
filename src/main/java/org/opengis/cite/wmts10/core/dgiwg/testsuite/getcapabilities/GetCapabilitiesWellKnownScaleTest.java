@@ -178,10 +178,7 @@ public class GetCapabilitiesWellKnownScaleTest extends AbstractBaseGetCapabiliti
 	}
 
 	private NodeList parseAnnex(String resource, String wellKnownScaleSet) throws IOException {
-		System.out.println("....parseAnnex : " + wellKnownScaleSet + " " + resource + " "
-				+ this.getClass().getResourceAsStream(resource));
 		NodeList listFromAnnexB = openXMLDocument(this.getClass().getResourceAsStream(resource), "TileMatrix");
-		System.out.println("....parseAnnex result : " + listFromAnnexB);
 		if (listFromAnnexB == null || listFromAnnexB.getLength() == 0)
 			throw new IOException("Required external file of " + wellKnownScaleSet + " values is not accessible");
 		return listFromAnnexB;

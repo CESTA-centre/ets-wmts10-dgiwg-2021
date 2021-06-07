@@ -24,7 +24,7 @@ visible characteristics or behaviors of the IUT while disregarding any implement
 The documents listed below stipulate requirements that must be satisfied by a 
 conforming implementation.
 
-1. [DGIWG – Web Map Service 1.3 Profile (09-102r3)](https://portal.opengeospatial.org/files/?artifact_id=66915)
+1. [DGIWG – Web Map Tile Service 1.0 Profile (09-102r3)](https://portal.opengeospatial.org/files/?artifact_id=66915)
 2. [Web Map Server Implementation Specification, Version 1.3.0 (06-042)](http://portal.opengeospatial.org/files/?artifact_id=14416)
 
 If any of the following preconditions are not satisfied then all tests in the 

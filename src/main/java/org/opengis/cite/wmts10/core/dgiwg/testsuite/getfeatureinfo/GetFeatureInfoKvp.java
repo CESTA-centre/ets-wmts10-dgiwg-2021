@@ -52,33 +52,26 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 
     @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmtsGetFeatureInfoRequestParameters.", dependsOnMethods = "wmtsGetFeatureInfoExists")
     public void wmtsGetFeatureInfoRequestParameters( ITestContext testContext ) {
-    	System.out.println("....wmtsGetFeatureInfoRequestParameters start :  " + testContext);
         if ( getFeatureInfoURI == null ) {
             getFeatureInfoURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities,
             		DGIWGWMTS.GET_FEATURE_INFO,
                                                                                ProtocolBinding.GET );
         }
         String requestFormat = null;
-        System.out.println("....wmtsGetFeatureInfoRequestParameters step 1  getFeatureInfoURI :  " + getFeatureInfoURI);
         try {
             XPath xPath = createXPath();
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 1a  ");
             
             // this function does not work
             //String layerName = this.reqEntity.getKvpValue( DGIWGWMTS.LAYER_PARAM );
             String layerName = null;
             
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 1b  ");
             if ( layerName == null ) {
-            	System.out.println("....wmtsGetFeatureInfoRequestParameters step 2 layerName :  " + layerName);
                 NodeList layers = ServiceMetadataUtils.getNodeElements( xPath, wmtsCapabilities,
                                                                         "//wmts:Contents/wmts:Layer/ows:Identifier" );
-                System.out.println("....wmtsGetFeatureInfoRequestParameters step 3 layers :  " + layers);
                 if ( layers.getLength() > 0 ) {
                     layerName = ( (Node) layers.item( 0 ) ).getTextContent().trim();
                 }
             }
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 4 :  " + layerName);
             // NodeList imageFormats = ServiceMetadataUtils.getNodeElements( xPath, wmtsCapabilities,
             // "//wmts:Contents/wmts:Layer[ows:Identifier = '" + layerName + "']/wmts:Format");
 
@@ -86,14 +79,12 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
             String pixelI = this.reqEntity.getKvpValue(WMTS_Constants.I_PARAM);
             String pixelJ = this.reqEntity.getKvpValue(WMTS_Constants.J_PARAM);
             --*/
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 5 :  " );
             
          
             // this function does not work
             String infoFormat = this.reqEntity.getKvpValue( DGIWGWMTS.INFO_FORMAT_PARAM );
             //String infoFormat = null;
             
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 6 :  " );
 
             // SoftAssert sa = new SoftAssert();
 
@@ -103,9 +94,7 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 
             // requestFormat = imageFormats.item(i).getTextContent().trim();
             // this.reqEntity.addKvp( WMTS_Constants.FORMAT_PARAM, requestFormat );
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 7 getFeatureInfoURI :  getFeatureInfoURI" );
             ClientResponse rsp = wmtsClient.submitRequest( this.reqEntity, getFeatureInfoURI );
-            System.out.println("....wmtsGetFeatureInfoRequestParameters step 8 getFeatureInfoURI :  getFeatureInfoURI" );
 
             // storeResponseImage( rsp, "Requirement5", "simple", requestFormat );
             /*--
@@ -125,7 +114,6 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
             }
             assertTrue( false, "Invalid or corrupt XML or KVP structure:  " + xpe.getMessage() );
         }
-        System.out.println("....wmtsGetFeatureInfoRequestParameters end :  " );
     }
 
     private XPath createXPath()

@@ -61,7 +61,6 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 	public static void verifyNASkeywords(boolean mandatory, String keywordLocationDescription, Node xmlNode,
 			String keywordLocation) {
 		try {
-			System.out.println("....verifyNASkeywords mandatory : " + mandatory);
 			Node keywordsElement = (Node) ServiceMetadataUtils.getNode(xmlNode, keywordLocation);
 			if (mandatory) {
 				assertFalse((keywordsElement == null),
@@ -87,7 +86,6 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 			for (int keywordNodeIndex = 0; keywordNodeIndex < keywords.getLength(); keywordNodeIndex++) {
 				Node keywordNode = keywords.item(keywordNodeIndex);
 				String keyword = keywordNode.getTextContent();
-				System.out.println("....verifyNASkeywords keyword : " + keyword);
 				if (keyword != null)
 					keywordsToCheck.add(keyword.toLowerCase().trim());
 			}

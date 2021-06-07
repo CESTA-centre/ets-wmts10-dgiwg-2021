@@ -15,6 +15,13 @@
         <BasicConformanceClasses>
           <conformanceClass>Preconditions</conformanceClass>
 			<conformanceClass>DGIWG WMTS requirement 2</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 3</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 4</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 5</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 6</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 7</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 8</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 17</conformanceClass>
         </BasicConformanceClasses>
       </suite>
       <revision>

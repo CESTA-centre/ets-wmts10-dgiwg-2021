@@ -5,20 +5,11 @@ DGIWG WMTS application profile, [DGIWG-124](https://portal.dgiwg.org/files/68271
 A conforming implementation must also satisfy the constraints of the **Queryable WMTS** conformance 
 class as defined in the base [WMTS 1.0 standard](http://www.ogc.org/standards/wmts).
 
-This test suite has been designed based on the existing [ets-wms13-dgiwg](https://github.com/opengeospatial/ets-wms13-dgiwg) project.
+
 
 
 ## How to build the project
 
-Before building it you need to build ets-dgiwg-core. Do the follwoing:
-
-`git clone https://github.com/opengeospatial/ets-dgiwg-core`
-
-`cd ets-dgiwg-core`
-
-`mvn clean install`
-
-Now you can build the project:
 
 `git clone https://github.com/CESTA-centre/ets-wmts10-dgiwg-2021.git`
 
@@ -26,7 +17,7 @@ Now you can build the project:
 
 `mvn clean install`
 
-It will creat the jars to be installed in TEAM Engine.
+It will create the jars to be installed in TEAM Engine.
 
 
 ## How to run the tests
