@@ -29,7 +29,6 @@ public class GetFeatureInfoExceptionInEnglishLanguageTest {
 			throws XPathExpressionException, XPathFactoryConfigurationException {
 		if (context == null)
 			throw new SkipException("Context is null!");
-		System.out.println("....GetFeatureInfoExceptionInEnglishLanguageTest : " + context.getSuite().getAttribute(SuiteAttribute.INTERACTIVE_TEST_RESULT.getName()));
 		Object attribute = context.getSuite().getAttribute(SuiteAttribute.INTERACTIVE_TEST_RESULT.getName());
 		if (attribute == null)
 			throw new SkipException("Missing testresult!");

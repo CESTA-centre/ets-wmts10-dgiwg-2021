@@ -1,16 +1,6 @@
 
 # Release Notes
 
-## 0.4 (2017-11-13)
-- Fix [#6](https://github.com/opengeospatial/ets-wms13-dgiwg/issues/6) - Add conformance class configuration
 
-## 0.3 (2016-12-13)
-
-This release includes the following fixes and enhancements:
-
-* Fix [#3](https://github.com/opengeospatial/ets-dgiwg-wms13/issues/3): FileAlreadyExistsException thrown during test run
-* Fix [#2](https://github.com/opengeospatial/ets-dgiwg-wms13/issues/2): Add "all-in-one" (aio) assembly for command-line execution
-* Fix [#1](https://github.com/opengeospatial/ets-dgiwg-wms13/issues/1): Exception thrown when reading WMS capabilities document
-
-## 0.2 (2016-11-24)
-The initial release covers all requirements described in "DGIWG – Web Map Service 1.3 Profile" (DGIWG-112)
+## 1.0 (2021-06-07)
+The initial release covers all requirements described in "DGIWG – Web Map Tile Service 1.0 Profile" (DGIWG-124)

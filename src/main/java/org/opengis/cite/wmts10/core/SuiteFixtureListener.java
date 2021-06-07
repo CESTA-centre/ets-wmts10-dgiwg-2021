@@ -44,7 +44,6 @@ public class SuiteFixtureListener implements ISuiteListener {
         str.append( suite.getXmlSuite().getAllParameters().toString() );
         Reporter.log( str.toString() );
         TestSuiteLogger.log( Level.CONFIG, str.toString() );
-        System.out.println("....onStart : " + str);
     }
 
     @Override
@@ -53,7 +52,6 @@ public class SuiteFixtureListener implements ISuiteListener {
         String reportDir = suite.getOutputDirectory();
         String msg = String.format( "Test run directory: %s",
                                     reportDir.substring( 0, reportDir.lastIndexOf( File.separatorChar ) ) );
-        System.out.println("....onFinish : " + msg);
         Reporter.log( msg );
     }
 

@@ -46,10 +46,8 @@ public class DGIWG_XMLUtils {
      */
     public static NodeList openXMLDocument( InputStream xmlDocument, String rootName ) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        System.out.println("....openXMLDocument  1: " + xmlDocument);
         try {
             DocumentBuilder ioe = dbf.newDocumentBuilder();
-            System.out.println("....openXMLDocument  2: " + ioe);
             Document dom = ioe.parse( xmlDocument );
             if ( dom != null ) {
                 Element docElems = dom.getDocumentElement();

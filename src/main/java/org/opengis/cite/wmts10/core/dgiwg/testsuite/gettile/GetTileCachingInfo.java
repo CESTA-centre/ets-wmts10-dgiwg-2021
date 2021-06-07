@@ -47,7 +47,6 @@ public class GetTileCachingInfo extends AbstractBaseGetTileFixture {
 
     @Test(description = "DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
     public void wmtsGetTileCachingInformationExists() {
-    	System.out.println("....wmtsGetTileCachingInformationExists : " + getTileURI);
         if ( getTileURI == null ) {
             getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                         ProtocolBinding.GET );
@@ -58,7 +57,6 @@ public class GetTileCachingInfo extends AbstractBaseGetTileFixture {
         this.reqEntity.addKvp( DGIWGWMTS.FORMAT_PARAM, requestFormat );
 
         response = wmtsClient.submitRequest( this.reqEntity, getTileURI );
-        System.out.println("....wmtsGetTileCachingInformationExists response : " + response);
         storeResponseImage( response, "Requirement2", "simple", requestFormat );
 
         assertTrue( response.hasEntity(), ErrorMessage.get( ErrorMessageKey.MISSING_XML_ENTITY ) );
@@ -70,7 +68,6 @@ public class GetTileCachingInfo extends AbstractBaseGetTileFixture {
 
         boolean anyCacheControls = ( ( cacheControls != null ) && ( cacheControls.size() > 0 ) );
         boolean anyExpires = ( ( expires != null ) && ( expires.size() > 0 ) );
-        System.out.println("....wmtsGetTileCachingInformationExists bool : " + anyCacheControls + " " + anyExpires);
         assertTrue( anyCacheControls || anyExpires, "WMTS does not provide appropriate caching information" );
     }
 

@@ -42,18 +42,14 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
 
     @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile KVP capability", dependsOnMethods = "verifyGetTileSupported")
     public void wmtsGetTileKVPRequestsExists() {
-    	System.out.println("....wmtsGetTileKVPRequestsExists start " );
         getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                     ProtocolBinding.GET );
-        System.out.println("....wmtsGetTileKVPRequestsExists getTileURI : " + getTileURI);
         assertTrue( getTileURI != null,
                     "GetTile (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document." );
-        System.out.println("....wmtsGetTileKVPRequestsExists end " );
     }
 
     @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile KVP parameters", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
     public void wmtsGetTileRequestFormatParameters( ITestContext testContext ) {
-    	System.out.println("....wmtsGetTileRequestFormatParameters start :  " + getTileURI);
         if ( getTileURI == null ) {
             getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                         ProtocolBinding.GET );
@@ -62,7 +58,6 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
 
         try {
             XPath xPath = createXPath();
-            System.out.println("....wmtsGetTileRequestFormatParameters xPath :  " + xPath);
             String layerName = this.reqEntity.getKvpValue( DGIWGWMTS.LAYER_PARAM );
             if ( layerName == null ) {
                 NodeList layers = ServiceMetadataUtils.getNodeElements( xPath, wmtsCapabilities,
@@ -75,7 +70,6 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
                                                                           "//wmts:Contents/wmts:Layer[ows:Identifier = '"
                                                                                                   + layerName
                                                                                                   + "']/wmts:Format" );
-            System.out.println("....wmtsGetTileRequestFormatParameters imageFormats :  " + imageFormats.getLength());
 
             SoftAssert sa = new SoftAssert();
 
@@ -84,22 +78,17 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
 
                 requestFormat = imageFormats.item( i ).getTextContent().trim();
                 this.reqEntity.addKvp( DGIWGWMTS.FORMAT_PARAM, requestFormat );
-                System.out.println("....wmtsGetTileRequestFormatParameters requestFormat :  " + requestFormat);
                 ClientResponse rsp = wmtsClient.submitRequest( this.reqEntity, getTileURI );
-                System.out.println("....wmtsGetTileRequestFormatParameters rsp 1 :  " + rsp);
                 storeResponseImage( rsp, "Requirement5", "simple", requestFormat );
-                System.out.println("....wmtsGetTileRequestFormatParameters rsp 2 :  " + rsp);
 
                 sa.assertTrue( rsp.hasEntity(), ErrorMessage.get( ErrorMessageKey.MISSING_XML_ENTITY ) );
                 WmtsAssertion.assertStatusCode( sa, rsp.getStatus(), 200 );
                 WmtsAssertion.assertContentType( sa, rsp.getHeaders(), requestFormat );
-                System.out.println("....wmtsGetTileRequestFormatParameters sa :  " + sa);
             }
             sa.assertAll();
         } catch ( XPathExpressionException | XPathFactoryConfigurationException xpe ) {
             assertTrue( false, "Invalid or corrupt XML or KVP structure:  " + xpe.getMessage() );
         }
-        System.out.println("....wmtsGetTileRequestFormatParameters end" );
     }
 
     private XPath createXPath()
