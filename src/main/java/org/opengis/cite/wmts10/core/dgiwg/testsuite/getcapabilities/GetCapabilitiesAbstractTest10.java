@@ -24,15 +24,18 @@ import org.opengis.cite.wmts10.core.util.ServiceMetadataUtils;
  * 
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
-public class GetCapabilitiesAbstractTest extends AbstractBaseGetCapabilitiesFixture {
+public class GetCapabilitiesAbstractTest10 extends AbstractBaseGetCapabilitiesFixture {
 
 	/**
-	 * DGIWG WMTS 1.0, Requirement 7 A WMTS server shall provide an "Abstract" at the service level, 
-	 * in the in the GetCapabilities response document..
+	 * If a WMTS server is providing services to a coalition mission federated network, in support of operations or an exercise, 
+	 * it shall include the following information in the <abstract> element of the service metadata: 
+	 * "This service implements the WMTS 1.0 STANAG 6523 Ed.2 profile". 
+	 * The provision of these metadata elements are optional for a WMTS server which is providing services across 
+	 * one single non-mission network.
 	 */
-    private static final String EXPECTED_ABSTRACT = "This service implements the DGIWG WMTS 1.0.";
+    private static final String EXPECTED_ABSTRACT = "This service implements the WMTS 1.0 STANAG 6523 Ed.2 profile";
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 7")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 10")
     public void wmsCapabilitiesAbstractContainsProfile()
                     throws XPathFactoryConfigurationException, XPathExpressionException {
     	//MGE attention on remplace getOperationEndpoint par getOperationEndpoint_KVP
@@ -44,12 +47,10 @@ public class GetCapabilitiesAbstractTest extends AbstractBaseGetCapabilitiesFixt
         
         // MGE voir pour ecrire dans testng-results.xml
        
-        /*
         assertTrue( abstractValue.contains( EXPECTED_ABSTRACT ), "Abstract is not valid, must contain the string '"
                                                                 + EXPECTED_ABSTRACT + " but is '" + abstractValue + "'" );
-                                                                */
                                                                 
-        assertTrue( true, "Abstract is : '" + abstractValue + "'" );
+        //assertTrue( false, "Abstract is : '" + abstractValue + "'" );
     }
 
     private String parseAbstract( ClientResponse rsp )

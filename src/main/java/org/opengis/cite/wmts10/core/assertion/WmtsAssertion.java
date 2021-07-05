@@ -4,6 +4,10 @@ package org.opengis.cite.wmts10.core.assertion;
 import static de.latlon.ets.core.assertion.ETSAssert.assertQualifiedName;
 import static de.latlon.ets.core.assertion.ETSAssert.assertXPath;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +16,12 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import de.latlon.ets.core.error.ErrorMessage;
 import de.latlon.ets.core.error.ErrorMessageKey;
@@ -124,6 +134,68 @@ public final class WmtsAssertion {
     public static void assertContentType( MultivaluedMap<String, String> headers, String expectedContentType ) {
         assertContentType( null, headers, expectedContentType );
     }
+    
+    /**
+     * Asserts that the string is a valid url.
+     * 
+     * @param sa
+     *            an optional assertion class to delay terminating test and handle in the calling routine
+     * @param url
+     *            The url to check.
+     */
+    public static void assertUrl( SoftAssert sa, String url ) {
+        boolean urlWellFormed = false;
+        String msg = null;
+
+        try {
+            new URL( url );
+            urlWellFormed = true;
+        } catch ( MalformedURLException e ) {
+            msg = String.format( "Invalid URL: %s", url );
+        }
+
+        if ( sa == null ) {
+            Assert.assertTrue( urlWellFormed, msg );
+        } else {
+            sa.assertTrue( urlWellFormed, msg );
+        }
+    }
+
+    // ---
+    /**
+     * Asserts that the string is a valid url.
+     *
+     * @param url
+     *            The url to check.
+     */
+    public static void assertUrl( String url ) {
+        assertUrl( null, url );
+    }
+
+    // ---
+
+    /**
+     * Asserts that the url is resolvable (status code is 200).
+     * 
+     * @param sa
+     *            an optional assertion class to delay terminating test and handle in the calling routine
+     * @param url
+     *            The url to check.
+     */
+    public static void assertUriIsResolvable( SoftAssert sa, String url ) {
+        try {
+            ClientConfig config = new DefaultClientConfig();
+            Client client = Client.create( config );
+            WebResource resource = client.resource( new URI( url ) );
+            ClientResponse response = resource.get( ClientResponse.class );
+            assertStatusCode( sa, response.getStatus(), 200 );
+        } catch ( NullPointerException | URISyntaxException e ) {
+            String errorMsg = String.format( "Invalid URI %s: %s", url, e.getMessage() );
+            throw new AssertionError( errorMsg );
+        }
+    }
+    
+    
     
     /**
      * Asserts that an XPath 1.0 expression holds true for the given evaluation context.

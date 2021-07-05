@@ -54,7 +54,7 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 
 	@Test(description = "DGIWG WMTS 1.0, Requirement 5", dependsOnMethods = "wmtsGetCapabilitiesURLExists")
 	public void wmtsCapabilitiesKeywordTest() {
-		verifyNASkeywords(true, "WMTS ServiceMetadata Capabilities docuemnt", wmtsCapabilities,
+		verifyNASkeywords(true, "WMTS ServiceMetadata Capabilities document", wmtsCapabilities,
 				"//ows:ServiceIdentification/ows:Keywords");
 	}
 
@@ -86,6 +86,7 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 			for (int keywordNodeIndex = 0; keywordNodeIndex < keywords.getLength(); keywordNodeIndex++) {
 				Node keywordNode = keywords.item(keywordNodeIndex);
 				String keyword = keywordNode.getTextContent();
+				System.out.println("....verifyNASkeywords  keyword : " + keyword);
 				if (keyword != null)
 					keywordsToCheck.add(keyword.toLowerCase().trim());
 			}
@@ -99,6 +100,7 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 				String nasKeyword;
 				while ((nasKeyword = br.readLine()) != null) {
 					nasKeyword = nasKeyword.toLowerCase().trim();
+					System.out.println("....verifyNASkeywords  nasKeyword : " + nasKeyword);
 					if (!nasKeyword.isEmpty()) {
 						if (keywordsToCheck.contains(nasKeyword)) {
 							anyFound = true;

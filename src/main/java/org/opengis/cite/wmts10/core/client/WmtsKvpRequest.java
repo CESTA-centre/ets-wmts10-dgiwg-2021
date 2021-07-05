@@ -63,6 +63,7 @@ public class WmtsKvpRequest {
      * @return the value of the KVP at key
      */
     public String getKvpValue( String keyd ) {
+    	System.out.println("....getKvpValue keyd : " + keyd);
         String value = null;
         for ( Entry<String, String> kvp : kvps.entrySet() ) {
             if ( kvp.getKey().equals( keyd ) ) {

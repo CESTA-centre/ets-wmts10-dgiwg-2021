@@ -27,19 +27,19 @@ import org.opengis.cite.wmts10.core.util.ServiceMetadataUtils;
  * 
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  */
-public class GetCapabilitiesAccessConstraintTest extends AbstractBaseGetCapabilitiesFixture {
+public class GetCapabilitiesAccessConstraintTest9 extends AbstractBaseGetCapabilitiesFixture {
 
     private static final List<String> EXPECTED_ACCESS_CONSTRAINTS = Arrays.asList( "unclassified", "restricted",
-                                                                                 "confidential", "secret", "topSecret" );
+            "confidential", "secret", "topSecret" );
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 8")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 9")
     public void wmsCapabilitiesAccessConstraintsExists() {
         //String xPathXml = "//wms:WMS_Capabilities/wms:Service/wms:AccessConstraints != ''";
         String xPathXml = "//ows:ServiceIdentification/ows:AccessConstraints != ''";
         assertXPath( xPathXml, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 8", dependsOnMethods = "wmsCapabilitiesAccessConstraintsExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 9", dependsOnMethods = "wmsCapabilitiesAccessConstraintsExists")
     public
                     void wmsCapabilitiesAccessConstraintsContainsValueFromDMF()
                                     throws XPathFactoryConfigurationException, XPathExpressionException {
@@ -49,7 +49,10 @@ public class GetCapabilitiesAccessConstraintTest extends AbstractBaseGetCapabili
         ClientResponse rsp = wmtsClient.submitRequest( this.reqEntity, endpoint );
 
         String accessConstraints = parseAccessConstraints( rsp );
-        assertTrue( true,"Constraint is "+ accessConstraints );
+        assertTrue( EXPECTED_ACCESS_CONSTRAINTS.contains( accessConstraints ),
+                "AccessConstraints are not valid, must be one of " + EXPECTED_ACCESS_CONSTRAINTS + " but was "
+                                + accessConstraints );
+       
     }
 
     private String parseAccessConstraints( ClientResponse rsp )

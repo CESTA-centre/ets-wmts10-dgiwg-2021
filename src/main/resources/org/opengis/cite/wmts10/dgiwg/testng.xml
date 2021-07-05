@@ -34,8 +34,9 @@
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileParametersRest" />
 
 
-			<!-- <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoKvp" 
-				/> -->
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoKvp" />
+
 
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoRest" />
@@ -92,14 +93,8 @@
 	<!-- A WMTS server shall provide the service exceptions in the English language. 
 		Exception text content may also be provided in additional languages, but 
 		English must always be included.. -->
-<!-- 
-	<test name="DGIWG WMTS requirement 6">
-		<classes>
-			<class
-				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoExceptionInEnglishLanguageTest" />
-		</classes>
-	</test>
--->
+	<!-- <test name="DGIWG WMTS requirement 6"> <classes> <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoExceptionInEnglishLanguageTest" 
+		/> </classes> </test> -->
 
 	<!-- A WMTS server shall provide an "Abstract" at the service level, in 
 		the in the GetCapabilities response document.. -->
@@ -126,6 +121,49 @@
 		</classes>
 	</test>
 
+	<!-- A WMTS server SHALL use the <AccessContraints> element to hold the 
+		classification information for this web service instance." -->
+	<test name="DGIWG WMTS requirement 9">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesAccessConstraintTest9" />
+		</classes>
+	</test>
+
+
+	<!-- If a WMTS server is providing services to a coalition mission federated 
+		network, in support of operations or an exercise, it shall include the following 
+		information in the <abstract> element of the service metadata: "This service 
+		implements the WMTS 1.0 STANAG 6523 Ed.2 profile". The provision of these 
+		metadata elements are optional for a WMTS server which is providing services 
+		across one single non-mission network. -->
+	<test name="DGIWG WMTS requirement 10">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesAbstractTest10" />
+		</classes>
+	</test>
+
+
+	<!-- A RESTFULL WMTS server shall provide tile experiation date, in an appropriate 
+		HTTP header ("Expires" header in HTTP 1.0, "Cache-control" header for HTTP 
+		1.1 and for HTTP 2). -->
+	<test name="DGIWG WMTS requirement 11">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo" />
+		</classes>
+	</test>
+
+	<!-- Each layer's style shall have an associated legend (using the <legendURL 
+		>element) if the data being provisioned is symbolized/portrayed (i.e. not 
+		imagery). -->
+	<test name="DGIWG WMTS requirement 14">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent" />
+		</classes>
+	</test>
 
 	<!-- If a WMTS server offers its functionality via the SOAP protocol, it 
 		shall do so in compliance with the Messaging Service SIP [NCIA TR/2012/SPW008000/30, 
