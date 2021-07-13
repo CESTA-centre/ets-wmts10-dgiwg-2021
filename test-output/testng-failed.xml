@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]" parallel="none">
+  <test verbose="2" name="Default test">
+    <classes>
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.AbstractBaseGetCapabilitiesFixture"/>
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent13"/>
+    </classes>
+  </test> <!-- Default test -->
+  <test name="Default test(failed)" parallel="none">
+    <classes>
+      <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent13">
+        <methods>
+          <include name="buildGetCapabilitiesRequest"/>
+          <include name="wmtsCapabilitiesOperationsMetadataExists"/>
+          <include name="verifyGetCapabilitiesSupported"/>
+          <include name="addAttributesOnTestFailure"/>
+          <include name="wmtsCapabilitiesContentsExists"/>
+          <include name="wmtsCapabilitiesLayerStyleLegends"/>
+          <include name="wmtsCapabilitiesServiceIdentificationExists"/>
+          <include name="initParser"/>
+          <include name="wmtsCapabilitiesServiceProviderExists"/>
+          <include name="addAttributesOnTestSuccess"/>
+          <include name="wmtsCapabilitiesExists"/>
+          <include name="initBaseFixture"/>
+        </methods>
+      </class> <!-- org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent13 -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

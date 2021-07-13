@@ -29,48 +29,49 @@ import org.w3c.dom.NodeList;
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  *
  */
-public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
+public class ServiceMetadataContent15 extends AbstractBaseGetCapabilitiesFixture {
     /**
-     * Each layer's style shall have an associated legend (using the legendURL element) if the data being provisioned 
-     * is symbolized/portrayed (i.e. not imagery).
+     * Legends shall be available as an image in at least one of the following formats: 
+     * PNG (image/png), GIF (image/gif) or JPEG (image/jpeg).
      */
 
-
     
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 15", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         // --- base test
         assertXPath( ".", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 15", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceIdentificationExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceIdentification", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 15", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceProviderExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceProvider", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 15", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesOperationsMetadataExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:OperationsMetadata", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 15", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesContentsExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//wmts:Contents", wmtsCapabilities, NS_BINDINGS );
     }
 
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesContentsExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 15", dependsOnMethods = "wmtsCapabilitiesContentsExists")
     public void wmtsCapabilitiesLayerStyleLegends()
                             throws XPathExpressionException, XPathFactoryConfigurationException {
+        // --- Test Method: 7 (The response provides an associated legend in at least one of the following formats: PNG,
+        // GIF, JPEG)
 
         XPath xPath = createXPath();
         if ( ( layerInfo == null ) || ( layerInfo.size() <= 0 ) ) {
@@ -103,12 +104,37 @@ public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
                     sa.assertTrue( ( legendList != null ) && ( legendList.getLength() > 0 ),
                                    "There is no Legend for <Style>: " + styleIdentifier + " under <Layer>: "
                                                            + layer.getLayerName() );
+
+                    if ( ( legendList != null ) && ( legendList.getLength() > 0 ) ) {
+                        boolean foundPreferredFormat = false;
+                        for ( int li = 0; li < legendList.getLength(); li++ ) {
+                            Node legend = legendList.item( li );
+
+                            String format = (String) xPath.evaluate( "@format", legend, XPathConstants.STRING );
+                            String url = (String) xPath.evaluate( "@xlink:href", legend, XPathConstants.STRING );
+                            
+                            System.out.println("....wmtsCapabilitiesLayerStyleLegends  : format : " + format + " url : " + url);
+
+                            sa.assertTrue( ( !Strings.isNullOrEmpty( format ) ) && ( !Strings.isNullOrEmpty( url ) ),
+                                           "Legend for Style: " + styleIdentifier + " under Layer: "
+                                                                   + layer.getLayerName() + " is not properly defined." );
+
+                            // -- Test for formats (Test Method 7)
+                            foundPreferredFormat |= ( format.equals( DGIWGWMTS.IMAGE_PNG )
+                                                      || format.equals( DGIWGWMTS.IMAGE_GIF ) || format.equals( DGIWGWMTS.IMAGE_JPEG ) );
+
+
+                        }
+                        sa.assertTrue( foundPreferredFormat,
+                                       "<Style>: " + styleIdentifier + " under <Layer>: " + layer.getLayerName()
+                                                               + " does not use a preferred Legend image format." );
+                    }
                 }
-                    
             }
         }
         sa.assertAll();
     }
+
 
 
     private XPath createXPath()

@@ -29,46 +29,45 @@ import org.w3c.dom.NodeList;
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz</a>
  *
  */
-public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
+public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture {
     /**
-     * Each layer's style shall have an associated legend (using the legendURL element) if the data being provisioned 
-     * is symbolized/portrayed (i.e. not imagery).
+    A WMTS server shall provide a title element for each supported style.
      */
 
 
     
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         // --- base test
         assertXPath( ".", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceIdentificationExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceIdentification", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceProviderExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceProvider", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesOperationsMetadataExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:OperationsMetadata", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesContentsExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//wmts:Contents", wmtsCapabilities, NS_BINDINGS );
     }
 
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesContentsExists")
+    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesContentsExists")
     public void wmtsCapabilitiesLayerStyleLegends()
                             throws XPathExpressionException, XPathFactoryConfigurationException {
 
@@ -99,9 +98,9 @@ public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
                     
                     System.out.println("....wmtsCapabilitiesLayerStyleLegends  : styleIdentifier " + styleIdentifier);
 
-                    NodeList legendList = (NodeList) xPath.evaluate( "./wmts:LegendURL", style, XPathConstants.NODESET );
-                    sa.assertTrue( ( legendList != null ) && ( legendList.getLength() > 0 ),
-                                   "There is no Legend for <Style>: " + styleIdentifier + " under <Layer>: "
+                    NodeList titleList = (NodeList) xPath.evaluate( "./ows:Title", style, XPathConstants.NODESET );
+                    sa.assertTrue( ( titleList != null ) && ( titleList.getLength() > 0 ),
+                                   "There is no Title for <Title>: " + styleIdentifier + " under <Layer>: "
                                                            + layer.getLayerName() );
                 }
                     

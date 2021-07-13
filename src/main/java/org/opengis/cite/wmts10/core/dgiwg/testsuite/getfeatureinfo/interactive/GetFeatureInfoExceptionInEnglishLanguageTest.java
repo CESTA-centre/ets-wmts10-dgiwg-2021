@@ -23,6 +23,10 @@ public class GetFeatureInfoExceptionInEnglishLanguageTest {
 	 * DGIWG WMTS 1.0, Requirement 6 A WMTS server shall provide the service
 	 * exceptions in the English language. Exception text content may also be
 	 * provided in additional languages, but English must always be included.
+	 * @param context
+	 * 	The context of the suite.
+	 * @throws XPathExpressionException
+	 * @throws XPathFactoryConfigurationException
 	 */
 	@Test(description = "DGIWG WMTS 1.0, Requirement 6")
 	public void getFeatureInfoExceptionInEnglishLanguage(ITestContext context)
