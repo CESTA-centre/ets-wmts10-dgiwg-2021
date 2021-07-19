@@ -84,6 +84,8 @@ public class SuiteFixtureListener implements ISuiteListener {
         if ( null != doc ) {
             suite.setAttribute( SuiteAttribute.TEST_SUBJECT.getName(), doc );
             suite.setAttribute( SuiteAttribute.LAYER_INFO.getName(), parseLayerInfo( doc ) );
+            suite.setAttribute( SuiteAttribute.IS_VECTOR.getName(), parseBoolean( params, TestRunArg.VECTOR ) );
+            suite.setAttribute( SuiteAttribute.INTERACTIVE_TEST_RESULT.getName(), parseInteractiveTestResults( params ) );
         }
     }
     

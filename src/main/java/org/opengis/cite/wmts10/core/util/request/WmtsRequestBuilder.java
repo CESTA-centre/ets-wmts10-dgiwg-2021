@@ -27,12 +27,13 @@ import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.IMAGE_PNG;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.INFO_FORMAT_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.I_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.J_PARAM;
-//import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.QUERY_LAYERS_PARAM;
+
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.REQUEST_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_PARAM;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_TYPE_CODE;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.VERSION;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.VERSION_PARAM;
+
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -68,10 +69,6 @@ public final class WmtsRequestBuilder {
 	private WmtsRequestBuilder() {
 	}
 
-	
-	
-	
-	
 	/**
 	 * Creates a GetFatureInfo request with random parameters from the WMTS
 	 * Capabilities.
@@ -81,19 +78,23 @@ public final class WmtsRequestBuilder {
 	 * @return a GetFeatureInfo request with random parameters, never
 	 *         <code>null</code>
 	 */
-	public static WmtsKvpRequest buildGetFeatureInfoRequest(Document wmtsCapabilities, List<LayerInfo> layerInfos) {
+	public static WmtsKvpRequest buildGetFeatureInfoRequest(Document wmtsCapabilities, List<LayerInfo> layerInfos,
+			boolean invalid) {
+		System.out.println("....buildGetFeatureInfoRequest begin ");
 		String format = getSupportedFormat(wmtsCapabilities, GET_FEATURE_INFO);
-		return buildGetFeatureInfoRequest(wmtsCapabilities, layerInfos, format);
-	}
-	
-    public static WmtsKvpRequest buildGetCapabilitiesRequest( Document wmtsCapabilities, List<LayerInfo> layerInfos ) {
-        WmtsKvpRequest reqEntity = new WmtsKvpRequest();
-        reqEntity.addKvp( SERVICE_PARAM, SERVICE_TYPE_CODE );
-        reqEntity.addKvp( REQUEST_PARAM, GET_CAPABILITIES );
-        reqEntity.addKvp( VERSION_PARAM, VERSION );
+		System.out.println("....buildGetFeatureInfoRequest format : " + format);
+		return buildGetFeatureInfoRequest(wmtsCapabilities, layerInfos, format, invalid);
 
-        return reqEntity;
-    }
+	}
+
+	public static WmtsKvpRequest buildGetCapabilitiesRequest(Document wmtsCapabilities, List<LayerInfo> layerInfos) {
+		WmtsKvpRequest reqEntity = new WmtsKvpRequest();
+		reqEntity.addKvp(SERVICE_PARAM, SERVICE_TYPE_CODE);
+		reqEntity.addKvp(REQUEST_PARAM, GET_CAPABILITIES);
+		reqEntity.addKvp(VERSION_PARAM, VERSION);
+
+		return reqEntity;
+	}
 
 	/**
 	 * Creates a GetFatureInfo request with random parameters from the WMTS
@@ -108,15 +109,13 @@ public final class WmtsRequestBuilder {
 	 *         <code>null</code>
 	 */
 	public static WmtsKvpRequest buildGetFeatureInfoRequest(Document wmtsCapabilities, List<LayerInfo> layerInfos,
-			String format) {
-		/*
-		 * boolean isFormatSupported = ServiceMetadataUtils.parseSupportedFormats(
-		 * wmtsCapabilities, GET_FEATURE_INFO ).contains( format ); assertTrue(
-		 * isFormatSupported,
-		 * "The requested format is not supported for GetFEatureInfo requests." );
-		 * return buildGetFeatureInfoRequestWithFormat( layerInfos, format );
-		 */
-		return null;
+			String format,boolean invalid) {
+		System.out.println("....WmtsKvpRequest : " + wmtsCapabilities + " format : " + format);
+		boolean isFormatSupported = ServiceMetadataUtils.parseSupportedFormats_v2(wmtsCapabilities, GET_FEATURE_INFO)
+				.contains(format);
+		System.out.println("....WmtsKvpRequest isFormatSupported : " + isFormatSupported);
+		assertTrue(isFormatSupported, "The requested format is not supported for GetFEatureInfo requests.");
+		return buildGetFeatureInfoRequestWithFormat(layerInfos, format, invalid);
 	}
 
 	/**
@@ -152,28 +151,42 @@ public final class WmtsRequestBuilder {
 		 */return null;
 	}
 
-	private static WmtsKvpRequest buildGetFeatureInfoRequestWithFormat(List<LayerInfo> layerInfos, String format) {
-		/*
-		 * WmtsKvpRequest reqEntity = new WmtsKvpRequest(); reqEntity.addKvp(
-		 * SERVICE_PARAM, SERVICE_TYPE_CODE ); reqEntity.addKvp( VERSION_PARAM, VERSION
-		 * ); reqEntity.addKvp( REQUEST_PARAM, GET_FEATURE_INFO );
-		 * 
-		 * LayerInfo layerInfo = findSuitableLayerInfo( layerInfos ); assertNotNull(
-		 * layerInfo, "Could not find suitable layer for GetMap requests." );
-		 * 
-		 * assertNotNull( format, "Could not find request format for GetFeatureInfo." );
-		 * 
-		 * String layerName = layerInfo.getLayerName(); BoundingBox bbox =
-		 * findBoundingBox( layerInfo );
-		 * 
-		 * reqEntity.addKvp( LAYERS_PARAM, layerName ); reqEntity.addKvp( STYLES_PARAM,
-		 * "" ); reqEntity.addKvp( CRS_PARAM, bbox.getCrs() ); reqEntity.addKvp(
-		 * BBOX_PARAM, bbox.getBboxAsString() ); reqEntity.addKvp( WIDTH_PARAM, "1" );
-		 * reqEntity.addKvp( HEIGHT_PARAM, "1" ); reqEntity.addKvp( QUERY_LAYERS_PARAM,
-		 * layerName ); reqEntity.addKvp( I_PARAM, "0" ); reqEntity.addKvp( J_PARAM, "0"
-		 * ); reqEntity.addKvp( INFO_FORMAT_PARAM, format ); return reqEntity;
-		 */return null;
+	private static WmtsKvpRequest buildGetFeatureInfoRequestWithFormat(List<LayerInfo> layerInfos, String format, boolean invalid) {
+
+		WmtsKvpRequest reqEntity = new WmtsKvpRequest();
+		reqEntity.addKvp(SERVICE_PARAM, SERVICE_TYPE_CODE);
+		reqEntity.addKvp(VERSION_PARAM, VERSION);
+		reqEntity.addKvp(REQUEST_PARAM, GET_FEATURE_INFO);
+
+		//LayerInfo layerInfo = findSuitableLayerInfo(layerInfos);
+		//assertNotNull(layerInfo, "Could not find suitable layer for GetMap requests.");
+
+		//assertNotNull(format, "Could not find request format for GetFeatureInfo.");
+
+		//String layerName = layerInfo.getLayerName();
+		String layerName = "ORTHOIMAGERY.ORTHOPHOTOS";
+		// BoundingBox bbox = findBoundingBox(layerInfo);
+
+		if ( !invalid) reqEntity.addKvp(LAYER_PARAM, layerName);
+		reqEntity.addKvp(TILE_MATRIX_SET_PARAM, "PM");
+		reqEntity.addKvp(TILE_MATRIX_PARAM, "14");
+		reqEntity.addKvp(TILE_ROW_PARAM, "0");
+		reqEntity.addKvp(TILE_COL_PARAM, "0");
+		reqEntity.addKvp(FORMAT_PARAM, "image/jpeg");
+		reqEntity.addKvp(STYLE_PARAM, "normal");
+		// reqEntity.addKvp(CRS_PARAM, bbox.getCrs());
+		// reqEntity.addKvp(BBOX_PARAM, bbox.getBboxAsString());
+		// reqEntity.addKvp(WIDTH_PARAM, "1");
+		// reqEntity.addKvp(HEIGHT_PARAM, "1");
+		// reqEntity.addKvp(QUERY_LAYERS_PARAM, layerName);
+		reqEntity.addKvp(INFO_FORMAT_PARAM, "text/xml");
+		reqEntity.addKvp(I_PARAM, "0");
+		reqEntity.addKvp(J_PARAM, "0");
+
+		return reqEntity;
+
 	}
+
 
 	/**
 	 * @param wmtsCapabilities the capabilities of the WMTS, never <code>null</code>
@@ -183,12 +196,13 @@ public final class WmtsRequestBuilder {
 	 *         no format is specified
 	 */
 	public static String getSupportedFormat(Document wmtsCapabilities, String opName) {
-		/*
-		 * List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats(
-		 * wmtsCapabilities, opName ); if ( supportedFormats.size() > 0 ) { int
-		 * randomIndex = RANDOM.nextInt( supportedFormats.size() ); return
-		 * supportedFormats.get( randomIndex ); }
-		 */
+		System.out.println("....getSupportedFormat : " + opName);
+		List<String> supportedFormats = ServiceMetadataUtils.parseSupportedFormats_v2(wmtsCapabilities, opName);
+		if (supportedFormats.size() > 0) {
+			int randomIndex = RANDOM.nextInt(supportedFormats.size());
+			return supportedFormats.get(randomIndex);
+		}
+
 		return null;
 	}
 

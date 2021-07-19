@@ -1,6 +1,15 @@
 package org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive;
 
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYERS_PARAM;
+import static org.opengis.cite.wmts10.core.domain.ProtocolBinding.GET;
+import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.getOperationEndpoint;
+import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
+import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetFeatureInfoRequest;
 import static org.testng.Assert.assertTrue;
+
+import java.net.URI;
+import java.util.List;
 
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactoryConfigurationException;
@@ -8,9 +17,16 @@ import javax.xml.xpath.XPathFactoryConfigurationException;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
-
+import org.w3c.dom.Document;
+import org.opengis.cite.wmts10.core.client.WmtsKvpRequest;
 import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
+import org.opengis.cite.wmts10.core.domain.LayerInfo;
 import org.opengis.cite.wmts10.core.domain.SuiteAttribute;
+
+
+
+import static org.opengis.cite.wmts10.core.util.interactive.InteractiveTestUtils.retrieveInvalidGetFeatureInfoRequest;
+
 
 /**
  * Checks the result of the interactive test for the language of the metadata
@@ -31,9 +47,14 @@ public class GetFeatureInfoExceptionInEnglishLanguageTest {
 	@Test(description = "DGIWG WMTS 1.0, Requirement 6")
 	public void getFeatureInfoExceptionInEnglishLanguage(ITestContext context)
 			throws XPathExpressionException, XPathFactoryConfigurationException {
+		System.out.println("Ici");
+		String req = retrieveInvalidGetFeatureInfoRequest("https://wxs.ign.fr/pratique/geoportail/wmts?SERVICE=WMTS&REQUEST=GetCapabilities");
+		System.out.println("!!!!!!! req = " + req);
+		
 		if (context == null)
 			throw new SkipException("Context is null!");
 		Object attribute = context.getSuite().getAttribute(SuiteAttribute.INTERACTIVE_TEST_RESULT.getName());
+		System.out.println("....attribute : " + attribute);
 		if (attribute == null)
 			throw new SkipException("Missing testresult!");
 

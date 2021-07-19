@@ -97,7 +97,7 @@
             </xsl:element>
           </div>
           <p>
-            A third question ?
+            Does the content of the GetFeatureInfo exception include English language?
           </p>
           <p>
             <input type="submit" name="submit" value="yes" />

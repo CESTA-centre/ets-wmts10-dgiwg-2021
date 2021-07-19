@@ -33,6 +33,7 @@ public class GetCapabilitiesOperations extends AbstractBaseGetCapabilitiesFixtur
      */
     @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities.", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
+    	System.out.println("....wmtsCapabilitiesExists OK " );
         assertTrue( this.wmtsCapabilities != null, "No ServerMetadata Capabilities document" );
     }
 

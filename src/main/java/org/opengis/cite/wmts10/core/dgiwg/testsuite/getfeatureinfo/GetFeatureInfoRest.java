@@ -41,14 +41,16 @@ public class GetFeatureInfoRest extends AbstractBaseGetFeatureInfoFixture {
      * DGIWG WMTS requirement 2
      * A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.
      */
-
+	
     private URI getFeatureInfoURI = null;
 
     private boolean _debug = false;
 
     @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmtsGetFeatureInfoRESTCapable.", dependsOnMethods = "verifyGetFeatureInfoSupported")
     public void wmtsGetFeatureInfoRESTCapable()
+    
                             throws XPathExpressionException, XPathFactoryConfigurationException {
+    	System.out.println("....wmtsGetFeatureInfoRESTCapable : " ); 
         getFeatureInfoURI = ServiceMetadataUtils.getOperationEndpoint_REST( wmtsCapabilities,
         		DGIWGWMTS.GET_FEATURE_INFO,
                                                                             ProtocolBinding.GET );
@@ -60,7 +62,7 @@ public class GetFeatureInfoRest extends AbstractBaseGetFeatureInfoFixture {
     @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmtsGetFeatureInfoRequestParametersSupported.", dependsOnMethods = "wmtsGetFeatureInfoRESTCapable")
     public void wmtsGetFeatureInfoRequestParametersSupported( ITestContext testContext ) {
         String requestFormat = null;
-
+        System.out.println("....wmtsGetFeatureInfoRequestParametersSupported : " ); 
         try {
             String layerName = this.reqEntity.getKvpValue( DGIWGWMTS.LAYER_PARAM );
             if ( layerName == null ) {

@@ -411,14 +411,39 @@ public final class ServiceMetadataUtils {
 		return supportedFormats;
 	}
 	
+    public static List<String> parseSupportedFormats_v2( Document wmsCapabilities, String opName ) {
+        ArrayList<String> supportedFormats = new ArrayList<>();
+
+        //String expr = "//wms:WMS_Capabilities/wms:Capability/wms:Request/wms:%s/wms:Format";
+        String expr = "/wmts:Capabilities/wmts:Contents/wmts:Layer/wmts:Style/wmts:LegendURL/@format";
+        String xPathExpr = String.format( expr, opName );
+
+        try {
+            XPath xPath = createXPath();
+            NodeList formatNodes = (NodeList) xPath.evaluate( xPathExpr, wmsCapabilities, XPathConstants.NODESET );
+            for ( int formatNodeIndex = 0; formatNodeIndex < formatNodes.getLength(); formatNodeIndex++ ) {
+                Node formatNode = formatNodes.item( formatNodeIndex );
+                String format = formatNode.getTextContent();
+                if ( format != null && !format.isEmpty() )
+                    supportedFormats.add( format );
+            }
+        } catch ( XPathExpressionException ex ) {
+            TestSuiteLogger.log( Level.INFO, ex.getMessage() );
+        }
+        System.out.println("....parseSupportedFormats_v2 : " + supportedFormats); 
+        return supportedFormats;
+    }
+	
+	
 	public static URI getOperationEndpoint( final Document wmsMetadata, String opName, ProtocolBinding binding ) {
         if ( null == binding || binding.equals( ProtocolBinding.ANY ) ) {
             binding = getOperationBindings( wmsMetadata, opName ).iterator().next();
         }
-        if ( binding == null )
+        if ( binding == null ) {
             return null;
-        //TODO : revoir expr
-    	String expr = "//wmts:Request/wmts:%s/wmts:DCPType/wmts:HTTP/wmts:%s/wmts:OnlineResource/@xlink:href";
+        }
+
+    	String expr = "//ows:OperationsMetadata/ows:Operation[@name='%s']/ows:DCP/ows:HTTP/ows:%s/@xlink:href";
         String xPathExpr = String.format( expr, opName, binding.getElementName() );
         
         String href = null;
@@ -428,7 +453,6 @@ public final class ServiceMetadataUtils {
         } catch ( XPathExpressionException ex ) {
             TestSuiteLogger.log( Level.INFO, ex.getMessage() );
         }
-
         return createEndpoint( href );
     }
 
