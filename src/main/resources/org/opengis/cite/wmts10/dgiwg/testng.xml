@@ -163,10 +163,19 @@
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo" />
 		</classes>
 	</test>
+	
+	<!-- A WMTS server shall provide a <title> element for each supported style. -->
+	<test name="DGIWG WMTS requirement 13">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent13" />
+		</classes>
+	</test>
 
 	<!-- Each layer's style shall have an associated legend (using the <legendURL 
 		>element) if the data being provisioned is symbolized/portrayed (i.e. not 
 		imagery). -->
+
 	<test name="DGIWG WMTS requirement 14">
 		<classes>
 			<class
@@ -174,6 +183,27 @@
 		</classes>
 	</test>
 
+	<!-- Legends shall be available as an image in at least one of the following 
+		formats: PNG (image/png), GIF (image/gif) or JPEG (image/jpeg). -->
+	<test name="DGIWG WMTS requirement 15">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent15" />
+		</classes>
+	</test>
+
+
+	<!-- If legend is present (see req 14), the <LegendURL> element shall specify 
+		a URL to allow access to an image of the legend. Note : This URL will relate 
+		to the source system and may not be resolvable on all connected/unconnected 
+		systems or applications. This requirement is conditional on the <LegendURL> 
+		being relevant to the generated service. -->
+	<test name="DGIWG WMTS requirement 16">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent16" />
+		</classes>
+	</test>
 
 	<!-- If a WMTS server offers its functionality via the SOAP protocol, it 
 		shall do so in compliance with the Messaging Service SIP [NCIA TR/2012/SPW008000/30, 

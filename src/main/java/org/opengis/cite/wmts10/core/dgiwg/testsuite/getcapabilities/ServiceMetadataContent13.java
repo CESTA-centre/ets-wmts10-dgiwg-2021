@@ -1,7 +1,6 @@
 package org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities;
 
 import static de.latlon.ets.core.assertion.ETSAssert.assertXPath;
-import static org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesKeywordTest.verifyNASkeywords;
 import static org.testng.Assert.assertTrue;
 
 import javax.xml.xpath.XPath;
@@ -10,16 +9,11 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
-import org.opengis.cite.wmts10.core.assertion.WmtsAssertion;
 import org.opengis.cite.wmts10.core.domain.LayerInfo;
-//import org.opengeospatial.cite.wmts10.ets.core.domain.WMTS_Constants;
-import org.opengis.cite.wmts10.core.domain.DGIWGWMTS;
 import org.opengis.cite.wmts10.core.util.ServiceMetadataUtils;
-import org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.AbstractBaseGetCapabilitiesFixture;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.util.Strings;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -34,9 +28,7 @@ public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture
     A WMTS server shall provide a title element for each supported style.
      */
 
-
-    
-    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies if Capabilities exists.", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         // --- base test
         assertXPath( ".", wmtsCapabilities, NS_BINDINGS );
@@ -48,6 +40,7 @@ public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture
         assertXPath( "//ows:ServiceIdentification", wmtsCapabilities, NS_BINDINGS );
     }
 
+    
     @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceProviderExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
@@ -84,9 +77,7 @@ public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture
             String exprPath = "//wmts:Contents/wmts:Layer[ows:Identifier = '" + layer.getLayerName() + "']/wmts:Style";
             // --- will soft assess in order to go thru all layers // assertXPath(exprPath, wmtsCapabilities,
             // NS_BINDINGS);
-            
-            System.out.println("....wmtsCapabilitiesLayerStyleLegends  : layer.getLayerName() " + layer.getLayerName());
-            
+                        
             NodeList layerStyles = (NodeList) xPath.evaluate( exprPath, wmtsCapabilities, XPathConstants.NODESET );
             sa.assertTrue( ( layerStyles != null ) && ( layerStyles.getLength() > 0 ),
                            "There are no <Style> elements for <Layer>:  " + layer.getLayerName() );
@@ -96,12 +87,11 @@ public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture
                     Node style = layerStyles.item( si );
                     String styleIdentifier = ServiceMetadataUtils.parseNodeElementName( xPath, style );
                     
-                    System.out.println("....wmtsCapabilitiesLayerStyleLegends  : styleIdentifier " + styleIdentifier);
-
                     NodeList titleList = (NodeList) xPath.evaluate( "./ows:Title", style, XPathConstants.NODESET );
-                    sa.assertTrue( ( titleList != null ) && ( titleList.getLength() > 0 ),
-                                   "There is no Title for <Title>: " + styleIdentifier + " under <Layer>: "
-                                                           + layer.getLayerName() );
+                                       
+                    assertTrue(( titleList != null ) && ( titleList.getLength() > 0 ),
+                            "There is no Title for <Title>: " + styleIdentifier + " under <Layer>: "
+                                    + layer.getLayerName() );
                 }
                     
             }

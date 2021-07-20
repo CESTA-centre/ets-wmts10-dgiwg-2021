@@ -24,7 +24,11 @@
 			<conformanceClass>DGIWG WMTS requirement 9</conformanceClass>
 			<conformanceClass>DGIWG WMTS requirement 10</conformanceClass>
 			<conformanceClass>DGIWG WMTS requirement 11</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 12</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 13</conformanceClass>
 			<conformanceClass>DGIWG WMTS requirement 14</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 15</conformanceClass>
+			<conformanceClass>DGIWG WMTS requirement 16</conformanceClass>
 			<conformanceClass>DGIWG WMTS requirement 17</conformanceClass>
         </BasicConformanceClasses>
       </suite>
