@@ -105,6 +105,22 @@
 						select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
 				</ctl:call-function>
 			</xsl:variable>
+			<xsl:variable
+				name="getCapabilitiesInEnglishLanguage">
+				<ctl:call-function
+					name="interactive:capabilitiesInEnglishLanguage">
+					<ctl:with-param name="wmts.capabilities.url"
+						select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
+				</ctl:call-function>
+			</xsl:variable>
+			<xsl:variable
+				name="getFeatureInfoInEnglishLanguage">
+				<ctl:call-function
+					name="interactive:featureInfoInEnglishLanguage">
+					<ctl:with-param name="wmts.capabilities.url"
+						select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
+				</ctl:call-function>
+			</xsl:variable>
 			<xsl:variable name="test-run-props">
 				<properties version="1.0">
 					<entry key="wmts">
@@ -133,6 +149,14 @@
 					<entry key="gettile_exception_in_english">
 						<xsl:value-of
 							select="$getTileExceptionInEnglishLanguage" />
+					</entry>
+					<entry key="getcapabilities_in_english">
+						<xsl:value-of
+							select="$getCapabilitiesInEnglishLanguage" />
+					</entry>
+					<entry key="getfeatureinfo_in_english">
+						<xsl:value-of
+							select="$getFeatureInfoInEnglishLanguage" />
 					</entry>
 				</properties>
 			</xsl:variable>

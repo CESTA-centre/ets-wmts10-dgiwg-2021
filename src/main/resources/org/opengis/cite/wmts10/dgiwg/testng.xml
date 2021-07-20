@@ -97,11 +97,11 @@
 		<classes>
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoExceptionInEnglishLanguageTest" />
-				<class
+			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.interactive.GetCapabilitiesExceptionInEnglishLanguageTest" />
-				<class
+			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.interactive.GetTileExceptionInEnglishLanguageTest" />
-				
+
 		</classes>
 	</test>
 
@@ -130,7 +130,7 @@
 		</classes>
 	</test>
 
-		<!-- A WMTS server SHALL use the <AccessContraints> element to hold the 
+	<!-- A WMTS server SHALL use the <AccessContraints> element to hold the 
 		classification information for this web service instance." -->
 	<test name="DGIWG WMTS requirement 9">
 		<classes>
@@ -163,7 +163,19 @@
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo" />
 		</classes>
 	</test>
-	
+
+
+	<test name="DGIWG WMTS requirement 12">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoInEnglishLanguageTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.interactive.GetCapabilitiesInEnglishLanguageTest" />
+
+		</classes>
+	</test>
+
+
 	<!-- A WMTS server shall provide a <title> element for each supported style. -->
 	<test name="DGIWG WMTS requirement 13">
 		<classes>
