@@ -1,18 +1,23 @@
 package org.opengis.cite.wmts10.core.util.interactive;
 
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_FEATURE_INFO;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_CAPABILITIES;
 import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.GET_TILE;
-import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYERS_PARAM;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.LAYER_PARAM;
+import static org.opengis.cite.wmts10.core.domain.DGIWGWMTS.SERVICE_PARAM;
 import static org.opengis.cite.wmts10.core.domain.ProtocolBinding.GET;
 import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.parseLayerInfo;
 import static org.opengis.cite.wmts10.core.util.ServiceMetadataUtils.getOperationEndpoint;
 import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetFeatureInfoRequest;
-import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetMapRequest;
+import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetCapabilitiesRequest;
+import static org.opengis.cite.wmts10.core.util.request.WmtsRequestBuilder.buildGetTileRequest;
+import static org.testng.Assert.assertNotNull;
 
 import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.core.UriBuilder;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Document;
 
@@ -53,6 +58,27 @@ public final class InteractiveTestUtils {
     	return null;
     }
 
+    
+    /**
+     * Creates a GetCapabilities request with unsupported parameter.
+     * 
+     * @param wmtsCapabilitiesUrl
+     *            the url of the WMTS capabilities, never <code>null</code>
+     * @return a GetFeatureInfo request with unsupported parameter, never <code>null</code>
+     */
+    public static String retrieveInvalidGetCapabilitiesRequest( String wmtsCapabilitiesUrl ) {
+        Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
+        URI getCapabilitiesEndpoint = getOperationEndpoint( wmtsCapabilities, GET_CAPABILITIES, GET );
+        List<LayerInfo> layerInfos = parseLayerInfo( wmtsCapabilities );
+        
+        WmtsKvpRequest getCapabilitiesRequest = buildGetCapabilitiesRequest(wmtsCapabilities, layerInfos);
+        getCapabilitiesRequest.addKvp(SERVICE_PARAM, "dummy");
+        
+        return createUri( getCapabilitiesEndpoint, getCapabilitiesRequest );
+
+    }
+    
+    
     /**
      * Creates a GetFeatureInfo request with unsupported layer.
      * 
@@ -60,35 +86,44 @@ public final class InteractiveTestUtils {
      *            the url of the WMTS capabilities, never <code>null</code>
      * @return a GetFeatureInfo request with unsupported layer, never <code>null</code>
      */
-    public static String retrieveInvalidGetFeatureInfoRequest( String wmtsCapabilitiesUrl ) {
+    public static String retrieveInvalidGetTileRequest( String wmtsCapabilitiesUrl ) {
         Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
-        URI getFeatureInfoEndpoint = getOperationEndpoint( wmtsCapabilities, GET_FEATURE_INFO, GET );
-        System.out.println("!!!! " + getFeatureInfoEndpoint);
+        URI getTileEndpoint = getOperationEndpoint( wmtsCapabilities, GET_TILE, GET );
         List<LayerInfo> layerInfos = parseLayerInfo( wmtsCapabilities );
 
-        WmtsKvpRequest getFeatureInfoRequest = buildGetFeatureInfoRequest( wmtsCapabilities, layerInfos ,true);
-        getFeatureInfoRequest.addKvp( LAYERS_PARAM, UNKNOWN_LAYER_FOR_TESTING );
-        return createUri( getFeatureInfoEndpoint, getFeatureInfoRequest );
-    }
+        try {
+	        WmtsKvpRequest getTileRequest = buildGetTileRequest( wmtsCapabilities, layerInfos);
+	        getTileRequest.addKvp( LAYER_PARAM, UNKNOWN_LAYER_FOR_TESTING );
+	        return createUri( getTileEndpoint, getTileRequest );
+        }catch(XPathExpressionException e) {
+        	assertNotNull( null, "Could not find suitable parameter for GetTile request.");
+        	return("Could not find suitable parameter for GetTile request.");
+        }
 
+    }
+    
     /**
-     * Creates a GetMap request with unsupported layer.
+     * Creates a GetTile request with unsupported layer.
      * 
      * @param wmtsCapabilitiesUrl
      *            the url of the WMTS capabilities, never <code>null</code>
-     * @return a GetMap request with unsupported layer, never <code>null</code>
+     * @return a GetTile request with unsupported layer, never <code>null</code>
      */
-    public static String retrieveInvalidGetMapRequest( String wmtsCapabilitiesUrl ) {
-        /*Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
-        URI getFeatureInfoEndpoint = getOperationEndpoint( wmtsCapabilities, GET_TILE, GET );
+    public static String retrieveInvalidGetFeatureInfoRequest( String wmtsCapabilitiesUrl ) {
+        Document wmtsCapabilities = readCapabilities( wmtsCapabilitiesUrl );
+        URI getFeatureInfoEndpoint = getOperationEndpoint( wmtsCapabilities, GET_FEATURE_INFO, GET );
         List<LayerInfo> layerInfos = parseLayerInfo( wmtsCapabilities );
-
-        WmtsKvpRequest getFeatureInfoRequest = buildGetMapRequest( wmtsCapabilities, layerInfos );
-        getFeatureInfoRequest.addKvp( LAYERS_PARAM, UNKNOWN_LAYER_FOR_TESTING );
-        return createUri( getFeatureInfoEndpoint, getFeatureInfoRequest );
-        */
-    	return null;
+        try {
+	        WmtsKvpRequest getFeatureInfoRequest = buildGetFeatureInfoRequest( wmtsCapabilities, layerInfos ,true);
+	        getFeatureInfoRequest.addKvp( LAYER_PARAM, UNKNOWN_LAYER_FOR_TESTING );
+	        return createUri( getFeatureInfoEndpoint, getFeatureInfoRequest );
+        }
+        catch(XPathExpressionException e) {
+        	assertNotNull( null, "GetFeatureInfo is not supported by this WMTS" );
+        	return ("GetFeatureInfo operation is not supported by the server !");
+        }
     }
+
 
     private static String createUri( URI getFeatureInfoEndpoint, WmtsKvpRequest getFeatureInfoRequest ) {
         String queryString = getFeatureInfoRequest.asQueryString();

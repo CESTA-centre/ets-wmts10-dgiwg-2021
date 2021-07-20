@@ -11,6 +11,85 @@
 	</listeners>
 
 
+	<test name="Preconditions">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.Prerequisites" />
+		</classes>
+	</test>
+
+	<!-- DGWIG WMTS requirement 2 A WMTS Server shall support HTTP GET operation 
+		using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings. -->
+
+	<test name="DGIWG WMTS requirement 2">
+		<classes>
+
+
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesOperations" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesRest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileParametersKvp" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileParametersRest" />
+
+
+			<!-- <class name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoKvp" 
+				/> -->
+
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoRest" />
+
+		</classes>
+	</test>
+
+
+	<!-- DGWIG requirement 3 A WMTS server shall support at least on the folowwing 
+		WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 
+		(UPS Tiles EPSG:5041 and EPSG:5042).. -->
+
+	<test name="DGIWG WMTS requirement 3">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesCrsTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesProjectionTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesWellKnownScaleTest" />
+		</classes>
+	</test>
+
+
+	<!-- DGWIG requirement 4 A WMTS server shall provide tiles in at least one 
+		of the following raster formats : • image/png (Portable Network Graphics) 
+		• image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics 
+		Expert Group). -->
+
+
+	<test name="DGIWG WMTS requirement 4">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileOfferings" />
+		</classes>
+	</test>
+
+
+	<!-- If a WMTS server is providing services to a coalition mission federated 
+		network, in support of operations or an exercise, it shall provide a minimum 
+		keyword list, based on ISO 19115 Topic Categories. It's recommended to provide 
+		additional details based on the DGIF groups. The provision of these keywords 
+		elements are optional for a WMTS server which is providing services across 
+		one single non-mission network. -->
+
+	<test name="DGIWG WMTS requirement 5">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesKeywordTest" />
+		</classes>
+	</test>
+
+
 	<!-- A WMTS server shall provide the service exceptions in the English language. 
 		Exception text content may also be provided in additional languages, but 
 		English must always be included.. -->
@@ -18,6 +97,92 @@
 		<classes>
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoExceptionInEnglishLanguageTest" />
+				<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.interactive.GetCapabilitiesExceptionInEnglishLanguageTest" />
+				<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.interactive.GetTileExceptionInEnglishLanguageTest" />
+				
+		</classes>
+	</test>
+
+	<!-- A WMTS server shall provide an "Abstract" at the service level, in 
+		the in the GetCapabilities response document.. -->
+	<test name="DGIWG WMTS requirement 7">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesAbstractTest" />
+		</classes>
+	</test>
+
+
+	<!-- If a WMS server is providing services to a coalition mission federated 
+		network, in support of operations or an exercise, it shall provide "ServiceContact", 
+		"AccessConstraints" and "KeywordList" elements. The provision of these metadata 
+		elements are optional for a WMTS server which is providing services across 
+		one single non-mission network.. -->
+
+	<test name="DGIWG WMTS requirement 8">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesAccessConstraintTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesContentTest" />
+		</classes>
+	</test>
+
+		<!-- A WMTS server SHALL use the <AccessContraints> element to hold the 
+		classification information for this web service instance." -->
+	<test name="DGIWG WMTS requirement 9">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesAccessConstraintTest9" />
+		</classes>
+	</test>
+
+
+	<!-- If a WMTS server is providing services to a coalition mission federated 
+		network, in support of operations or an exercise, it shall include the following 
+		information in the <abstract> element of the service metadata: "This service 
+		implements the WMTS 1.0 STANAG 6523 Ed.2 profile". The provision of these 
+		metadata elements are optional for a WMTS server which is providing services 
+		across one single non-mission network. -->
+	<test name="DGIWG WMTS requirement 10">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesAbstractTest10" />
+		</classes>
+	</test>
+
+
+	<!-- A RESTFULL WMTS server shall provide tile experiation date, in an appropriate 
+		HTTP header ("Expires" header in HTTP 1.0, "Cache-control" header for HTTP 
+		1.1 and for HTTP 2). -->
+	<test name="DGIWG WMTS requirement 11">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileCachingInfo" />
+		</classes>
+	</test>
+
+	<!-- Each layer's style shall have an associated legend (using the <legendURL 
+		>element) if the data being provisioned is symbolized/portrayed (i.e. not 
+		imagery). -->
+	<test name="DGIWG WMTS requirement 14">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.ServiceMetadataContent" />
+		</classes>
+	</test>
+
+
+	<!-- If a WMTS server offers its functionality via the SOAP protocol, it 
+		shall do so in compliance with the Messaging Service SIP [NCIA TR/2012/SPW008000/30, 
+		2012] which defines general requirements that apply to all services in the 
+		NNEC environment that make use of SOAP. -->
+	<test name="DGIWG WMTS requirement 17">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesSoap" />
 		</classes>
 	</test>
 

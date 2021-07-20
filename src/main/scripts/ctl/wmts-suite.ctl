@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO : remake ctl file -->
 <ctl:package xmlns:ctl="http://www.occamlab.com/ctl"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:tns="http://www.opengis.net/cite/nsg/wmts"
 	xmlns:saxon="http://saxon.sf.net/"
+	xmlns:interactive="https://lat-lon.de/wms-1.3.0/dgiwg/ctl/interactive.xml"
 	xmlns:tec="java:com.occamlab.te.TECore"
 	xmlns:tng="java:org.opengis.cite.wmts10.dgiwg.WmtsDgiwgTestNGController">
 
 	<ctl:function name="tns:run-ets-${ets-code}">
 		<ctl:param name="testRunArgs">A Document node containing test run
-			arguments (as XML properties).</ctl:param>
+			arguments (as XML properties).
+		</ctl:param>
 		<ctl:param name="outputDir">The directory in which the test results will
-			be written.</ctl:param>
+			be written.
+		</ctl:param>
 		<ctl:return>The test results as a Source object (root node).
 		</ctl:return>
 		<ctl:description>Runs the DGIWG WMTS 1.0.0 (${version}) test suite.
@@ -27,7 +29,8 @@
 	<ctl:suite name="tns:ets-${ets-code}-${version}">
 		<ctl:title>DGIWG WMTS 1.0.0 Conformance Test Suite</ctl:title>
 		<ctl:description>Checks DGIWG WMTS 1.0.0 implementations for
-			conformance to DGIWG WMTS 1.0.0.</ctl:description>
+			conformance to DGIWG WMTS 1.0.0.
+		</ctl:description>
 		<ctl:starting-test>tns:Main</ctl:starting-test>
 	</ctl:suite>
 
@@ -49,7 +52,8 @@
 							<p>
 								<label for="wmts-uri">
 									<h4 style="margin-bottom: 0.5em">Location of WMTS capabilities document (http: or
-										file: URI)</h4>
+										file: URI)
+									</h4>
 								</label>
 								<input id="wmts-uri" name="wmts-uri" size="96" type="text"
 									value="" />
@@ -85,6 +89,22 @@
 						select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
 				</ctl:call-function>
 			</xsl:variable>
+			<xsl:variable
+				name="getCapabilitiesExceptionInEnglishLanguage">
+				<ctl:call-function
+					name="interactive:capabilitiesExceptionInEnglishLanguage">
+					<ctl:with-param name="wmts.capabilities.url"
+						select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
+				</ctl:call-function>
+			</xsl:variable>
+			<xsl:variable
+				name="getTileExceptionInEnglishLanguage">
+				<ctl:call-function
+					name="interactive:tileExceptionInEnglishLanguage">
+					<ctl:with-param name="wmts.capabilities.url"
+						select="normalize-space($form-data/values/value[@key='wmts-uri'])" />
+				</ctl:call-function>
+			</xsl:variable>
 			<xsl:variable name="test-run-props">
 				<properties version="1.0">
 					<entry key="wmts">
@@ -105,6 +125,14 @@
 					<entry key="getfeatureinfo_exception_in_english">
 						<xsl:value-of
 							select="$getFeatureInfoExceptionInEnglishLanguage" />
+					</entry>
+					<entry key="getcapabilities_exception_in_english">
+						<xsl:value-of
+							select="$getCapabilitiesExceptionInEnglishLanguage" />
+					</entry>
+					<entry key="gettile_exception_in_english">
+						<xsl:value-of
+							select="$getTileExceptionInEnglishLanguage" />
 					</entry>
 				</properties>
 			</xsl:variable>

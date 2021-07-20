@@ -411,11 +411,12 @@ public final class ServiceMetadataUtils {
 		return supportedFormats;
 	}
 	
-    public static List<String> parseSupportedFormats_v2( Document wmsCapabilities, String opName ) {
+    public static List<String> parseImageSupportedFormats( Document wmsCapabilities, String opName ) {
         ArrayList<String> supportedFormats = new ArrayList<>();
 
         //String expr = "//wms:WMS_Capabilities/wms:Capability/wms:Request/wms:%s/wms:Format";
-        String expr = "/wmts:Capabilities/wmts:Contents/wmts:Layer/wmts:Style/wmts:LegendURL/@format";
+        //String expr = "/wmts:Capabilities/wmts:Contents/wmts:Layer/wmts:Style/wmts:LegendURL/@format"; NOT THE GOOD ITEM
+        String expr = "/wmts:Capabilities/wmts:OperationsMetadata/wmts:Operation/wmts:Style/wmts:LegendURL/@format";
         String xPathExpr = String.format( expr, opName );
 
         try {
@@ -430,7 +431,7 @@ public final class ServiceMetadataUtils {
         } catch ( XPathExpressionException ex ) {
             TestSuiteLogger.log( Level.INFO, ex.getMessage() );
         }
-        System.out.println("....parseSupportedFormats_v2 : " + supportedFormats); 
+        System.out.println("....parseImageSupportedFormats : " + supportedFormats); 
         return supportedFormats;
     }
 	

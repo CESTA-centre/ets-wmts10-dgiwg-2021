@@ -7,17 +7,20 @@ package org.opengis.cite.wmts10.core.domain;
  */
 public class InteractiveTestResult {
 
-    
-
     private final boolean getFeatureInfoExceptionInEnglishLanguage;
+    private final boolean getCapabilitiesExceptionInEnglishLanguage;
+    private final boolean getTileExceptionInEnglishLanguage;
 
-   
 
     public InteractiveTestResult( 
-                                  boolean getFeatureInfoExceptionInEnglishLanguage
+                                  boolean getFeatureInfoExceptionInEnglishLanguage,
+                                  boolean getCapabilitiesExceptionInEnglishLanguage,
+                                  boolean getTileExceptionInEnglishLanguage
                                   ) {
         
         this.getFeatureInfoExceptionInEnglishLanguage = getFeatureInfoExceptionInEnglishLanguage;
+        this.getCapabilitiesExceptionInEnglishLanguage = getCapabilitiesExceptionInEnglishLanguage;
+        this.getTileExceptionInEnglishLanguage = getTileExceptionInEnglishLanguage;
   
     }
 
@@ -28,6 +31,22 @@ public class InteractiveTestResult {
      */
     public boolean isGetFeatureInfoExceptionInEnglishLanguage() {
         return getFeatureInfoExceptionInEnglishLanguage;
+    }
+    
+    /**
+     * @return <code>true</code> if the test (GetCapabilities exception in english language) passed, <code>false</code>
+     *         otherwise
+     */
+    public boolean isGetCapabilitiesExceptionInEnglishLanguage() {
+    	return getCapabilitiesExceptionInEnglishLanguage;
+    }
+    
+    /**
+     * @return <code>true</code> if the test (GetTile exception in english language) passed, <code>false</code>
+     *         otherwise
+     */
+    public boolean isGetTileExceptionInEnglishLanguage() {
+    	return getTileExceptionInEnglishLanguage;
     }
 
 
