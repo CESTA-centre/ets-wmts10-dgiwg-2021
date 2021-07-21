@@ -29,21 +29,25 @@ import org.opengis.cite.wmts10.core.util.ServiceMetadataUtils;
  */
 public class GetCapabilitiesAccessConstraintTest9 extends AbstractBaseGetCapabilitiesFixture {
 
+	/*
+	 * A WMTS server SHALL use the <AccessContraints>  element to hold the classification information for this web service instance."
+	 */
     private static final List<String> EXPECTED_ACCESS_CONSTRAINTS = Arrays.asList( "unclassified", "restricted",
             "confidential", "secret", "topSecret" );
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 9")
+    @Test(groups = {"A WMTS server SHALL use the <AccessContraints>  element to hold the classification information for this web service instance.\""},
+    		description = "Checks AccessConstraints.")
     public void wmsCapabilitiesAccessConstraintsExists() {
         //String xPathXml = "//wms:WMS_Capabilities/wms:Service/wms:AccessConstraints != ''";
         String xPathXml = "//ows:ServiceIdentification/ows:AccessConstraints != ''";
         assertXPath( xPathXml, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 9", dependsOnMethods = "wmsCapabilitiesAccessConstraintsExists")
-    public
-                    void wmsCapabilitiesAccessConstraintsContainsValueFromDMF()
+    @Test(groups = {"A WMTS server SHALL use the <AccessContraints>  element to hold the classification information for this web service instance.\""},
+    		description = "Checks accessConstraints content.",dependsOnMethods = "wmsCapabilitiesAccessConstraintsExists")
+    public void wmsCapabilitiesAccessConstraintsContainsValueFromDMF()
                                     throws XPathFactoryConfigurationException, XPathExpressionException {
-    	//MGE attention on remplace getOperationEndpoint par getOperationEndpoint_KVP
+    	// attention on remplace getOperationEndpoint par getOperationEndpoint_KVP
         URI endpoint = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, GET_CAPABILITIES,
                                                                   ProtocolBinding.GET );
         ClientResponse rsp = wmtsClient.submitRequest( this.reqEntity, endpoint );

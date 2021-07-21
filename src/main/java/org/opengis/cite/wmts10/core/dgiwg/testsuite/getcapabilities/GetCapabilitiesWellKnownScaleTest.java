@@ -41,33 +41,38 @@ public class GetCapabilitiesWellKnownScaleTest extends AbstractBaseGetCapabiliti
 
 	private static final String NSG_WMTS_EPSG_5042 = "NSG_WMTS_EPSG_5042.xml";
 
-	@Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks wmtsCapabilitiesExists",dependsOnMethods = "verifyGetCapabilitiesSupported")
+	@Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+			description = "Checks wmtsCapabilitiesExists",dependsOnMethods = "verifyGetCapabilitiesSupported")
 	public void wmtsCapabilitiesExists() {
 		assertTrue(this.wmtsCapabilities != null, "No ServerMetadata Capabilities document");
 	}
 
-	@Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks WellKnownScaleTest_3395",dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+			description = "Checks WellKnownScaleTest_3395",dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesWellKnownScaleTest_3395_Test() throws IOException, XPathExpressionException {
 		String wellKnownScaleSet = "EPSG:3395";
 		NodeList listFromAnnexB = parseAnnex(ANNEX_B1_3395_TABLE, wellKnownScaleSet);
 		testWellKnownScale(wellKnownScaleSet, listFromAnnexB);
 	}
 
-	@Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks WellKnownScaleTest_4326", dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+			description = "Checks WellKnownScaleTest_4326", dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesWellKnownScaleTest_4326_Test() throws IOException, XPathExpressionException {
 		String wellKnownScaleSet = "EPSG:4326";
 		NodeList listFromAnnexB = parseAnnex(ANNEX_B2_4326_TABLE, wellKnownScaleSet);
 		testWellKnownScale(wellKnownScaleSet, listFromAnnexB);
 	}
 
-	@Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks WellKnownScaleTest_5041",dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+			description = "Checks WellKnownScaleTest_5041",dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesWellKnownScaleTest_5041_Test() throws IOException, XPathExpressionException {
 		String wellKnownScaleSet = "EPSG:5041";
 		NodeList listFromAnnexB = parseAnnex(NSG_WMTS_EPSG_5041, wellKnownScaleSet);
 		testWellKnownScale(wellKnownScaleSet, listFromAnnexB);
 	}
 
-	@Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks WellKnownScaleTest_5042", dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+			description = "Checks WellKnownScaleTest_5042", dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesWellKnownScaleTest_5042_Test() throws IOException, XPathExpressionException {
 		String wellKnownScaleSet = "EPSG:5042";
 		NodeList listFromAnnexB = parseAnnex(NSG_WMTS_EPSG_5042, wellKnownScaleSet);

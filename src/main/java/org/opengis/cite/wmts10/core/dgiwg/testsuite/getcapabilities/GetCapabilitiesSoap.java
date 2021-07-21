@@ -31,11 +31,13 @@ public class GetCapabilitiesSoap extends AbstractBaseGetCapabilitiesFixture {
      * to all services in the NNEC environment that make use of SOAP. 
      */
     private URI soapURI;
+    
+    private static final String GROUPE_NAME = "If a WMTS server offers its functionality via the SOAP protocol, it shall do so in compliance with the Messaging Service SIP [NCIA TR/2012/SPW008000/30, 2012] which defines general requirements that apply to all services in the NNEC environment that make use of SOAP. ";
 
     GetCapabilitiesSoap() {
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 17", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups = GROUPE_NAME,description = "Verifies soap is supported", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesSoapSupported() {
         soapURI = ServiceMetadataUtils.getOperationEndpoint_SOAP( wmtsCapabilities, DGIWGWMTS.GET_CAPABILITIES,
                                                                   ProtocolBinding.POST );
@@ -44,7 +46,7 @@ public class GetCapabilitiesSoap extends AbstractBaseGetCapabilitiesFixture {
                                      "GetCapabilities (POST) endpoint not found in ServiceMetadata capabilities document or WMTS does not support SOAP." );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 17", dependsOnMethods = "wmtsCapabilitiesSoapSupported")
+    @Test(groups = GROUPE_NAME,description = "Test soap response capabilities", dependsOnMethods = "wmtsCapabilitiesSoapSupported")
     public void wmtsCapabilitiesSoapReponseTest() {
         assertTrue( soapURI != null, "There is no SOAP URL to test against" );
 

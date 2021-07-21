@@ -29,21 +29,28 @@ import org.opengis.cite.wmts10.core.util.ServiceMetadataUtils;
  */
 public class GetCapabilitiesAccessConstraintTest extends AbstractBaseGetCapabilitiesFixture {
 
-    private static final List<String> EXPECTED_ACCESS_CONSTRAINTS = Arrays.asList( "unclassified", "restricted",
-                                                                                 "confidential", "secret", "topSecret" );
+	/* DGIWG WMTS 1.0, Requirement 8 
+	 * If a WMS server is providing services to a coalition mission federated network, in support of operations or an exercise, 
+	 * it shall provide "ServiceContact", "AccessConstraints" and "KeywordList" elements. The provision of these metadata elements 
+	 * are optional for a WMTS server which is providing services across one single non-mission network.*/
+	
+	
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 8")
+
+    @Test(groups = {"If a WMS server is providing services to a coalition mission federated network, in support of operations or an exercise, it shall provide \"ServiceContact\", \"AccessConstraints\" and \"KeywordList\" elements. The provision of these metadata elements are optional for a WMTS server which is providing services across one single non-mission network."}
+    ,description = "Checks CapabilitiesAccessConstraintsExists .")
     public void wmsCapabilitiesAccessConstraintsExists() {
         //String xPathXml = "//wms:WMS_Capabilities/wms:Service/wms:AccessConstraints != ''";
         String xPathXml = "//ows:ServiceIdentification/ows:AccessConstraints != ''";
         assertXPath( xPathXml, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 8", dependsOnMethods = "wmsCapabilitiesAccessConstraintsExists")
+    @Test(groups = {"If a WMS server is providing services to a coalition mission federated network, in support of operations or an exercise, it shall provide \"ServiceContact\", \"AccessConstraints\" and \"KeywordList\" elements. The provision of these metadata elements are optional for a WMTS server which is providing services across one single non-mission network."}
+    ,description = "Checks accessConstraints.", dependsOnMethods = "wmsCapabilitiesAccessConstraintsExists")
     public
                     void wmsCapabilitiesAccessConstraintsContainsValueFromDMF()
                                     throws XPathFactoryConfigurationException, XPathExpressionException {
-    	//MGE attention on remplace getOperationEndpoint par getOperationEndpoint_KVP
+    	//attention on remplace getOperationEndpoint par getOperationEndpoint_KVP
         URI endpoint = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, GET_CAPABILITIES,
                                                                   ProtocolBinding.GET );
         ClientResponse rsp = wmtsClient.submitRequest( this.reqEntity, endpoint );

@@ -38,7 +38,8 @@ public class GetCapabilitiesRest extends AbstractBaseGetCapabilitiesFixture {
 
     private boolean _debug = false;
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks if REST capabilities are supported.", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks if REST capabilities are supported.", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesRESTCapable()
                             throws XPathExpressionException, XPathFactoryConfigurationException, URISyntaxException {
         restURI = ServiceMetadataUtils.getOperationEndpoint_REST( wmtsCapabilities, DGIWGWMTS.GET_CAPABILITIES,
@@ -53,7 +54,8 @@ public class GetCapabilitiesRest extends AbstractBaseGetCapabilitiesFixture {
         assertTrue( this.restURI != null, "This WMTS does not support REST" );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks REST response.", dependsOnMethods = "wmtsCapabilitiesRESTCapable")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks REST response.", dependsOnMethods = "wmtsCapabilitiesRESTCapable")
     public void wmtsCapabilitiesRESTReponseTest() {
         assertTrue( restURI != null, "There is no REST URL to test against" );
         String restURIstr = restURI.toString();

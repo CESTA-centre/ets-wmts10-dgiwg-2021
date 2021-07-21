@@ -13,7 +13,8 @@ import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
 import org.opengis.cite.wmts10.core.domain.SuiteAttribute;
 
 public class GetCapabilitiesExceptionInEnglishLanguageTest {
-	@Test(groups= {"A WMS server shall provide the service exceptions in the English language.  Exception text content may also be provided in additional languages, but English must always be included."}, description = "Asks the user if the presented request returns an exception that contains English language.")
+	@Test(groups= {"A WMS server shall provide the service exceptions in the English language.  Exception text content may also be provided in additional languages, but English must always be included."}, 
+			description = "Asks the user if the presented request returns an exception that contains English language.")
     public void getCapabilitiesExceptionInEnglishLanguage( ITestContext context )
                     throws XPathExpressionException, XPathFactoryConfigurationException {
         if ( context == null )

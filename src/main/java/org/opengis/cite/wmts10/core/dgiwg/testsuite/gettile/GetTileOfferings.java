@@ -38,7 +38,8 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 
 	private URI getTileURI = null;
 
-	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "Checks wmtsGetCapabilitiiesWithXML")
+	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
+			description = "Checks wmtsGetCapabilitiiesWithXML")
 	public void wmtsGetCapabilitiiesWithXML(ITestContext testContext) {
 		GetCapabilitiesKvpFormatTest gck = new GetCapabilitiesKvpFormatTest();
 		gck.init(testContext);
@@ -46,7 +47,8 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 		gck.TestXML();
 	}
 
-	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "Checks wmtsGetCapabilitiiesWithHTML")
+	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
+			description = "Checks wmtsGetCapabilitiiesWithHTML")
 	public void wmtsGetCapabilitiiesWithHTML(ITestContext testContext) {
 		GetCapabilitiesKvpFormatTest gck = new GetCapabilitiesKvpFormatTest();
 		gck.init(testContext);
@@ -61,7 +63,8 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 	}
 	*/
 
-	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "Checks GetTileKVPRequests", dependsOnMethods = "verifyGetTileSupported")
+	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
+			description = "Checks GetTileKVPRequests", dependsOnMethods = "verifyGetTileSupported")
 	public void wmtsGetTileKVPRequestsExists() {
 		getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
 				ProtocolBinding.GET);
@@ -69,17 +72,20 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 				"GetTile (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document.");
 	}
 
-	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "Checks PNG format", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
+	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
+			description = "Checks PNG format", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
 	public void wmtsGetTileOfferingsTestPNG() {
 		checkGetTileWithImageFormat(DGIWGWMTS.IMAGE_PNG);
 	}
 
-	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "Checks JPEG format", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
+	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
+			description = "Checks JPEG format", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
 	public void wmtsGetTileOfferingsTestJPG() {
 		checkGetTileWithImageFormat(DGIWGWMTS.IMAGE_JPEG);
 	}
 
-	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "Checks GIF format", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
+	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
+			description = "Checks GIF format", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
 	public void wmtsGetTileOfferingsTestGIF() {
 		checkGetTileWithImageFormat(DGIWGWMTS.IMAGE_GIF);
 	}

@@ -24,11 +24,13 @@ import de.latlon.ets.core.error.ErrorMessageKey;
  *
  */
 public class GetTileCachingInfo extends AbstractBaseGetTileFixture {
-    /**
-A RESTFULL WMTS server shall provide tile experiation date, in an appropriate  HTTP header ("Expires" header in HTTP 1.0,  
-"Cache-control" header for HTTP 1.1 and for HTTP 2).     * --- DGWIG requirement 2 A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.
-     * ---
-     */
+	/**
+	 *A RESTFULL WMTS server shall provide tile experiation date, in an appropriate  HTTP header ("Expires" header in HTTP 1.0,  
+	 *"Cache-control" header for HTTP 1.1 and for HTTP 2).
+	 */
+	
+	private static final String GROUPE_NAME = "A RESTFULL WMTS server shall provide tile experiation date, in an appropriate  HTTP header (\"Expires\" header in HTTP 1.0,  \"Cache-control\" header for HTTP 1.1 and for HTTP 2).";
+	
 
     private URI getTileURI = null;
 
@@ -38,7 +40,7 @@ A RESTFULL WMTS server shall provide tile experiation date, in an appropriate  H
 
     private List<String> expires = null;
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 11", dependsOnMethods = "verifyGetTileSupported")
+    @Test(groups = GROUPE_NAME,description = "Checks if tile request exist", dependsOnMethods = "verifyGetTileSupported")
     public void wmtsGetTileKVPRequestsExists() {
         getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                     ProtocolBinding.GET );
@@ -46,7 +48,7 @@ A RESTFULL WMTS server shall provide tile experiation date, in an appropriate  H
                     "GetTile (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document." );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 11", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
+    @Test(groups = GROUPE_NAME,description = "Checks if tile caching information exist", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
     public void wmtsGetTileCachingInformationExists() {
         if ( getTileURI == null ) {
             getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
@@ -72,7 +74,7 @@ A RESTFULL WMTS server shall provide tile experiation date, in an appropriate  H
         assertTrue( anyCacheControls || anyExpires, "WMTS does not provide appropriate caching information" );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 11", dependsOnMethods = "wmtsGetTileCachingInformationExists")
+    @Test(groups = GROUPE_NAME,description = "Checks if tile expiration exist", dependsOnMethods = "wmtsGetTileCachingInformationExists")
     public void wmtsGetTileExpirationExists() {
         boolean hasExpiration = false;
         if ( ( expires != null ) && ( expires.size() > 0 ) ) {

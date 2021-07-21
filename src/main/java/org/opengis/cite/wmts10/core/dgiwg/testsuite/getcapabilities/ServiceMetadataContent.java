@@ -31,44 +31,45 @@ import org.w3c.dom.NodeList;
  */
 public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
     /**
+     * DGIWG WMTS 1.0, Requirement 4 
      * Each layer's style shall have an associated legend (using the legendURL element) if the data being provisioned 
      * is symbolized/portrayed (i.e. not imagery).
      */
 
 
     
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups = {"Each layer's style shall have an associated legend (using the <legendURL >element) if the data being provisioned is symbolized/portrayed (i.e. not imagery)."},description = "Verifies if Capabilities exists", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         // --- base test
         assertXPath( ".", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups = {"Each layer's style shall have an associated legend (using the <legendURL >element) if the data being provisioned is symbolized/portrayed (i.e. not imagery)."},description = "Verifies if capabilities service indetification exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceIdentificationExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceIdentification", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups = {"Each layer's style shall have an associated legend (using the <legendURL >element) if the data being provisioned is symbolized/portrayed (i.e. not imagery)."},description = "Verifies if capabilities service provider exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceProviderExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceProvider", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups = {"Each layer's style shall have an associated legend (using the <legendURL >element) if the data being provisioned is symbolized/portrayed (i.e. not imagery)."},description = "Verifies if capabilities operation metada exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesOperationsMetadataExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:OperationsMetadata", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups = {"Each layer's style shall have an associated legend (using the <legendURL >element) if the data being provisioned is symbolized/portrayed (i.e. not imagery)."},description = "Verifies if capabilities contents exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesContentsExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//wmts:Contents", wmtsCapabilities, NS_BINDINGS );
     }
 
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 14", dependsOnMethods = "wmtsCapabilitiesContentsExists")
+    @Test(groups = {"Each layer's style shall have an associated legend (using the <legendURL >element) if the data being provisioned is symbolized/portrayed (i.e. not imagery)."},description = "Verifies capabilities layer style legend", dependsOnMethods = "wmtsCapabilitiesContentsExists")
     public void wmtsCapabilitiesLayerStyleLegends()
                             throws XPathExpressionException, XPathFactoryConfigurationException {
 
@@ -86,7 +87,6 @@ public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
             // --- will soft assess in order to go thru all layers // assertXPath(exprPath, wmtsCapabilities,
             // NS_BINDINGS);
             
-            System.out.println("....wmtsCapabilitiesLayerStyleLegends  : layer.getLayerName() " + layer.getLayerName());
             
             NodeList layerStyles = (NodeList) xPath.evaluate( exprPath, wmtsCapabilities, XPathConstants.NODESET );
             sa.assertTrue( ( layerStyles != null ) && ( layerStyles.getLength() > 0 ),
@@ -97,7 +97,6 @@ public class ServiceMetadataContent extends AbstractBaseGetCapabilitiesFixture {
                     Node style = layerStyles.item( si );
                     String styleIdentifier = ServiceMetadataUtils.parseNodeElementName( xPath, style );
                     
-                    System.out.println("....wmtsCapabilitiesLayerStyleLegends  : styleIdentifier " + styleIdentifier);
 
                     NodeList legendList = (NodeList) xPath.evaluate( "./wmts:LegendURL", style, XPathConstants.NODESET );
                     sa.assertTrue( ( legendList != null ) && ( legendList.getLength() > 0 ),

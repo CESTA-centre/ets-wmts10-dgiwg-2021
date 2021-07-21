@@ -14,7 +14,7 @@ import org.opengis.cite.wmts10.core.domain.SuiteAttribute;
 
 
 
-import static org.opengis.cite.wmts10.core.util.interactive.InteractiveTestUtils.retrieveInvalidGetFeatureInfoRequest;
+//import static org.opengis.cite.wmts10.core.util.interactive.InteractiveTestUtils.retrieveInvalidGetFeatureInfoRequest;
 
 
 /**
@@ -33,7 +33,8 @@ public class GetFeatureInfoExceptionInEnglishLanguageTest {
 	 * @throws XPathExpressionException
 	 * @throws XPathFactoryConfigurationException
 	 */
-	 @Test(groups= {"A WMS server shall provide the service exceptions in the English language.  Exception text content may also be provided in additional languages, but English must always be included."}, description = "Asks the user if the presented request returns an exception that contains English language.")
+	 @Test(groups= {"A WMS server shall provide the service exceptions in the English language.  Exception text content may also be provided in additional languages, but English must always be included."}, 
+			 description = "Asks the user if the presented request returns an exception that contains English language.")
 	public void getFeatureInfoExceptionInEnglishLanguage(ITestContext context)
 			throws XPathExpressionException, XPathFactoryConfigurationException {
 	

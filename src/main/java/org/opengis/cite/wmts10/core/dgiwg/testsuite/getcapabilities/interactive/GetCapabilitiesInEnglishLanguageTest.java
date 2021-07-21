@@ -13,6 +13,11 @@ import org.opengis.cite.wmts10.core.domain.InteractiveTestResult;
 import org.opengis.cite.wmts10.core.domain.SuiteAttribute;
 
 public class GetCapabilitiesInEnglishLanguageTest {
+	/*
+	 * A WMTS server shall provide the service metadata document (GetCapabilities response or ServiceMetadata resource document) 
+	 * and the featureInfo document (if supported, GetFeatureInfo response or FeatureInfo resource document) in the English language.  
+	 * Metadata content may also be provided in additional languages, but English must always be included.
+	 */
 	@Test(groups= {"A WMTS server shall provide the service metadata document (GetCapabilities response or ServiceMetadata resource document) and the featureInfo document (if supported, GetFeatureInfo response or FeatureInfo resource document) in the English language.  Metadata content may also be provided in additional languages, but English must always be included."}, description = "Asks the user if the resource contains English language.")
     public void getCapabilitiesInEnglishLanguage( ITestContext context )
                     throws XPathExpressionException, XPathFactoryConfigurationException {

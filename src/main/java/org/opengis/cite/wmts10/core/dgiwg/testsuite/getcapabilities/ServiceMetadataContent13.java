@@ -25,7 +25,7 @@ import org.w3c.dom.NodeList;
  */
 public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture {
     /**
-    A WMTS server shall provide a title element for each supported style.
+    DGIWG WMTS 1.0, Requirement 13 A WMTS server shall provide a title element for each supported style.
      */
 
     @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies if Capabilities exists.", dependsOnMethods = "verifyGetCapabilitiesSupported")
@@ -34,33 +34,33 @@ public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture
         assertXPath( ".", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies if capabilities service indetification exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceIdentificationExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceIdentification", wmtsCapabilities, NS_BINDINGS );
     }
 
     
-    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies if capabilities service provider exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesServiceProviderExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:ServiceProvider", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies if capabilities operation metada exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesOperationsMetadataExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//ows:OperationsMetadata", wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies if capabilities contents exists", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesContentsExists() {
         // --- Test Method: 1 (The response has all required service metadata elements)
         assertXPath( "//wmts:Contents", wmtsCapabilities, NS_BINDINGS );
     }
 
 
-    @Test(description = "DGIWG WMTS 1.0, Requirement 13", dependsOnMethods = "wmtsCapabilitiesContentsExists")
+    @Test(groups= "A WMTS server shall provide a title element for each supported style.",description = "Verifies capabilities layer style legend", dependsOnMethods = "wmtsCapabilitiesContentsExists")
     public void wmtsCapabilitiesLayerStyleLegends()
                             throws XPathExpressionException, XPathFactoryConfigurationException {
 

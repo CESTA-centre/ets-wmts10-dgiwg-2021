@@ -37,39 +37,42 @@ public class ServiceMetadataContent16 extends AbstractBaseGetCapabilitiesFixture
 	 * systems or applications. This requirement is conditional on the LegendURL
 	 * being relevant to the generated service.
 	 */
+	
+	private static final String GROUPE_NAME = "If legend is present (see req 14), the <LegendURL> element shall specify a URL to allow access to an image of the legend. \n"
+			+ "Note : This URL will relate to the source system and may not be resolvable on all connected/unconnected systems or applications. This requirement is conditional on the <LegendURL> being relevant to the generated service.";
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 16", dependsOnMethods = "verifyGetCapabilitiesSupported")
+	@Test(groups = GROUPE_NAME,description = "Verifies if Capabilities exists", dependsOnMethods = "verifyGetCapabilitiesSupported")
 	public void wmtsCapabilitiesExists() {
 		// --- base test
 		assertXPath(".", wmtsCapabilities, NS_BINDINGS);
 	}
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 16", dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups = GROUPE_NAME,description = "Verifies if capabilities service indetification exists", dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesServiceIdentificationExists() {
 		// --- Test Method: 1 (The response has all required service metadata elements)
 		assertXPath("//ows:ServiceIdentification", wmtsCapabilities, NS_BINDINGS);
 	}
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 16", dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups = GROUPE_NAME,description = "Verifies if capabilities service provider exists", dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesServiceProviderExists() {
 		// --- Test Method: 1 (The response has all required service metadata elements)
 		assertXPath("//ows:ServiceProvider", wmtsCapabilities, NS_BINDINGS);
 	}
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 16", dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups = GROUPE_NAME,description = "Verifies if capabilities operation metada exists", dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesOperationsMetadataExists() {
 		// --- Test Method: 1 (The response has all required service metadata elements)
 		assertXPath("//ows:OperationsMetadata", wmtsCapabilities, NS_BINDINGS);
 	}
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 16", dependsOnMethods = "wmtsCapabilitiesExists")
+	@Test(groups = GROUPE_NAME,description = "Verifies if capabilities contents exists", dependsOnMethods = "wmtsCapabilitiesExists")
 	public void wmtsCapabilitiesContentsExists() {
 		// --- Test Method: 1 (The response has all required service metadata elements)
 		assertXPath("//wmts:Contents", wmtsCapabilities, NS_BINDINGS);
 	}
 
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 16", dependsOnMethods = "wmtsCapabilitiesContentsExists")
+	@Test(groups = GROUPE_NAME,description = "Verifies capabilities layer style legend", dependsOnMethods = "wmtsCapabilitiesContentsExists")
 	public void wmtsCapabilitiesLayerStyleLegends()
 			throws XPathExpressionException, XPathFactoryConfigurationException {
 		// --- Test Method: 7 (The response provides an associated legend in at least
@@ -92,7 +95,6 @@ public class ServiceMetadataContent16 extends AbstractBaseGetCapabilitiesFixture
 			// wmtsCapabilities,
 			// NS_BINDINGS);
 
-			System.out.println("....wmtsCapabilitiesLayerStyleLegends  : layer.getLayerName() " + layer.getLayerName());
 
 			NodeList layerStyles = (NodeList) xPath.evaluate(exprPath, wmtsCapabilities, XPathConstants.NODESET);
 			sa.assertTrue((layerStyles != null) && (layerStyles.getLength() > 0),
@@ -103,7 +105,6 @@ public class ServiceMetadataContent16 extends AbstractBaseGetCapabilitiesFixture
 					Node style = layerStyles.item(si);
 					String styleIdentifier = ServiceMetadataUtils.parseNodeElementName(xPath, style);
 
-					System.out.println("....wmtsCapabilitiesLayerStyleLegends  : styleIdentifier " + styleIdentifier);
 
 					NodeList legendList = (NodeList) xPath.evaluate("./wmts:LegendURL", style, XPathConstants.NODESET);
 					sa.assertTrue((legendList != null) && (legendList.getLength() > 0),
@@ -118,8 +119,6 @@ public class ServiceMetadataContent16 extends AbstractBaseGetCapabilitiesFixture
 							String format = (String) xPath.evaluate("@format", legend, XPathConstants.STRING);
 							String url = (String) xPath.evaluate("@xlink:href", legend, XPathConstants.STRING);
 
-							System.out.println(
-									"....wmtsCapabilitiesLayerStyleLegends  : format : " + format + " url : " + url);
 
 							sa.assertTrue((!Strings.isNullOrEmpty(format)) && (!Strings.isNullOrEmpty(url)),
 									"Legend for Style: " + styleIdentifier + " under Layer: " + layer.getLayerName()
@@ -145,10 +144,8 @@ public class ServiceMetadataContent16 extends AbstractBaseGetCapabilitiesFixture
 
 	private XPath createXPath() throws XPathFactoryConfigurationException {
 		XPathFactory factory = XPathFactory.newInstance(XPathConstants.DOM_OBJECT_MODEL);
-		System.out.println("....createXPath factory : " + factory);
 		XPath xpath = factory.newXPath();
 		xpath.setNamespaceContext(NS_BINDINGS);
-		System.out.println("....createXPath xpath : " + xpath);
 		return xpath;
 	}
 

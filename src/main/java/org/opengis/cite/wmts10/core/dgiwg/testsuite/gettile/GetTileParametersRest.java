@@ -44,7 +44,8 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
 
     private URI getTileURI = null;
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile REST capability", dependsOnMethods = "verifyGetTileSupported")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description = "Checks wmts get tile REST capability", dependsOnMethods = "verifyGetTileSupported")
     public void wmtsGetTileRESTCapable()
                             throws XPathExpressionException, XPathFactoryConfigurationException {
         getTileURI = ServiceMetadataUtils.getOperationEndpoint_REST( wmtsCapabilities, DGIWGWMTS.GET_TILE,
@@ -82,7 +83,8 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
                     "GetTile (GET) endpoint not found or REST is not supported in ServiceMetadata capabilities document." );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile REST parameters", dependsOnMethods = "wmtsGetTileRESTCapable")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description = "Checks wmts get tile REST parameters", dependsOnMethods = "wmtsGetTileRESTCapable")
     public void wmtsGetTileRequestParametersSupported( ITestContext testContext ) {
         String requestFormat = null;
 

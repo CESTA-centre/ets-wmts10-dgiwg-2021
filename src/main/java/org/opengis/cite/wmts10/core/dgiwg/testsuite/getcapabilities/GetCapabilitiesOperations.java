@@ -31,25 +31,28 @@ public class GetCapabilitiesOperations extends AbstractBaseGetCapabilitiesFixtur
      * DGIWG WMTS requirement 2
      * A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.
      */
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities.", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks wmts capabilities.", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
-    	System.out.println("....wmtsCapabilitiesExists OK " );
         assertTrue( this.wmtsCapabilities != null, "No ServerMetadata Capabilities document" );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities metadata.", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks wmts capabilities metadata.", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesOperationsMetadataExists() {
         String xPathExpr = "//wmts:Capabilities/ows:OperationsMetadata != ''";
         assertXPath( xPathExpr, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities metadata operation.", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataExists")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks wmts capabilities metadata operation.", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataExists")
     public void wmtsCapabilitiesOperationsMetadataOperationExists() {
         String xPathExpr = "//wmts:Capabilities/ows:OperationsMetadata/ows:Operation != ''";
         assertXPath( xPathExpr, wmtsCapabilities, NS_BINDINGS );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities KVP request.", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataOperationExists")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks wmts capabilities KVP request.", dependsOnMethods = "wmtsCapabilitiesOperationsMetadataOperationExists")
     public void wmtsCapabilitiesKVPRequestsExists() {
         URI uri = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities,
         		DGIWGWMTS.GET_CAPABILITIES, ProtocolBinding.GET );
@@ -57,7 +60,8 @@ public class GetCapabilitiesOperations extends AbstractBaseGetCapabilitiesFixtur
                     "GetCapabilities (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document." );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description="Checks wmts capabilities validated.", dependsOnMethods = "wmtsCapabilitiesKVPRequestsExists")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description="Checks wmts capabilities validated.", dependsOnMethods = "wmtsCapabilitiesKVPRequestsExists")
     public void wmtsCapabilitiesValidated()
                             throws XPathFactoryConfigurationException, XPathExpressionException {
         XPath xpath = createXPath();

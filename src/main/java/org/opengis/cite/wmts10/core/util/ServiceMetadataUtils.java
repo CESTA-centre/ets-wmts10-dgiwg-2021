@@ -431,7 +431,6 @@ public final class ServiceMetadataUtils {
         } catch ( XPathExpressionException ex ) {
             TestSuiteLogger.log( Level.INFO, ex.getMessage() );
         }
-        System.out.println("....parseImageSupportedFormats : " + supportedFormats); 
         return supportedFormats;
     }
 	

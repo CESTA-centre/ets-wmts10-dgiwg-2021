@@ -24,13 +24,10 @@ import static org.opengis.cite.wmts10.core.util.interactive.InteractiveTestUtils
  */
 public class GetFeatureInfoInEnglishLanguageTest {
 	/**
-	 * DGIWG WMTS 1.0, Requirement 6 A WMTS server shall provide the service
-	 * exceptions in the English language. Exception text content may also be
-	 * provided in additional languages, but English must always be included.
-	 * @param context
-	 * 	The context of the suite.
-	 * @throws XPathExpressionException
-	 * @throws XPathFactoryConfigurationException
+	 * DGIWG WMTS 1.0, Requirement 12 A WMTS server shall provide the service metadata document (GetCapabilities response 
+	 * or ServiceMetadata resource document) and the featureInfo document (if supported, GetFeatureInfo response or FeatureInfo 
+	 * resource document) in the English language.  Metadata content may also be provided in additional languages, 
+	 * but English must always be included.
 	 */
 	 @Test(groups= {"A WMTS server shall provide the service metadata document (GetCapabilities response or ServiceMetadata resource document) and the featureInfo document (if supported, GetFeatureInfo response or FeatureInfo resource document) in the English language.  Metadata content may also be provided in additional languages, but English must always be included."}, description = "Asks the user if the presented request returns a response that contains English language.")
 	public void getFeatureInfoInEnglishLanguage(ITestContext context)

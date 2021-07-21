@@ -41,19 +41,18 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 
 	private boolean _debug = false;
 
-	@Test(groups = "A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.", description = "Checks wmtsGetFeatureInfoExists.", dependsOnMethods = "verifyGetFeatureInfoSupported")
+	@Test(groups = {"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."}, 
+			description = "Checks wmtsGetFeatureInfoExists.", dependsOnMethods = "verifyGetFeatureInfoSupported")
 	public void wmtsGetFeatureInfoExists() {
-		System.out.println("....wmtsGetFeatureInfoExists start : ");
 		getFeatureInfoURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities,
 				DGIWGWMTS.GET_FEATURE_INFO, ProtocolBinding.GET);
 		assertTrue(getFeatureInfoURI != null,
 				"GetFeatureInfo (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document.");
-		System.out.println("....wmtsGetFeatureInfoExists end : ");
 	}
 
-	@Test(groups = "A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.", description = "Checks wmtsGetFeatureInfoRequestParameters.", dependsOnMethods = "wmtsGetFeatureInfoExists")
+	@Test(groups = {"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."}, 
+			description = "Checks wmtsGetFeatureInfoRequestParameters.", dependsOnMethods = "wmtsGetFeatureInfoExists")
 	public void wmtsGetFeatureInfoRequestParameters(ITestContext testContext) {
-		System.out.println("....wmtsGetFeatureInfoRequestParameters start : " + getFeatureInfoURI);
 		if (getFeatureInfoURI == null) {
 			getFeatureInfoURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities,
 					DGIWGWMTS.GET_FEATURE_INFO, ProtocolBinding.GET);
@@ -61,25 +60,19 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 		String requestFormat = null;
 		try {
 			XPath xPath = createXPath();
-			System.out.println("....wmtsGetFeatureInfoRequestParameters xPath : " + xPath);
 			// this function does not work
-			System.out.println("....wmtsGetFeatureInfoRequestParameters this : " + this);
-			System.out.println("....wmtsGetFeatureInfoRequestParameters this.reqEntity : " + this.reqEntity);
 			// modify code because this.reqEntity can be null
 			String layerName = null;
 			if (this.reqEntity != null) {
 				layerName = this.reqEntity.getKvpValue(DGIWGWMTS.LAYER_PARAM);
 			}
-			System.out.println("....wmtsGetFeatureInfoRequestParameters layerName : " + layerName);
 
 			if (layerName == null) {
 				NodeList layers = ServiceMetadataUtils.getNodeElements(xPath, wmtsCapabilities,
 						"//wmts:Contents/wmts:Layer/ows:Identifier");
-				System.out.println("....wmtsGetFeatureInfoRequestParameters layers : " + layers);
 				if (layers.getLength() > 0) {
 					layerName = ((Node) layers.item(0)).getTextContent().trim();
 				}
-				System.out.println("....wmtsGetFeatureInfoRequestParameters layerName : " + layerName);
 			}
 			// NodeList imageFormats = ServiceMetadataUtils.getNodeElements( xPath,
 			// wmtsCapabilities,
@@ -109,7 +102,6 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 			if (this.reqEntity != null) {
 				rsp = wmtsClient.submitRequest(this.reqEntity, getFeatureInfoURI);
 			}
-			System.out.println("....wmtsGetFeatureInfoRequestParameters rsp : " + rsp);
 			// storeResponseImage( rsp, "Requirement5", "simple", requestFormat );
 			/*--
 			 sa.assertTrue( rsp.hasEntity(), ErrorMessage.get( ErrorMessageKey.MISSING_XML_ENTITY ) );
@@ -125,13 +117,11 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 			// sa.assertAll();
 		} catch (XPathExpressionException | XPathFactoryConfigurationException xpe) {
 			System.out.println(xpe.getMessage());
-			System.out.println("....wmtsGetFeatureInfoRequestParameters Exception  : ");
 			if (this._debug) {
 				xpe.printStackTrace();
 			}
 			assertTrue(false, "Invalid or corrupt XML or KVP structure:  " + xpe.getMessage());
 		}
-		System.out.println("....wmtsGetFeatureInfoRequestParameters end : " + testContext);
 	}
 
 	private XPath createXPath() throws XPathFactoryConfigurationException {
