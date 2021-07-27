@@ -40,31 +40,40 @@ public class GetTileCachingInfo extends AbstractBaseGetTileFixture {
 
     private List<String> expires = null;
 
+    
     @Test(groups = GROUPE_NAME,description = "Checks if tile request exist", dependsOnMethods = "verifyGetTileSupported")
-    public void wmtsGetTileKVPRequestsExists() {
-        getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
+    public void wmtsGetTileRESTequestsExists() {
+    	//System.out.println("....wmtsGetTileRESTequestsExists : ");
+        getTileURI = ServiceMetadataUtils.getOperationEndpoint_REST( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                     ProtocolBinding.GET );
+        //System.out.println("....wmtsGetTileRESTequestsExists getTileURI : " + getTileURI);
         assertTrue( getTileURI != null,
-                    "GetTile (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document." );
+                    "GetTile (GET) endpoint not found or REST is not supported in ServiceMetadata capabilities document." );
+        
     }
 
-    @Test(groups = GROUPE_NAME,description = "Checks if tile caching information exist", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
+    @Test(groups = GROUPE_NAME,description = "Checks if tile caching information exist", dependsOnMethods = "wmtsGetTileRESTequestsExists")
     public void wmtsGetTileCachingInformationExists() {
         if ( getTileURI == null ) {
-            getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
+            getTileURI = ServiceMetadataUtils.getOperationEndpoint_REST( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                         ProtocolBinding.GET );
         }
 
+        /*
         this.reqEntity.removeKvp( DGIWGWMTS.FORMAT_PARAM );
         String requestFormat = DGIWGWMTS.IMAGE_PNG;
         this.reqEntity.addKvp( DGIWGWMTS.FORMAT_PARAM, requestFormat );
+        */
 
+        
+        /*
         response = wmtsClient.submitRequest( this.reqEntity, getTileURI );
         storeResponseImage( response, "Requirement11", "simple", requestFormat );
 
         assertTrue( response.hasEntity(), ErrorMessage.get( ErrorMessageKey.MISSING_XML_ENTITY ) );
         assertStatusCode( response.getStatus(), 200 );
         assertContentType( response.getHeaders(), requestFormat );
+        */
 
         cacheControls = response.getHeaders().get( "Cache-control" );
         expires = response.getHeaders().get( "Expires" );

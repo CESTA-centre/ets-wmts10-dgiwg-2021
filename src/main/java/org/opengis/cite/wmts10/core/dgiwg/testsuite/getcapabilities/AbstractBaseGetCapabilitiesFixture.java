@@ -27,13 +27,16 @@ public abstract class AbstractBaseGetCapabilitiesFixture extends AbstractBaseGet
 
     @Test
     public void verifyGetCapabilitiesSupported() {
+    	//System.out.println("....verifyGetCapabilitiesSupported : " );
         Node getCapabilitiesEntry = null;
         try {
             getCapabilitiesEntry = (Node) ServiceMetadataUtils.getNode( wmtsCapabilities,
                                                                         "//ows:OperationsMetadata/ows:Operation[@name = 'GetCapabilities']" );
+            //System.out.println("....verifyGetCapabilitiesSupported 2 getCapabilitiesEntry : getCapabilitiesEntry" );
         } catch ( XPathExpressionException e ) {
         }
-        assertNotNull( getCapabilitiesEntry, "GetCapabilities is not supported by this WMTS" );
-    }
+        assertNotNull( getCapabilitiesEntry, "GetCapabilities is not supported by this WMTS TOTO" );
+        //System.out.println("....verifyGetCapabilitiesSupported 3 getCapabilitiesEntry : getCapabilitiesEntry" );
+    } 
 
 }

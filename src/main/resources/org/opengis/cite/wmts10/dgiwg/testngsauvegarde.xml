@@ -10,6 +10,7 @@
 			class-name="org.opengis.cite.wmts10.core.SuiteFixtureListener" />
 	</listeners>
 
+
 	<test name="Preconditions">
 		<classes>
 			<class
@@ -32,15 +33,11 @@
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileParametersKvp" />
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.GetTileParametersRest" />
-
-
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoKvp" />
-
-<!--
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.GetFeatureInfoRest" />
--->
+
 		</classes>
 	</test>
 
@@ -97,6 +94,11 @@
 		<classes>
 			<class
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoExceptionInEnglishLanguageTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.interactive.GetCapabilitiesExceptionInEnglishLanguageTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.gettile.interactive.GetTileExceptionInEnglishLanguageTest" />
+
 		</classes>
 	</test>
 
@@ -159,6 +161,18 @@
 		</classes>
 	</test>
 
+
+	<test name="DGIWG WMTS requirement 12">
+		<classes>
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getfeatureinfo.interactive.GetFeatureInfoInEnglishLanguageTest" />
+			<class
+				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.interactive.GetCapabilitiesInEnglishLanguageTest" />
+
+		</classes>
+	</test>
+
+
 	<!-- A WMTS server shall provide a <title> element for each supported style. -->
 	<test name="DGIWG WMTS requirement 13">
 		<classes>
@@ -170,6 +184,7 @@
 	<!-- Each layer's style shall have an associated legend (using the <legendURL 
 		>element) if the data being provisioned is symbolized/portrayed (i.e. not 
 		imagery). -->
+
 	<test name="DGIWG WMTS requirement 14">
 		<classes>
 			<class
@@ -209,5 +224,6 @@
 				name="org.opengis.cite.wmts10.core.dgiwg.testsuite.getcapabilities.GetCapabilitiesSoap" />
 		</classes>
 	</test>
+
 
 </suite>

@@ -98,6 +98,7 @@ public abstract class AbstractBaseGetFixture {
         }
         if ( this.reqEntity != null ) {
             String request = this.reqEntity.asQueryString();
+            //System.out.println("....addAttributesOnTestFailure : " + request); 
             result.setAttribute( "request", request );
         }
         if ( this.rspEntity != null ) {
@@ -123,6 +124,7 @@ public abstract class AbstractBaseGetFixture {
         }
         if ( this.reqEntity != null ) {
             String request = this.reqEntity.asQueryString();
+            //System.out.println("....addAttributesOnTestSuccess : " + request); 
             result.setAttribute( "request", request );
         }
     }

@@ -116,12 +116,12 @@ public class ServiceMetadataContent15 extends AbstractBaseGetCapabilitiesFixture
                             sa.assertTrue( ( !Strings.isNullOrEmpty( format ) ) && ( !Strings.isNullOrEmpty( url ) ),
                                            "Legend for Style: " + styleIdentifier + " under Layer: "
                                                                    + layer.getLayerName() + " is not properly defined." );
-
+                            //System.out.println("....format : " + format);
                             // -- Test for formats (Test Method 7)
                             foundPreferredFormat |= ( format.equals( DGIWGWMTS.IMAGE_PNG )
                                                       || format.equals( DGIWGWMTS.IMAGE_GIF ) || format.equals( DGIWGWMTS.IMAGE_JPEG ) );
 
-
+                            //System.out.println("....foundPreferredFormat : " + foundPreferredFormat);
                         }
                         sa.assertTrue( foundPreferredFormat,
                                        "<Style>: " + styleIdentifier + " under <Layer>: " + layer.getLayerName()

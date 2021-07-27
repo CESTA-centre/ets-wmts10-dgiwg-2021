@@ -37,7 +37,7 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 	 */
 
 	private URI getTileURI = null;
-
+/*
 	@Test(groups={"A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group)."},
 			description = "Checks wmtsGetCapabilitiiesWithXML")
 	public void wmtsGetCapabilitiiesWithXML(ITestContext testContext) {
@@ -55,6 +55,7 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 
 		gck.TestHTML();
 	}
+	*/
 
 	/*
 	@Test(groups="A WMTS server shall provide tiles in at least one of the following raster formats  : • image/png (Portable Network Graphics) • image/gif (Graphics Interchange Format) • image/jpeg (Joint Photographics Expert Group).",description = "DGIWG WMTS 1.0, Requirement 4")
@@ -95,8 +96,24 @@ public class GetTileOfferings extends AbstractBaseGetTileFixture {
 			getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
 					ProtocolBinding.GET);
 		}
+		
+		//System.out.println("....checkGetTileWithImageFormat : this.reqEntity : " + this.reqEntity);
+		
+		
 		this.reqEntity.removeKvp(DGIWGWMTS.FORMAT_PARAM);
 		this.reqEntity.addKvp(DGIWGWMTS.FORMAT_PARAM, requestFormat);
+		
+		// CESTA supersedes TILE_COL_PARAM, TILE_ROW_PARAM and TILE_MATRIX_PARAM to be sure that the tile really exists
+		this.reqEntity.removeKvp(DGIWGWMTS.TILE_COL_PARAM);
+		this.reqEntity.addKvp(DGIWGWMTS.TILE_COL_PARAM, "1");
+		this.reqEntity.removeKvp(DGIWGWMTS.TILE_ROW_PARAM);
+		this.reqEntity.addKvp(DGIWGWMTS.TILE_ROW_PARAM, "1");
+		this.reqEntity.removeKvp(DGIWGWMTS.TILE_MATRIX_PARAM);
+		this.reqEntity.addKvp(DGIWGWMTS.TILE_MATRIX_PARAM, "2");
+		
+		String layer_name = this.reqEntity.getKvpValue(DGIWGWMTS.LAYER_PARAM);
+		//System.out.println("....checkGetTileWithImageFormat : layer_name : " + layer_name);
+		
 		ClientResponse rsp = wmtsClient.submitRequest(this.reqEntity, getTileURI);
 		storeResponseImage(rsp, "Requirement4", "simple", requestFormat);
 

@@ -38,6 +38,8 @@ public class GetCapabilitiesContentTest extends AbstractBaseGetCapabilitiesFixtu
 	public void wmsCapabilitiesKeywordsExists() throws SOAPException {
 		// String xPathXml = "//ows:ServiceProvider/ows:Keywords != ''";
 		String xPathXml = "//ows:ServiceIdentification/ows:Keywords != ''";
+		//System.out.println("....wmtsCapabilities : " + wmtsCapabilities);
+		//System.out.println("....xPathXml : " + xPathXml);
 		assertXPath(xPathXml, wmtsCapabilities, NS_BINDINGS);
 	}
 

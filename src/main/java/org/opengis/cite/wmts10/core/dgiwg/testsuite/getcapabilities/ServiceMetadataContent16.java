@@ -131,6 +131,7 @@ public class ServiceMetadataContent16 extends AbstractBaseGetCapabilitiesFixture
 							// -- Test for valid url (Test Method 8)
 							WmtsAssertion.assertUrl(sa, url);
 							WmtsAssertion.assertUriIsResolvable(sa, url);
+							//System.out.println("....url : " + url);
 
 						}
 						sa.assertTrue(foundPreferredFormat, "<Style>: " + styleIdentifier + " under <Layer>: "

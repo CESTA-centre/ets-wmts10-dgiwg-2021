@@ -77,7 +77,7 @@ public class ServiceMetadataContent13 extends AbstractBaseGetCapabilitiesFixture
             String exprPath = "//wmts:Contents/wmts:Layer[ows:Identifier = '" + layer.getLayerName() + "']/wmts:Style";
             // --- will soft assess in order to go thru all layers // assertXPath(exprPath, wmtsCapabilities,
             // NS_BINDINGS);
-                        
+            //System.out.println("....exprPath : " + exprPath);  
             NodeList layerStyles = (NodeList) xPath.evaluate( exprPath, wmtsCapabilities, XPathConstants.NODESET );
             sa.assertTrue( ( layerStyles != null ) && ( layerStyles.getLength() > 0 ),
                            "There are no <Style> elements for <Layer>:  " + layer.getLayerName() );

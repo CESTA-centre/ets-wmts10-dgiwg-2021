@@ -116,8 +116,10 @@ public final class ServiceMetadataUtils {
 			String xPathString = "//ows:OperationsMetadata/ows:Operation[@name = '%s'and ( ./ows:Constraint/ows:AllowedValues/ows:Value = '%s' or ./ows:DCP/ows:HTTP/ows:%s/ows:Constraint/ows:AllowedValues/ows:Value = '%s')]/ows:DCP/ows:HTTP/ows:%s/@xlink:href";
 			String xPathExpr = String.format(xPathString, opName, protocol, binding.getElementName(), protocol,
 					binding.getElementName());
+			//System.out.println("....getOperationEndpoint : xPathExpr : " + xPathExpr);
 			XPath xPath = createXPath();
 			String href = getNodeText(xPath, wmtsMetadata, xPathExpr);
+			//System.out.println("....getOperationEndpoint : href : " + href);
 			return createEndpoint(href);
 		} catch (XPathExpressionException ex) {
 			TestSuiteLogger.log(Level.INFO, ex.getMessage());
@@ -374,6 +376,7 @@ public final class ServiceMetadataUtils {
 			throws XPathExpressionException {
 		if (xPath == null)
 			xPath = createXPath();
+		//System.out.println("....path : " + xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.NODESET)); 
 		return (NodeList) xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.NODESET);
 	}
 

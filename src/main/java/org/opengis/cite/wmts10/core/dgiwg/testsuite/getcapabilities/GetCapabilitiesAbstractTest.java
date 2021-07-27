@@ -39,11 +39,13 @@ public class GetCapabilitiesAbstractTest extends AbstractBaseGetCapabilitiesFixt
     	//attention on remplace getOperationEndpoint par getOperationEndpoint_KVP
         URI endpoint = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, GET_CAPABILITIES,
                                                                   ProtocolBinding.GET );
+        
+        //System.out.println("....endpointendpoint : " + endpoint);
         ClientResponse rsp = wmtsClient.submitRequest( this.reqEntity, endpoint );
-
+        //System.out.println("....rsp : " + rsp);
         String abstractValue = parseAbstract( rsp );
         
-        System.out.println("....abstractValue : " + abstractValue);
+        //System.out.println("....abstractValue : " + abstractValue);
                                                                 
         assertTrue( true, "Abstract is : '" + abstractValue + "'" );
     }

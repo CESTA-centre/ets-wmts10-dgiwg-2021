@@ -44,10 +44,12 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 	@Test(groups = {"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."}, 
 			description = "Checks wmtsGetFeatureInfoExists.", dependsOnMethods = "verifyGetFeatureInfoSupported")
 	public void wmtsGetFeatureInfoExists() {
+		//System.out.println("....wmtsGetFeatureInfoExists start : " );
 		getFeatureInfoURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities,
 				DGIWGWMTS.GET_FEATURE_INFO, ProtocolBinding.GET);
 		assertTrue(getFeatureInfoURI != null,
 				"GetFeatureInfo (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document.");
+		//System.out.println("....wmtsGetFeatureInfoExists end : " );
 	}
 
 	@Test(groups = {"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."}, 
@@ -58,6 +60,10 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 					DGIWGWMTS.GET_FEATURE_INFO, ProtocolBinding.GET);
 		}
 		String requestFormat = null;
+		
+
+		
+		
 		try {
 			XPath xPath = createXPath();
 			// this function does not work
@@ -90,6 +96,16 @@ public class GetFeatureInfoKvp extends AbstractBaseGetFeatureInfoFixture {
 				infoFormat = this.reqEntity.getKvpValue(DGIWGWMTS.INFO_FORMAT_PARAM);
 			}
 
+			
+			// CESTA supersedes TILE_COL_PARAM, TILE_ROW_PARAM and TILE_MATRIX_PARAM to be sure that the tile really exists
+			this.reqEntity.removeKvp(DGIWGWMTS.TILE_COL_PARAM);
+			this.reqEntity.addKvp(DGIWGWMTS.TILE_COL_PARAM, "1");
+			this.reqEntity.removeKvp(DGIWGWMTS.TILE_ROW_PARAM);
+			this.reqEntity.addKvp(DGIWGWMTS.TILE_ROW_PARAM, "1");
+			this.reqEntity.removeKvp(DGIWGWMTS.TILE_MATRIX_PARAM);
+			this.reqEntity.addKvp(DGIWGWMTS.TILE_MATRIX_PARAM, "2");
+			
+			
 			// SoftAssert sa = new SoftAssert();
 
 			// for(int i=0; i<imageFormats.getLength(); i++)

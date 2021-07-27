@@ -42,6 +42,7 @@ public class GetCapabilitiesCrsTest extends AbstractBaseGetCapabilitiesFixture {
             boolean EPSG4326 = false;
 
             NodeList crsList = (NodeList) ServiceMetadataUtils.getNodeElements( wmtsCapabilities, "//ows:SupportedCRS" );
+            
             for ( int crsI = 0; ( crsI < crsList.getLength() && !( CRS84 && EPSG4326 ) ); crsI++ ) {
                 Node supportedCRS = crsList.item( crsI );
                 String crsName = supportedCRS.getTextContent();
