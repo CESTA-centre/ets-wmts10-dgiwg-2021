@@ -169,6 +169,7 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
                 ETSAssert.assertContentType( rsp.getHeaders(), requestFormat );
                 ETSAssert.assertStatusCode( rsp.getStatus(), 200 );
             }
+            /*
             // --- Example of invalid URL
             {
                 String erroneousURL = getTileURI.toString();
@@ -193,6 +194,7 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
                 ETSAssert.assertContentType( rsp.getHeaders(), DGIWGWMTS.TEXT_XML );
 
             }
+            */
         } catch ( XPathExpressionException | XPathFactoryConfigurationException xpe ) {
             assertTrue( false, "Error found when retrieving REST Get Tile request: " + xpe.getMessage() );
         }
