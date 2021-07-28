@@ -27,7 +27,7 @@ public abstract class AbstractBaseGetFeatureInfoFixture extends AbstractBaseGetF
     public void buildGetFeatureInfoRequest()
                             throws XPathExpressionException {
         //this.reqEntity = WmtsKvpRequestBuilder.buildGetFeatureInfoRequest( wmtsCapabilities, layerInfo );
-    	this.reqEntity = WmtsRequestBuilder.buildGetFeatureInfoRequest( wmtsCapabilities, layerInfo );
+    	this.reqEntity = WmtsRequestBuilder.buildGetFeatureInfoRequest( wmtsCapabilities, layerInfo, false );
     }
 
     @Test

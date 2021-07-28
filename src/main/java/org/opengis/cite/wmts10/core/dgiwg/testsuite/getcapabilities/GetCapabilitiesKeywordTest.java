@@ -44,7 +44,8 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 
 	private static final String KEYWORD_FILE = "nas.keywords";
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 5", dependsOnMethods = "verifyGetCapabilitiesSupported")
+	@Test(groups = {"If a WMTS server is providing services to a coalition mission federated network, in support of operations or an exercise, it shall provide a minimum keyword list, based on ISO 19115 Topic Categories. It's recommended to provide additional details based on the DGIF groups.The provision of these keywords elements are optional for a WMTS server which is providing services across one single non-mission network."},
+			description = "Checks wmtsGetCapabilitiesURLExists.",dependsOnMethods = "verifyGetCapabilitiesSupported")
 	public void wmtsGetCapabilitiesURLExists() {
 		getCapabilitiesURI = ServiceMetadataUtils.getOperationEndpoint_KVP(this.wmtsCapabilities,
 				DGIWGWMTS.GET_CAPABILITIES, ProtocolBinding.GET);
@@ -52,9 +53,10 @@ public class GetCapabilitiesKeywordTest extends AbstractBaseGetCapabilitiesFixtu
 				"GetCapabilities (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document.");
 	}
 
-	@Test(description = "DGIWG WMTS 1.0, Requirement 5", dependsOnMethods = "wmtsGetCapabilitiesURLExists")
+	@Test(groups = {"If a WMTS server is providing services to a coalition mission federated network, in support of operations or an exercise, it shall provide a minimum keyword list, based on ISO 19115 Topic Categories. It's recommended to provide additional details based on the DGIF groups.The provision of these keywords elements are optional for a WMTS server which is providing services across one single non-mission network."}, 
+			description = "Checks wmtsCapabilitiesKeywordTest.",dependsOnMethods = "wmtsGetCapabilitiesURLExists")
 	public void wmtsCapabilitiesKeywordTest() {
-		verifyNASkeywords(true, "WMTS ServiceMetadata Capabilities docuemnt", wmtsCapabilities,
+		verifyNASkeywords(true, "WMTS ServiceMetadata Capabilities document", wmtsCapabilities,
 				"//ows:ServiceIdentification/ows:Keywords");
 	}
 

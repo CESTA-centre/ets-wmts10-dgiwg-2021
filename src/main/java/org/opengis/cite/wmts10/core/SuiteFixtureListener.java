@@ -84,6 +84,8 @@ public class SuiteFixtureListener implements ISuiteListener {
         if ( null != doc ) {
             suite.setAttribute( SuiteAttribute.TEST_SUBJECT.getName(), doc );
             suite.setAttribute( SuiteAttribute.LAYER_INFO.getName(), parseLayerInfo( doc ) );
+            suite.setAttribute( SuiteAttribute.IS_VECTOR.getName(), parseBoolean( params, TestRunArg.VECTOR ) );
+            suite.setAttribute( SuiteAttribute.INTERACTIVE_TEST_RESULT.getName(), parseInteractiveTestResults( params ) );
         }
     }
     
@@ -91,10 +93,18 @@ public class SuiteFixtureListener implements ISuiteListener {
         
         boolean getFeatureInfoExceptionInEnglishLanguage = parseBoolean( params,
                                                                          TestRunArg.GETFEATUREINFO_EXCEPTION_IN_ENGLISH );
-
+        boolean getCapabilitiesExceptionInEnglishLanguage = parseBoolean( params, TestRunArg.GETCAPABILITIES_EXCEPTION_IN_ENGLISH);
+        boolean getTileExceptionInEnglishLanguage = parseBoolean( params, TestRunArg.GETTILE_EXCEPTION_IN_ENGLISH);
+        boolean getCapabilitiesInEnglishLanguage = parseBoolean( params, TestRunArg.GETCAPABILITIES_IN_ENGLISH);
+        boolean getFeatureInfoResponseInEnglishLanguage = parseBoolean( params, TestRunArg.GETFEATUREINFO_IN_ENGLISH);
 
         return new InteractiveTestResult( 
-                        getFeatureInfoExceptionInEnglishLanguage);
+        		getFeatureInfoExceptionInEnglishLanguage,
+        		getCapabilitiesExceptionInEnglishLanguage,
+        		getTileExceptionInEnglishLanguage,
+        		getCapabilitiesInEnglishLanguage,
+        		getFeatureInfoResponseInEnglishLanguage
+        		);
     }
 
     private boolean parseBoolean( Map<String, String> params, TestRunArg arg ) {

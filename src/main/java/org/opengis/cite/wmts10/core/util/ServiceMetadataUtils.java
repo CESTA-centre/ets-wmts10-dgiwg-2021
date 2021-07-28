@@ -116,8 +116,10 @@ public final class ServiceMetadataUtils {
 			String xPathString = "//ows:OperationsMetadata/ows:Operation[@name = '%s'and ( ./ows:Constraint/ows:AllowedValues/ows:Value = '%s' or ./ows:DCP/ows:HTTP/ows:%s/ows:Constraint/ows:AllowedValues/ows:Value = '%s')]/ows:DCP/ows:HTTP/ows:%s/@xlink:href";
 			String xPathExpr = String.format(xPathString, opName, protocol, binding.getElementName(), protocol,
 					binding.getElementName());
+			//System.out.println("....getOperationEndpoint : xPathExpr : " + xPathExpr);
 			XPath xPath = createXPath();
 			String href = getNodeText(xPath, wmtsMetadata, xPathExpr);
+			//System.out.println("....getOperationEndpoint : href : " + href);
 			return createEndpoint(href);
 		} catch (XPathExpressionException ex) {
 			TestSuiteLogger.log(Level.INFO, ex.getMessage());
@@ -374,6 +376,7 @@ public final class ServiceMetadataUtils {
 			throws XPathExpressionException {
 		if (xPath == null)
 			xPath = createXPath();
+		//System.out.println("....path : " + xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.NODESET)); 
 		return (NodeList) xPath.evaluate(xPathAbstract, wmtsCapabilities, XPathConstants.NODESET);
 	}
 
@@ -411,14 +414,39 @@ public final class ServiceMetadataUtils {
 		return supportedFormats;
 	}
 	
+    public static List<String> parseImageSupportedFormats( Document wmsCapabilities, String opName ) {
+        ArrayList<String> supportedFormats = new ArrayList<>();
+
+        //String expr = "//wms:WMS_Capabilities/wms:Capability/wms:Request/wms:%s/wms:Format";
+        //String expr = "/wmts:Capabilities/wmts:Contents/wmts:Layer/wmts:Style/wmts:LegendURL/@format"; NOT THE GOOD ITEM
+        String expr = "/wmts:Capabilities/wmts:OperationsMetadata/wmts:Operation/wmts:Style/wmts:LegendURL/@format";
+        String xPathExpr = String.format( expr, opName );
+
+        try {
+            XPath xPath = createXPath();
+            NodeList formatNodes = (NodeList) xPath.evaluate( xPathExpr, wmsCapabilities, XPathConstants.NODESET );
+            for ( int formatNodeIndex = 0; formatNodeIndex < formatNodes.getLength(); formatNodeIndex++ ) {
+                Node formatNode = formatNodes.item( formatNodeIndex );
+                String format = formatNode.getTextContent();
+                if ( format != null && !format.isEmpty() )
+                    supportedFormats.add( format );
+            }
+        } catch ( XPathExpressionException ex ) {
+            TestSuiteLogger.log( Level.INFO, ex.getMessage() );
+        }
+        return supportedFormats;
+    }
+	
+	
 	public static URI getOperationEndpoint( final Document wmsMetadata, String opName, ProtocolBinding binding ) {
         if ( null == binding || binding.equals( ProtocolBinding.ANY ) ) {
             binding = getOperationBindings( wmsMetadata, opName ).iterator().next();
         }
-        if ( binding == null )
+        if ( binding == null ) {
             return null;
-        //TODO : revoir expr
-    	String expr = "//wmts:Request/wmts:%s/wmts:DCPType/wmts:HTTP/wmts:%s/wmts:OnlineResource/@xlink:href";
+        }
+
+    	String expr = "//ows:OperationsMetadata/ows:Operation[@name='%s']/ows:DCP/ows:HTTP/ows:%s/@xlink:href";
         String xPathExpr = String.format( expr, opName, binding.getElementName() );
         
         String href = null;
@@ -428,7 +456,6 @@ public final class ServiceMetadataUtils {
         } catch ( XPathExpressionException ex ) {
             TestSuiteLogger.log( Level.INFO, ex.getMessage() );
         }
-
         return createEndpoint( href );
     }
 

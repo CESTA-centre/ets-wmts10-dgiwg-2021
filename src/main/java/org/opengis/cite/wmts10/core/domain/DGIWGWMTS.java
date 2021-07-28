@@ -86,9 +86,5 @@ public final class DGIWGWMTS {
     public static final String IMAGE_GIF = "image/gif";
 
     public static final String IMAGE_JPEG = "image/jpeg";
-    
-    public static final String QUERY_LAYERS_PARAM = "QUERY_LAYERS";
-    
-    public static final String LAYERS_PARAM = "LAYERS";
-
+       
 }

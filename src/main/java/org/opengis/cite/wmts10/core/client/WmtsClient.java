@@ -90,7 +90,11 @@ public class WmtsClient {
      */
     public ClientResponse submitRequest( WmtsKvpRequest request, URI endpoint ) {
         WebResource resource = client.resource( endpoint );
-        return submitGetRequest( resource, request );
+        //System.out.println("....submitRequest request : " + request);
+        ClientResponse rsp = submitGetRequest( resource, request );
+        //System.out.println("....submitRequest rsp : " + rsp);
+        return rsp;
+        //return submitGetRequest( resource, request );
     }
 
     /**
@@ -108,7 +112,11 @@ public class WmtsClient {
             throw new IllegalArgumentException( "Neither payload nor endpoint must be null" );
         WebResource resource = client.resource( endpoint );
         resource.uri( UriBuilder.fromUri( endpoint ).build() );
-        return submitPostRequest( resource, payload );
+        
+        ClientResponse rsp = submitPostRequest( resource, payload );
+        //System.out.println("....submitRequest2 rsp : " + rsp);
+        return rsp;
+        //return submitPostRequest( resource, payload );
     }
     
 
@@ -127,6 +135,7 @@ public class WmtsClient {
         } catch ( UniformInterfaceException | ClientHandlerException ex ) {
             LOGR.log( Level.SEVERE, "Failed to process SOAP request/response: " + resource.getURI(), ex );
         }
+        //System.out.println("....submitPostRequest rsp : " + response);
         return response;
     }
 
@@ -135,7 +144,9 @@ public class WmtsClient {
         String queryString = requestParameter.asQueryString();
         URI requestURI = UriBuilder.fromUri( resource.getURI() ).replaceQuery( queryString ).build();
         LOGR.log( Level.FINE, String.format( "Request URI: %s", requestURI ) );
+        //System.out.println("....submitGetRequest requestURI : " + requestURI);
         resource = resource.uri( requestURI );
+        //System.out.println("....submitGetRequest resource : " + resource);
         return resource.get( ClientResponse.class );
     }
 

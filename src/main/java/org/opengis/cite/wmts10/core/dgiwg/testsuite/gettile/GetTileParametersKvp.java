@@ -40,7 +40,8 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
 
     private URI getTileURI = null;
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile KVP capability", dependsOnMethods = "verifyGetTileSupported")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description = "Checks wmts get tile KVP capability", dependsOnMethods = "verifyGetTileSupported")
     public void wmtsGetTileKVPRequestsExists() {
         getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
                                                                     ProtocolBinding.GET );
@@ -48,7 +49,8 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
                     "GetTile (GET) endpoint not found or KVP is not supported in ServiceMetadata capabilities document." );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile KVP parameters", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description = "Checks wmts get tile KVP parameters", dependsOnMethods = "wmtsGetTileKVPRequestsExists")
     public void wmtsGetTileRequestFormatParameters( ITestContext testContext ) {
         if ( getTileURI == null ) {
             getTileURI = ServiceMetadataUtils.getOperationEndpoint_KVP( this.wmtsCapabilities, DGIWGWMTS.GET_TILE,
@@ -56,6 +58,15 @@ public class GetTileParametersKvp extends AbstractBaseGetTileFixture {
         }
         String requestFormat = null;
 
+		// CESTA supersedes TILE_COL_PARAM, TILE_ROW_PARAM and TILE_MATRIX_PARAM to be sure that the tile really exists
+		this.reqEntity.removeKvp(DGIWGWMTS.TILE_COL_PARAM);
+		this.reqEntity.addKvp(DGIWGWMTS.TILE_COL_PARAM, "1");
+		this.reqEntity.removeKvp(DGIWGWMTS.TILE_ROW_PARAM);
+		this.reqEntity.addKvp(DGIWGWMTS.TILE_ROW_PARAM, "1");
+		this.reqEntity.removeKvp(DGIWGWMTS.TILE_MATRIX_PARAM);
+		this.reqEntity.addKvp(DGIWGWMTS.TILE_MATRIX_PARAM, "2");
+        
+        
         try {
             XPath xPath = createXPath();
             String layerName = this.reqEntity.getKvpValue( DGIWGWMTS.LAYER_PARAM );

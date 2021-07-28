@@ -31,33 +31,38 @@ public class GetCapabilitiesProjectionTest extends AbstractBaseGetCapabilitiesFi
 	 * and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).
      */
 
-    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks wmtsCapabilities", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "Checks wmtsCapabilities", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         assertTrue( this.wmtsCapabilities != null, "No ServerMetadata Capabilities document" );
     }
 
-    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesEPSG3395", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "Checks CapabilitiesEPSG3395", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesEPSG3395Test() {
         assessAdvertisedProjections( "EPSG:3395", "World Mercator Projection", -15496570.7397, 18764656.2314, -84.0,
                                      80.0 );
     }
     
-    /*
+    
     // Add EPSG:3857, we need to check if latmin and latmax are OK
-    @Test(description = "DGIWG Web Map Tile Service (WMTS) 1.0.0, Requirement 3", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "DGIWG Web Map Tile Service (WMTS) 1.0.0, Requirement 3", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesEPSG3857Test() {
         assessAdvertisedProjections( "EPSG:3857", "Web Mercator Projection", -15496570.7397, 18764656.2314, -84.0,
                                      80.0 );
     }
-    */
+    
     
 
-    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesUPS_North", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "Checks CapabilitiesUPS_North", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesUPS_NorthTest() {
         assessAdvertisedProjections( "EPSG:5041", "WGS 84 / UPS North", -14440759.350252, 18440759.350252, 60.0, 90.0 );
     }
 
-    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesUPS_South", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "Checks CapabilitiesUPS_South", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesUPS_SouthTest() {
         assessAdvertisedProjections( "EPSG:5042", "WGS 84 / UPS South", -14440759.350252, 18440759.350252, -90.0, -60.0 );
     }
@@ -66,6 +71,7 @@ public class GetCapabilitiesProjectionTest extends AbstractBaseGetCapabilitiesFi
                                               double latMin, double latMax ) {
         try {
             String parsedCrs = DGIWG_CRSUtils.normaliseCrsName( crsName2Look4 );
+            //System.out.println("....parsedCrs : " + parsedCrs); 
 
             boolean crsFound = isCrsFound( parsedCrs );
 
@@ -76,7 +82,7 @@ public class GetCapabilitiesProjectionTest extends AbstractBaseGetCapabilitiesFi
             if ( !crsFound ) {
                 for ( int layerI = 0; ( layerI < layerInfo.size() && !crsFound ); layerI++ ) {
                     LayerInfo layer = layerInfo.get( layerI );
-
+                    //System.out.println("....layer : " + layer); 
                     List<BoundingBox> bbox = layer.getBboxes();
 
                     for ( int bboxI = -1; ( bboxI < bbox.size() && !crsFound ); bboxI++ ) {

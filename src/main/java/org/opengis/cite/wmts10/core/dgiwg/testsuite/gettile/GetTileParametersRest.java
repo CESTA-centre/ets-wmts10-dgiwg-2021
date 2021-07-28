@@ -44,7 +44,8 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
 
     private URI getTileURI = null;
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile REST capability", dependsOnMethods = "verifyGetTileSupported")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description = "Checks wmts get tile REST capability", dependsOnMethods = "verifyGetTileSupported")
     public void wmtsGetTileRESTCapable()
                             throws XPathExpressionException, XPathFactoryConfigurationException {
         getTileURI = ServiceMetadataUtils.getOperationEndpoint_REST( wmtsCapabilities, DGIWGWMTS.GET_TILE,
@@ -82,7 +83,8 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
                     "GetTile (GET) endpoint not found or REST is not supported in ServiceMetadata capabilities document." );
     }
 
-    @Test(groups="A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings.",description = "Checks wmts get tile REST parameters", dependsOnMethods = "wmtsGetTileRESTCapable")
+    @Test(groups={"A WMTS Server shall support HTTP GET operation using KVP (clause 8 of OGC WMS) and RESTful (clause 10 of OGC WMTS 1.0) encodings."},
+    		description = "Checks wmts get tile REST parameters", dependsOnMethods = "wmtsGetTileRESTCapable")
     public void wmtsGetTileRequestParametersSupported( ITestContext testContext ) {
         String requestFormat = null;
 
@@ -99,6 +101,15 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
             XPath xPath = createXPath();
 
             // --- get the prepopulated KVP parameters, for the SOAP parameters
+            
+            
+    		// CESTA supersedes TILE_COL_PARAM, TILE_ROW_PARAM and TILE_MATRIX_PARAM to be sure that the tile really exists
+    		this.reqEntity.removeKvp(DGIWGWMTS.TILE_COL_PARAM);
+    		this.reqEntity.addKvp(DGIWGWMTS.TILE_COL_PARAM, "1");
+    		this.reqEntity.removeKvp(DGIWGWMTS.TILE_ROW_PARAM);
+    		this.reqEntity.addKvp(DGIWGWMTS.TILE_ROW_PARAM, "1");
+    		this.reqEntity.removeKvp(DGIWGWMTS.TILE_MATRIX_PARAM);
+    		this.reqEntity.addKvp(DGIWGWMTS.TILE_MATRIX_PARAM, "2");
 
             String style = this.reqEntity.getKvpValue( DGIWGWMTS.STYLE_PARAM );
             String tileMatrixSet = this.reqEntity.getKvpValue( DGIWGWMTS.TILE_MATRIX_SET_PARAM );
@@ -158,6 +169,7 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
                 ETSAssert.assertContentType( rsp.getHeaders(), requestFormat );
                 ETSAssert.assertStatusCode( rsp.getStatus(), 200 );
             }
+            /*
             // --- Example of invalid URL
             {
                 String erroneousURL = getTileURI.toString();
@@ -182,6 +194,7 @@ public class GetTileParametersRest extends AbstractBaseGetTileFixture {
                 ETSAssert.assertContentType( rsp.getHeaders(), DGIWGWMTS.TEXT_XML );
 
             }
+            */
         } catch ( XPathExpressionException | XPathFactoryConfigurationException xpe ) {
             assertTrue( false, "Error found when retrieving REST Get Tile request: " + xpe.getMessage() );
         }

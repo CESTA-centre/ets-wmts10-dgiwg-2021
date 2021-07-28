@@ -28,18 +28,21 @@ public class GetCapabilitiesCrsTest extends AbstractBaseGetCapabilitiesFixture {
 	 * and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).
 	 */
 
-    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks wmtsCapabilitiesExists", dependsOnMethods = "verifyGetCapabilitiesSupported")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "Checks wmtsCapabilitiesExists", dependsOnMethods = "verifyGetCapabilitiesSupported")
     public void wmtsCapabilitiesExists() {
         assertTrue( this.wmtsCapabilities != null, "No ServerMetadata Capabilities document" );
     }
 
-    @Test(groups="A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042).",description = "Checks CapabilitiesCrs", dependsOnMethods = "wmtsCapabilitiesExists")
+    @Test(groups={"A WMTS server shall support at least on the folowwing WKKS : see DGIWG ANNEX B.1 (EPSG:3395), B.2 (EPSG:4326 and CRS 84) and B.3 (UPS Tiles EPSG:5041 and EPSG:5042)."},
+    		description = "Checks CapabilitiesCrs", dependsOnMethods = "wmtsCapabilitiesExists")
     public void wmtsCapabilitiesCrsTest() {
         try {
             boolean CRS84 = false;
             boolean EPSG4326 = false;
 
             NodeList crsList = (NodeList) ServiceMetadataUtils.getNodeElements( wmtsCapabilities, "//ows:SupportedCRS" );
+            
             for ( int crsI = 0; ( crsI < crsList.getLength() && !( CRS84 && EPSG4326 ) ); crsI++ ) {
                 Node supportedCRS = crsList.item( crsI );
                 String crsName = supportedCRS.getTextContent();
